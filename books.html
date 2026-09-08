@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>星哥内部图书馆 · 19 部著作 + 10 节闭门音频 · 全部免费</title>
+<meta name="description" content="19 部内部著作、144 万字、10 节亲录闭门音频，全部免费看、免费听。人性开悟 · 财富破局 · 职场博弈 · 社交操控。">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+:root{
+  --c-ren:#8B5CF6; --c-ren2:#4C1D95;
+  --c-money:#F7C873; --c-money2:#7C4A03;
+  --c-job:#5EEAD4; --c-job2:#0F766E;
+  --c-soc:#FF6F91; --c-soc2:#9D174D;
+}
+*{tap-highlight-color:transparent}
+body{background:#07070B}
+
+/* ---------- NAV ---------- */
+.lb-nav{position:fixed;left:0;right:0;top:0;z-index:120;padding:13px 26px;display:flex;justify-content:space-between;align-items:center;
+  background:rgba(7,7,11,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.lb-nav .brand{font-weight:800;font-size:15px;letter-spacing:.4px;
+  background:linear-gradient(135deg,#fff,#C4B5FD 60%,#F7C873);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lb-nav .r{display:flex;gap:14px;align-items:center}
+.lb-nav .r a{font-size:13.5px;color:var(--muted)}
+.lb-nav .r a.cta{padding:8px 18px;border-radius:999px;font-weight:700;color:#1a1030;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));box-shadow:0 6px 20px -6px rgba(247,200,115,.6)}
+
+/* ---------- HERO ---------- */
+.lb-hero{padding:118px 24px 0;text-align:center;position:relative;overflow:hidden}
+.lb-hero::before{content:"";position:absolute;left:50%;top:-10%;width:900px;height:900px;transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(139,92,246,.20),transparent 62%);pointer-events:none}
+.lb-hero::after{content:"";position:absolute;left:50%;bottom:-40%;width:700px;height:500px;transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(247,200,115,.10),transparent 65%);pointer-events:none}
+.lb-hero .inner{position:relative;z-index:2}
+.kicker{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;font-size:12px;letter-spacing:3px;
+  color:var(--gold-2);background:rgba(247,200,115,.10);border:1px solid rgba(247,200,115,.25);margin-bottom:22px}
+.kicker i{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.lb-hero h1{font-size:clamp(34px,6.4vw,68px);font-weight:900;line-height:1.08;margin:0 0 20px;letter-spacing:-1px;
+  background:linear-gradient(135deg,#fff 0%,#C4B5FD 45%,#F7C873 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lb-hero .sub{font-size:16px;color:var(--muted);max-width:600px;margin:0 auto 34px;line-height:1.75}
+.lb-hero .sub b{color:var(--text);font-weight:700}
+
+.hero-stats{display:flex;justify-content:center;gap:clamp(20px,6vw,64px);flex-wrap:wrap;padding:32px 0 44px;position:relative;z-index:2}
+.hero-stats .hs{text-align:center}
+.hero-stats .hs b{display:block;font-size:clamp(26px,4.6vw,40px);font-weight:900;line-height:1;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-stats .hs span{font-size:12px;color:var(--dim);letter-spacing:1px}
+
+/* ---------- TABS ---------- */
+.tabs{position:relative;z-index:50;display:flex;justify-content:center;gap:8px;padding:6px 20px 18px}
+.tabs::before{content:"";position:absolute;left:0;right:0;top:-20px;height:20px;background:linear-gradient(180deg,transparent,#07070B);pointer-events:none}
+.tabs button{padding:11px 26px;border-radius:999px;font-size:14.5px;font-weight:700;color:var(--muted);
+  background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.25s}
+.tabs button.on{color:#fff;background:linear-gradient(135deg,rgba(139,92,246,.35),rgba(247,200,115,.28));border-color:rgba(196,181,253,.5);
+  box-shadow:0 8px 26px -10px rgba(139,92,246,.8)}
+
+/* ---------- SECTION ---------- */
+.pane{display:none;animation:fadeUp .4s}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.wrap2{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- FILTER ---------- */
+.filters{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin:0 0 30px}
+.filters button{padding:7px 16px;border-radius:999px;font-size:13px;color:var(--muted);
+  background:rgba(255,255,255,.035);border:1px solid var(--line);transition:.2s}
+.filters button.on{color:#0d0a18;font-weight:700;background:linear-gradient(135deg,var(--gold),var(--gold-2));border-color:transparent}
+
+/* ---------- PODIUM (TOP3) ---------- */
+.podium{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:34px}
+.pod{position:relative;padding:22px;border-radius:20px;cursor:pointer;overflow:hidden;
+  background:linear-gradient(170deg,rgba(255,255,255,.055),rgba(255,255,255,.02));border:1px solid var(--line);transition:.3s}
+.pod:hover{transform:translateY(-5px)}
+.pod::before{content:"";position:absolute;left:0;right:0;top:0;height:3px}
+.pod.p1::before{background:linear-gradient(90deg,#FFE0A3,#F7C873,#E0A94A)}
+.pod.p2::before{background:linear-gradient(90deg,#E8E8F0,#A9A9BC,#7C7C90)}
+.pod.p3::before{background:linear-gradient(90deg,#E8A87C,#C97B4A,#8F5533)}
+.pod.p1{border-color:rgba(247,200,115,.35)}
+.pod.p1:hover{box-shadow:0 26px 60px -22px rgba(247,200,115,.55)}
+.pod.p2:hover{box-shadow:0 26px 60px -22px rgba(200,200,220,.35)}
+.pod.p3:hover{box-shadow:0 26px 60px -22px rgba(201,123,74,.35)}
+.medal{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:7px;font-size:11.5px;font-weight:800;letter-spacing:1px;margin-bottom:14px}
+.p1 .medal{background:linear-gradient(135deg,#F7C873,#E0A94A);color:#3a2606}
+.p2 .medal{background:linear-gradient(135deg,#DCDCE8,#9A9AB0);color:#22222c}
+.p3 .medal{background:linear-gradient(135deg,#D89A6E,#B06A3E);color:#2b1608}
+.pod .ranknum{position:absolute;right:16px;top:14px;font-size:52px;font-weight:900;line-height:1;opacity:.09;letter-spacing:-3px}
+
+/* ---------- COVER ---------- */
+.cover{position:relative;width:100%;aspect-ratio:3/4;border-radius:8px 4px 4px 8px;overflow:hidden;flex:none;
+  box-shadow:0 14px 34px -12px rgba(0,0,0,.85), inset 0 0 0 1px rgba(255,255,255,.07)}
+.cover::after{content:"";position:absolute;left:0;top:0;bottom:0;width:11px;
+  background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(255,255,255,.10),rgba(0,0,0,.35))}
+.cover .bg{position:absolute;inset:0}
+.cover .cat{position:absolute;left:18px;top:14px;right:12px;font-size:9.5px;letter-spacing:2px;opacity:.75;color:#fff}
+.cover .ttl{position:absolute;left:16px;right:12px;top:34%;transform:translateY(-50%);font-weight:800;line-height:1.28;color:#fff;
+  text-shadow:0 2px 14px rgba(0,0,0,.6);letter-spacing:1px}
+.cover .seal{position:absolute;right:11px;bottom:38px;width:26px;height:26px;border-radius:4px;border:1px solid rgba(255,255,255,.35);
+  display:flex;align-items:center;justify-content:center;font-size:9px;color:rgba(255,255,255,.6);transform:rotate(-8deg)}
+.cover .ft{position:absolute;left:16px;right:12px;bottom:11px;font-size:8.5px;letter-spacing:1.5px;color:rgba(255,255,255,.55);
+  border-top:1px solid rgba(255,255,255,.18);padding-top:6px}
+.cover .gloss{position:absolute;inset:0;background:linear-gradient(125deg,rgba(255,255,255,.16) 0%,transparent 38%)}
+.c-renxing .bg{background:linear-gradient(150deg,#7C3AED 0%,#4C1D95 55%,#1E1040 100%)}
+.c-money .bg{background:linear-gradient(150deg,#F7C873 0%,#A3620B 55%,#3A2205 100%)}
+.c-job .bg{background:linear-gradient(150deg,#5EEAD4 0%,#0F766E 55%,#06332F 100%)}
+.c-soc .bg{background:linear-gradient(150deg,#FF6F91 0%,#9D174D 55%,#3D0A20 100%)}
+
+.pod .row{display:flex;gap:16px;align-items:flex-start}
+.pod .cover{width:88px}
+.pod h3{font-size:16.5px;font-weight:800;line-height:1.4;margin:0 0 8px;color:var(--text)}
+.pod .hook{font-size:13px;color:var(--muted);line-height:1.65;margin:0 0 12px}
+.pod .facts{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--dim)}
+.pod .facts span{padding:3px 8px;border-radius:5px;background:rgba(255,255,255,.05)}
+.pod .go{margin-top:12px;font-size:12.5px;font-weight:700;color:var(--gold-2)}
+
+/* ---------- LIST ---------- */
+.rank-list{display:flex;flex-direction:column;gap:9px}
+.rk{display:flex;gap:15px;align-items:center;padding:13px 16px;border-radius:14px;cursor:pointer;
+  background:linear-gradient(170deg,rgba(255,255,255,.038),rgba(255,255,255,.015));border:1px solid var(--line);transition:.22s;position:relative}
+.rk:hover{background:rgba(139,92,246,.09);border-color:rgba(139,92,246,.42);transform:translateX(4px)}
+.rk .no{width:32px;font-size:19px;font-weight:900;text-align:center;color:var(--dim);font-variant-numeric:tabular-nums;flex:none}
+.rk .no.top{color:var(--gold)}
+.rk .cover{width:46px}
+.rk .mid{flex:1;min-width:0}
+.rk h4{font-size:15px;font-weight:700;margin:0 0 5px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rk .hook{font-size:12.5px;color:var(--muted);margin:0 0 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rk .meta{display:flex;gap:10px;align-items:center;font-size:11px;color:var(--dim);flex-wrap:wrap}
+.rk .meta i{font-style:normal;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.05)}
+.rk .heatbox{width:88px;flex:none;text-align:right}
+.rk .heatbox .bar{height:4px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:5px}
+.rk .heatbox .bar i{display:block;height:100%;border-radius:2px;background:linear-gradient(90deg,var(--violet),var(--gold))}
+.rk .heatbox .n{font-size:10.5px;color:var(--dim)}
+.rk .arrow{font-size:13px;color:var(--dim);flex:none}
+
+/* ---------- AUDIO ---------- */
+.audio-hero{max-width:1180px;margin:0 auto;padding:0 20px}
+.player{display:grid;grid-template-columns:250px 1fr;gap:30px;align-items:center;padding:34px;border-radius:26px;
+  background:linear-gradient(150deg,rgba(139,92,246,.13),rgba(255,255,255,.02) 55%,rgba(247,200,115,.06));
+  border:1px solid rgba(196,181,253,.22);box-shadow:0 40px 90px -40px rgba(139,92,246,.6);position:relative;overflow:hidden}
+.player::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 15% 20%,rgba(139,92,246,.20),transparent 55%);pointer-events:none}
+
+.vinyl-wrap{position:relative;display:flex;justify-content:center;align-items:center}
+.vinyl{position:relative;width:210px;height:210px;border-radius:50%;flex:none;
+  background:
+    repeating-radial-gradient(circle at 50% 50%,#0d0d12 0 2px,#16161d 2px 4px),
+    radial-gradient(circle at 50% 50%,#1a1a22,#08080c);
+  box-shadow:0 20px 50px -14px rgba(0,0,0,.9),inset 0 0 0 1px rgba(255,255,255,.08);
+  animation:spin 9s linear infinite;animation-play-state:paused}
+.vinyl.play{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.vinyl .label{position:absolute;left:50%;top:50%;width:84px;height:84px;transform:translate(-50%,-50%);border-radius:50%;
+  background:linear-gradient(135deg,#F7C873,#E0A94A 60%,#8B5CF6);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:0 0 0 1px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.5)}
+.vinyl .label b{font-size:15px;font-weight:900;color:#2a1a04;line-height:1;letter-spacing:1px}
+.vinyl .label span{font-size:7.5px;color:rgba(42,26,4,.75);letter-spacing:2px;margin-top:3px}
+.vinyl .hole{position:absolute;left:50%;top:50%;width:11px;height:11px;transform:translate(-50%,-50%);border-radius:50%;background:#07070B;box-shadow:inset 0 0 3px rgba(0,0,0,.9)}
+.vinyl .shine{position:absolute;inset:0;border-radius:50%;background:linear-gradient(125deg,rgba(255,255,255,.16) 0%,transparent 40%,transparent 60%,rgba(255,255,255,.07) 100%)}
+.tonearm{position:absolute;right:6px;top:-6px;width:96px;height:96px;pointer-events:none;opacity:.5;
+  background:conic-gradient(from 200deg at 88% 12%,rgba(255,255,255,.22) 0 2deg,transparent 2deg);border-radius:50%}
+
+.pl-main{position:relative;z-index:2;min-width:0}
+.pl-tag{display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:1.5px;
+  background:rgba(139,92,246,.20);color:var(--violet-3);margin-bottom:12px}
+.pl-title{font-size:clamp(19px,2.6vw,27px);font-weight:800;line-height:1.35;margin:0 0 8px;color:#fff}
+.pl-sub{font-size:13px;color:var(--muted);margin:0 0 18px}
+
+.spectrum{display:flex;align-items:flex-end;gap:3px;height:44px;margin-bottom:14px}
+.spectrum i{flex:1;min-width:2px;border-radius:2px 2px 0 0;background:linear-gradient(180deg,var(--violet-2),rgba(139,92,246,.25));
+  height:4px;transition:height .09s linear}
+
+.seekrow{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.seekrow .t{font-size:11.5px;color:var(--dim);font-variant-numeric:tabular-nums;flex:none;width:42px}
+.seekrow .t.r{text-align:right}
+.seek{flex:1;height:22px;display:flex;align-items:center;position:relative;cursor:pointer}
+.seek .track{width:100%;height:5px;border-radius:3px;background:rgba(255,255,255,.10);overflow:hidden}
+.seek .fill{height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--violet),var(--gold));transition:width .1s linear}
+.seek .knob{position:absolute;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(139,92,246,.35);
+  left:0;transform:translateX(-50%);pointer-events:none;transition:left .1s linear}
+
+.ctrls{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ctrls button{display:flex;align-items:center;justify-content:center;border-radius:50%;transition:.2s}
+.ctrls .b-skip{width:38px;height:38px;background:rgba(255,255,255,.06);color:var(--muted)}
+.ctrls .b-skip:hover{background:rgba(255,255,255,.12);color:#fff}
+.ctrls .b-play{width:56px;height:56px;background:linear-gradient(135deg,var(--violet),#6D28D9);color:#fff;
+  box-shadow:0 12px 30px -8px rgba(139,92,246,.85)}
+.ctrls .b-play:hover{transform:scale(1.06)}
+.ctrls .b-play svg{margin-left:2px}
+.ctrls .b-play.playing svg{margin-left:0}
+.ctrls .b-txt{padding:7px 14px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(255,255,255,.06);color:var(--muted);width:auto}
+.ctrls .b-txt:hover{color:#fff;background:rgba(255,255,255,.12)}
+
+/* ---------- TRACKLIST ---------- */
+.tl-head{display:flex;justify-content:space-between;align-items:baseline;margin:36px 0 14px}
+.tl-head h3{font-size:19px;font-weight:800;margin:0}
+.tl-head span{font-size:12.5px;color:var(--dim)}
+.tracks{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:9px}
+.tk{display:flex;gap:13px;align-items:center;padding:13px 15px;border-radius:13px;cursor:pointer;
+  background:rgba(255,255,255,.032);border:1px solid var(--line);transition:.2s}
+.tk:hover{background:rgba(139,92,246,.10);border-color:rgba(139,92,246,.4)}
+.tk.on{background:linear-gradient(100deg,rgba(139,92,246,.20),rgba(247,200,115,.09));border-color:rgba(196,181,253,.55)}
+.tk .n{width:26px;height:26px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;
+  font-size:11.5px;font-weight:800;background:rgba(255,255,255,.06);color:var(--muted)}
+.tk.on .n{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#2a1a04}
+.tk .m{flex:1;min-width:0}
+.tk .m b{display:block;font-size:13.8px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tk .m span{font-size:11.5px;color:var(--dim)}
+.tk .d{font-size:11.5px;color:var(--dim);font-variant-numeric:tabular-nums;flex:none}
+.eq{display:none;gap:2px;align-items:flex-end;height:12px}
+.tk.on .eq{display:flex}
+.eq i{width:2.5px;background:var(--gold);border-radius:1px;animation:eqb .9s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:.15s}.eq i:nth-child(3){animation-delay:.3s}.eq i:nth-child(4){animation-delay:.45s}
+@keyframes eqb{0%,100%{height:3px}50%{height:12px}}
+
+/* ---------- MINI PLAYER ---------- */
+.mini{position:fixed;left:12px;right:12px;bottom:12px;z-index:130;display:none;align-items:center;gap:12px;padding:10px 14px;border-radius:16px;
+  background:rgba(18,16,30,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(196,181,253,.3);
+  box-shadow:0 20px 50px -14px rgba(0,0,0,.9)}
+.mini.show{display:flex;animation:slideUp .3s}
+@keyframes slideUp{from{transform:translateY(70px);opacity:0}to{transform:none;opacity:1}}
+.mini .mc{min-width:0;flex:1}
+.mini .mc b{display:block;font-size:13px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini .mc span{font-size:11px;color:var(--dim)}
+.mini button{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.07);color:#fff;flex:none}
+.mini button.pl{background:linear-gradient(135deg,var(--violet),#6D28D9)}
+
+/* ---------- DETAIL DRAWER ---------- */
+.mask{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:.3s}
+.mask.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;right:0;top:0;bottom:0;width:min(560px,100%);z-index:210;transform:translateX(102%);transition:transform .38s cubic-bezier(.22,.8,.3,1);
+  background:linear-gradient(180deg,#16132a,#0a0912);border-left:1px solid var(--line);display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.dr-head{padding:22px 24px 18px;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:flex-start;position:relative}
+.dr-head .cover{width:76px}
+.dr-head .x{position:absolute;right:16px;top:16px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.07);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:17px}
+.dr-head h3{font-size:19px;font-weight:800;line-height:1.4;margin:0 26px 8px 0;color:#fff}
+.dr-head .cat{font-size:11px;color:var(--gold-2);letter-spacing:1.5px}
+.dr-head .facts{margin-top:9px;display:flex;gap:7px;flex-wrap:wrap;font-size:11px;color:var(--dim)}
+.dr-head .facts span{padding:2px 8px;border-radius:5px;background:rgba(255,255,255,.05)}
+.dr-body{flex:1;overflow-y:auto;padding:22px 24px 40px;-webkit-overflow-scrolling:touch}
+.dr-body h5{font-size:12.5px;letter-spacing:2px;color:var(--dim);margin:0 0 12px;font-weight:700}
+.quotes{margin-bottom:26px}
+.quotes p{position:relative;padding:13px 15px 13px 40px;border-radius:11px;background:rgba(247,200,115,.07);
+  border-left:2px solid var(--gold);font-size:14px;line-height:1.75;color:var(--gold-2);margin:0 0 9px}
+.quotes p::before{content:"“";position:absolute;left:12px;top:6px;font-size:28px;color:rgba(247,200,115,.35);font-family:Georgia,serif}
+.toc{margin-bottom:26px;display:grid;gap:6px}
+.toc li{list-style:none;font-size:13.2px;color:var(--muted);padding:8px 13px;border-radius:9px;background:rgba(255,255,255,.03);line-height:1.5}
+.reader{font-size:15px;line-height:1.95;color:#DCD8E6}
+.reader p{margin:0 0 16px}
+.reader .fade{position:relative;max-height:520px;overflow:hidden}
+.reader .fade::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;
+  background:linear-gradient(180deg,transparent,#0d0b18 88%)}
+.dr-cta{margin-top:26px;padding:22px;border-radius:16px;text-align:center;
+  background:linear-gradient(135deg,rgba(139,92,246,.16),rgba(247,200,115,.10));border:1px dashed rgba(247,200,115,.35)}
+.dr-cta b{display:block;font-size:17px;color:var(--gold-2);margin-bottom:7px}
+.dr-cta p{font-size:13px;color:var(--muted);margin:0 0 16px;line-height:1.7}
+.dr-cta a{display:inline-block;padding:12px 32px;border-radius:999px;font-weight:800;font-size:14.5px;color:#1a1030;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));box-shadow:0 10px 28px -8px rgba(247,200,115,.7)}
+
+/* ---------- FINAL ---------- */
+.lb-final{padding:90px 20px 130px;text-align:center;margin-top:50px;
+  background:linear-gradient(180deg,transparent,rgba(139,92,246,.07))}
+.lb-final h2{font-size:clamp(26px,4.4vw,42px);font-weight:900;margin:0 0 16px;line-height:1.25}
+.lb-final h2 em{font-style:normal;background:linear-gradient(135deg,var(--gold),var(--gold-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lb-final p{color:var(--muted);margin:0 0 30px;font-size:15px}
+.lb-final a.cta{display:inline-block;padding:16px 44px;border-radius:999px;font-weight:800;font-size:16px;color:#1a1030;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));box-shadow:0 16px 40px -10px rgba(247,200,115,.75)}
+.lb-final .tip{margin-top:18px;font-size:12.5px;color:var(--dim)}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:900px){
+  .player{grid-template-columns:1fr;gap:22px;padding:24px 20px}
+  .vinyl{width:170px;height:170px}
+  .vinyl .label{width:70px;height:70px}
+  .tonearm{display:none}
+}
+@media(max-width:768px){
+  .lb-nav{padding:11px 16px}
+  .lb-hero{padding:96px 18px 0}
+  .hero-stats{gap:20px;padding:26px 0 34px}
+  .tabs{top:49px;padding:0 14px 14px;gap:6px}
+  .tabs button{padding:9px 18px;font-size:13.5px}
+  .podium{grid-template-columns:1fr;gap:12px}
+  .pod{padding:17px}
+  .pod .cover{width:74px}
+  .rk{padding:12px 13px;gap:11px}
+  .rk .heatbox{display:none}
+  .rk .hook{display:none}
+  .rk h4{font-size:14px}
+  .tracks{grid-template-columns:1fr}
+  .dr-head{padding:18px 18px 15px}
+  .dr-body{padding:18px 18px 60px}
+  .lb-final{padding:60px 18px 120px}
+  body{min-height:100vh}
+}
+@media(max-width:400px){
+  .pod .cover{width:64px}
+  .rk .cover{width:40px}
+}
+</style>
+</head>
+<body>
+
+<nav class="lb-nav">
+  <a href="index.html" class="brand">✳ 星哥 · 内部图书馆</a>
+  <div class="r">
+    <a href="index.html">主页</a>
+    <a href="wx.html" class="cta">加微信</a>
+  </div>
+</nav>
+
+<header class="lb-hero">
+  <div class="inner">
+    <span class="kicker"><i></i>F R E E &nbsp;· &nbsp;全 部 免 费</span>
+    <h1>19 部内部著作<br>+ 10 节闭门音频</h1>
+    <p class="sub">四年写下的 <b>144 万字</b>，和我自己录的 <b>90 分钟</b> 音频课。<br>不用报名、不用付费、不用加群——<b>在这儿直接看、直接听</b>。</p>
+  </div>
+  <div class="hero-stats">
+    <div class="hs"><b>19</b><span>部内部著作</span></div>
+    <div class="hs"><b>144<span style="font-size:.55em">万</span></b><span>字原创内容</span></div>
+    <div class="hs"><b>10</b><span>节亲录音频</span></div>
+    <div class="hs"><b>0</b><span>元 · 无门槛</span></div>
+  </div>
+</header>
+
+<div class="tabs">
+  <button id="tab-books" class="on" onclick="switchTab('books')">📚 内部著作榜 TOP 19</button>
+  <button id="tab-audio" onclick="switchTab('audio')">🎧 闭门音频课 10 节</button>
+</div>
+
+<!-- ============ 书籍榜 ============ -->
+<section class="pane on" id="pane-books">
+  <div class="wrap2">
+    <div class="filters" id="filters"></div>
+    <div class="podium" id="podium"></div>
+    <div class="rank-list" id="ranklist"></div>
+  </div>
+</section>
+
+<!-- ============ 音频 ============ -->
+<section class="pane" id="pane-audio">
+  <div class="audio-hero">
+    <div class="player">
+      <div class="vinyl-wrap">
+        <div class="vinyl" id="vinyl">
+          <div class="shine"></div>
+          <div class="label"><b>星哥</b><span>X I N G G E</span></div>
+          <div class="hole"></div>
+        </div>
+        <div class="tonearm"></div>
+      </div>
+      <div class="pl-main">
+        <span class="pl-tag" id="plTag">思 维 篇</span>
+        <h2 class="pl-title" id="plTitle">如何快速人生逆袭 · 财富自由</h2>
+        <p class="pl-sub" id="plSub">第 1 节 / 共 10 节 · 点击播放，免费听完</p>
+        <div class="spectrum" id="spec"></div>
+        <div class="seekrow">
+          <span class="t" id="tCur">00:00</span>
+          <div class="seek" id="seek">
+            <div class="track"><div class="fill" id="fillBar"></div></div>
+            <div class="knob" id="knob"></div>
+          </div>
+          <span class="t r" id="tDur">00:00</span>
+        </div>
+        <div class="ctrls">
+          <button class="b-skip" onclick="prevTrack()" aria-label="上一首">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M7 6h2v12H7zm3 6l8-6v12z"/></svg>
+          </button>
+          <button class="b-play" id="btnPlay" onclick="togglePlay()">
+            <svg id="icPlay" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="icPause" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+          </button>
+          <button class="b-skip" onclick="nextTrack()" aria-label="下一首">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M15 6h2v12h-2zM6 6l8 6-8 6z"/></svg>
+          </button>
+          <button class="b-txt" id="btnRate" onclick="cycleRate()">1.0×</button>
+          <button class="b-txt" id="btnLoop" onclick="toggleLoop()">顺序播放</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-head">
+      <h3>全部 10 节</h3>
+      <span id="tlSum"></span>
+    </div>
+    <div class="tracks" id="tracks"></div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="lb-final">
+  <h2>完整 19 部 PDF + 文档原稿<br><em>加微信，我直接发你</em></h2>
+  <p>网站上每本都能免费试读开头，完整版和 20 份文档原稿，我打包发你。</p>
+  <a href="wx.html" class="cta">加微信 · 领完整版 →</a>
+  <p class="tip">免费送，不推销。看完再说要不要聊别的。</p>
+</section>
+
+<!-- MINI PLAYER -->
+<div class="mini" id="mini">
+  <button class="pl" id="miniBtn" onclick="togglePlay()">
+    <svg id="miniPlay" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    <svg id="miniPause" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+  </button>
+  <div class="mc"><b id="miniTitle"></b><span id="miniSub"></span></div>
+  <button onclick="nextTrack()" aria-label="下一首">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M15 6h2v12h-2zM6 6l8 6-8 6z"/></svg>
+  </button>
+</div>
+
+<!-- DRAWER -->
+<div class="mask" id="mask" onclick="closeBook()"></div>
+<aside class="drawer" id="drawer">
+  <div class="dr-head" id="drHead"></div>
+  <div class="dr-body" id="drBody"></div>
+</aside>
+
+<script src="assets/js/library-data.js"></script>
+<script>
+/* ============ helpers ============ */
+var CATCLS={'人性开悟':'c-renxing','财富破局':'c-money','职场博弈':'c-job','社交操控':'c-soc'};
+var CATS=['全部','人性开悟','财富破局','职场博弈','社交操控'];
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});};
+function fmt(s){s=Math.max(0,Math.floor(s||0));var m=Math.floor(s/60);return (m<10?'0':'')+m+':'+(s%60<10?'0':'')+(s%60);}
+function wcn(n){return n>=10000?(Math.round(n/1000)/10)+'万字':n+'字';}
+function coverHTML(b,rank){
+  var t=b.t.replace(/[《》]/g,'');
+  var fs = t.length<=6?26:t.length<=9?21:t.length<=12?17:14;
+  return '<div class="cover '+CATCLS[b.cat]+'">'+
+    '<div class="bg"></div><div class="gloss"></div>'+
+    '<div class="cat">'+esc(b.cat)+'</div>'+
+    '<div class="ttl" style="font-size:'+fs+'px">'+esc(t)+'</div>'+
+    '<div class="seal">'+rank+'</div>'+
+    '<div class="ft">星哥 · 内部著作</div></div>';
+}
+
+/* ============ render books ============ */
+var curCat='全部';
+function renderFilters(){
+  document.getElementById('filters').innerHTML=CATS.map(function(c){
+    return '<button class="'+(c===curCat?'on':'')+'" onclick="setCat(\''+c+'\')">'+c+'</button>';
+  }).join('');
+}
+function setCat(c){curCat=c;renderFilters();renderBooks();}
+function visible(){return window.BOOKS.filter(function(b){return curCat==='全部'||b.cat===curCat;});}
+
+function renderBooks(){
+  var list=visible();
+  var pod=document.getElementById('podium'),rl=document.getElementById('ranklist');
+  if(curCat!=='全部'){pod.innerHTML='';pod.style.display='none';}
+  else{pod.style.display='';}
+  if(curCat==='全部'){
+    pod.innerHTML=list.slice(0,3).map(function(b,i){
+      var cls=['p1','p2','p3'][i],md=['🥇 榜 首','🥈 亚 军','🥉 季 军'][i];
+      return '<div class="pod '+cls+'" onclick="openBook(\''+b.id+'\')">'+
+        '<span class="ranknum">0'+(i+1)+'</span>'+
+        '<span class="medal">'+md+'</span>'+
+        '<div class="row">'+coverHTML(b,(i+1))+
+        '<div style="min-width:0"><h3>《'+esc(b.t)+'》</h3>'+
+        '<p class="hook">'+esc(b.hook)+'</p>'+
+        '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span></div>'+
+        '<div class="go">免费试读 →</div></div></div></div>';
+    }).join('');
+  }
+  var rest = curCat==='全部'? list.slice(3) : list;
+  rl.innerHTML=rest.map(function(b){
+    var i=window.BOOKS.indexOf(b);
+    return '<div class="rk" onclick="openBook(\''+b.id+'\')">'+
+      '<div class="no'+(i<3?' top':'')+'">'+(i<10?'0':'')+(i+1)+'</div>'+
+      coverHTML(b,(i+1))+
+      '<div class="mid"><h4>《'+esc(b.t)+'》</h4><p class="hook">'+esc(b.hook)+'</p>'+
+      '<div class="meta"><i>'+esc(b.cat)+'</i><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span></div></div>'+
+      '<div class="heatbox"><div class="bar"><i style="width:'+b.heat+'%"></i></div><div class="n">热度 '+b.heat+'</div></div>'+
+      '<div class="arrow">›</div></div>';
+  }).join('');
+}
+
+/* ============ drawer ============ */
+function openBook(id){
+  var b=window.BOOKS.filter(function(x){return x.id===id})[0];if(!b)return;
+  var i=window.BOOKS.indexOf(b)+1;
+  document.getElementById('drHead').innerHTML=
+    coverHTML(b,i)+
+    '<div style="min-width:0;flex:1"><span class="cat">'+esc(b.cat)+' · NO.'+(i<10?'0':'')+i+'</span>'+
+    '<h3>《'+esc(b.t)+'》</h3>'+
+    '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>热度 '+b.heat+'</span></div></div>'+
+    '<button class="x" onclick="closeBook()">×</button>';
+
+  var q=(b.q||[]).map(function(x){return '<p>'+esc(x)+'</p>'}).join('');
+  var toc=(b.toc||[]).map(function(x){return '<li>'+esc(x)+'</li>'}).join('');
+  var paras=b.body.split(/\n+/).filter(function(p){return p.trim()})
+    .map(function(p){return '<p>'+esc(p.trim())+'</p>'}).join('');
+
+  document.getElementById('drBody').innerHTML=
+    '<div class="quotes"><h5>本 书 金 句</h5>'+q+'</div>'+
+    (toc?'<div class="toc"><h5>目 录 节 选</h5>'+toc+'</div>':'')+
+    '<h5>正 文 试 读</h5>'+
+    '<div class="reader"><div class="fade">'+paras+'</div></div>'+
+    '<div class="dr-cta"><b>看完了？完整版在这里</b>'+
+    '<p>上面只是开头。完整 19 部 PDF + 20 份文档原稿，<br>加微信我打包发你，不收费、不推销。</p>'+
+    '<a href="wx.html">加微信 · 领完整版 →</a></div>';
+  document.getElementById('mask').classList.add('on');
+  document.getElementById('drawer').classList.add('on');
+  document.body.style.overflow='hidden';
+  document.getElementById('drBody').scrollTop=0;
+}
+function closeBook(){
+  document.getElementById('mask').classList.remove('on');
+  document.getElementById('drawer').classList.remove('on');
+  document.body.style.overflow='';
+}
+
+/* ============ TAB ============ */
+function switchTab(t){
+  document.getElementById('pane-books').classList.toggle('on',t==='books');
+  document.getElementById('pane-audio').classList.toggle('on',t==='audio');
+  document.getElementById('tab-books').classList.toggle('on',t==='books');
+  document.getElementById('tab-audio').classList.toggle('on',t==='audio');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============ AUDIO ============ */
+var A=new Audio();A.preload='none';
+var idx=0,rates=[1,1.25,1.5,0.75],ri=0,loopAll=true,started=false;
+var ctx=null,analyser=null,freq=null,bars=[];
+
+(function initSpec(){
+  var s=document.getElementById('spec'),h='';
+  for(var i=0;i<48;i++)h+='<i></i>';
+  s.innerHTML=h;bars=[].slice.call(s.children);
+})();
+
+function loadTrack(n,auto){
+  idx=(n+window.TRACKS.length)%window.TRACKS.length;
+  var t=window.TRACKS[idx];
+  A.src='assets/audio/track'+t.n+'.mp3';
+  A.load();
+  document.getElementById('plTag').textContent=t.tag.split('').join(' ');
+  document.getElementById('plTitle').textContent=t.t;
+  document.getElementById('plSub').textContent='第 '+t.n+' 节 / 共 '+window.TRACKS.length+' 节 · 免费听完';
+  document.getElementById('tDur').textContent=fmt(t.d);
+  document.getElementById('miniTitle').textContent=t.t;
+  document.getElementById('miniSub').textContent='第 '+t.n+' 节 · '+t.tag;
+  [].forEach.call(document.querySelectorAll('.tk'),function(el,i){el.classList.toggle('on',i===idx)});
+  setFill(0);
+  if(auto)A.play().catch(function(){});
+}
+function togglePlay(){
+  if(!A.src)loadTrack(idx,true);
+  else if(A.paused)A.play().catch(function(){});
+  else A.pause();
+}
+function nextTrack(){loadTrack(idx+1,true);}
+function prevTrack(){if(A.currentTime>3){A.currentTime=0;return;}loadTrack(idx-1,true);}
+function cycleRate(){ri=(ri+1)%rates.length;A.playbackRate=rates[ri];document.getElementById('btnRate').textContent=rates[ri].toFixed(2).replace(/0$/,'')+'×';}
+function toggleLoop(){loopAll=!loopAll;document.getElementById('btnLoop').textContent=loopAll?'顺序播放':'单曲循环';A.loop=!loopAll;}
+
+A.addEventListener('play',function(){
+  document.getElementById('vinyl').classList.add('play');
+  document.getElementById('btnPlay').classList.add('playing');
+  document.getElementById('icPlay').style.display='none';
+  document.getElementById('icPause').style.display='';
+  document.getElementById('miniPlay').style.display='none';
+  document.getElementById('miniPause').style.display='';
+  document.getElementById('mini').classList.add('show');
+  setupAudioCtx();
+});
+A.addEventListener('pause',function(){
+  document.getElementById('vinyl').classList.remove('play');
+  document.getElementById('btnPlay').classList.remove('playing');
+  document.getElementById('icPlay').style.display='';
+  document.getElementById('icPause').style.display='none';
+  document.getElementById('miniPlay').style.display='';
+  document.getElementById('miniPause').style.display='none';
+});
+A.addEventListener('timeupdate',function(){
+  var p=A.duration?A.currentTime/A.duration:0;setFill(p);
+  document.getElementById('tCur').textContent=fmt(A.currentTime);
+  if(A.duration)document.getElementById('tDur').textContent=fmt(A.duration);
+});
+A.addEventListener('ended',function(){if(loopAll)nextTrack();});
+A.addEventListener('error',function(){
+  if(A.src){document.getElementById('plSub').textContent='⚠ 音频加载失败，请刷新后重试';}
+});
+
+function setFill(p){
+  p=Math.max(0,Math.min(1,p||0));
+  document.getElementById('fillBar').style.width=(p*100)+'%';
+  document.getElementById('knob').style.left=(p*100)+'%';
+}
+var seekEl=document.getElementById('seek');
+function seekTo(e){
+  var r=seekEl.getBoundingClientRect();
+  var x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+  var p=Math.max(0,Math.min(1,x/r.width));
+  if(A.duration)A.currentTime=p*A.duration;setFill(p);
+}
+var seeking=false;
+seekEl.addEventListener('mousedown',function(e){seeking=true;seekTo(e);});
+document.addEventListener('mousemove',function(e){if(seeking)seekTo(e);});
+document.addEventListener('mouseup',function(){seeking=false;});
+seekEl.addEventListener('touchstart',function(e){seeking=true;seekTo(e);},{passive:true});
+seekEl.addEventListener('touchmove',function(e){if(seeking)seekTo(e);},{passive:true});
+seekEl.addEventListener('touchend',function(){seeking=false;});
+
+/* real spectrum via Web Audio */
+function setupAudioCtx(){
+  try{
+    if(!ctx){
+      ctx=new (window.AudioContext||window.webkitAudioContext)();
+      var src=ctx.createMediaElementSource(A);
+      analyser=ctx.createAnalyser();analyser.fftSize=128;analyser.smoothingTimeConstant=.75;
+      src.connect(analyser);analyser.connect(ctx.destination);
+      freq=new Uint8Array(analyser.frequencyBinCount);
+    }
+    if(ctx.state==='suspended')ctx.resume();
+    if(!started){started=true;drawSpec();}
+  }catch(e){fakeSpec();}
+}
+function drawSpec(){
+  requestAnimationFrame(drawSpec);
+  if(!analyser){return;}
+  analyser.getByteFrequencyData(freq);
+  for(var i=0;i<bars.length;i++){
+    var v=freq[Math.floor(i*freq.length/bars.length*0.75)]||0;
+    bars[i].style.height=Math.max(4,v/255*44)+'px';
+  }
+}
+function fakeSpec(){
+  var t=0;setInterval(function(){
+    t+=.2;for(var i=0;i<bars.length;i++){
+      bars[i].style.height=(6+Math.abs(Math.sin(t+i*.35))*26)+'px';
+    }
+  },90);
+}
+
+/* ============ track list ============ */
+(function renderTracks(){
+  var total=0;
+  document.getElementById('tracks').innerHTML=window.TRACKS.map(function(t,i){
+    total+=t.d;
+    return '<div class="tk" onclick="loadTrack('+i+',true)">'+
+      '<div class="n">'+(t.n<10?'0':'')+t.n+'</div>'+
+      '<div class="m"><b>'+esc(t.t)+'</b><span>'+esc(t.tag)+'</span></div>'+
+      '<div class="eq"><i></i><i></i><i></i><i></i></div>'+
+      '<div class="d">'+fmt(t.d)+'</div></div>';
+  }).join('');
+  document.getElementById('tlSum').textContent='共 '+window.TRACKS.length+' 节 · 约 '+Math.round(total/60)+' 分钟';
+  fakeSpec();
+})();
+
+/* ============ init ============ */
+renderFilters();renderBooks();loadTrack(0,false);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBook();});
+</script>
+</body>
+</html>
