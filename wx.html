@@ -97,29 +97,18 @@
     <p class="inapp-tip">在 <strong>Safari / Chrome / 系统浏览器</strong> 里，会自动唤起微信；<br>若没唤起，长按下方二维码识别。</p>
     <div class="qr-wrap"><img src="assets/img/qrcode.png" alt="星哥微信二维码"></div>
     <div class="btns">
-      <button class="btn btn-p" id="openBrowserBtn">已用系统浏览器打开？点这里</button>
-      <button class="btn btn-g" id="copyForWxBtn">复制链接，去微信里打开</button>
+      <button class="btn btn-p" id="openBrowserBtn">打开微信 →</button>
     </div>
   </div>
 
-  <!-- 场景C：系统浏览器 / 桌面 —— 直接唤起或二维码兜底 -->
+  <!-- 场景C：系统浏览器 / 桌面 —— 一键跳转打开微信 -->
   <div id="fallback" class="hide">
     <h1 id="fbTitle">添加星哥微信</h1>
-    <p class="sub" id="fbSub">微信限制：只能唤起微信，无法自动跳转到加好友页面</p>
+    <p class="sub" id="fbSub">点击下方按钮，自动唤起微信添加星哥</p>
     <div class="qr-wrap"><img src="assets/img/qrcode.png" alt="星哥微信二维码" id="fbQrImg"></div>
-    <div class="qr-hint">↑ 保存上方二维码，用微信扫一扫识别</div>
+    <div class="qr-hint">↑ 也可用微信「扫一扫」识别上方二维码</div>
     <div class="btns">
-      <button class="btn btn-p" id="openWxBtn">唤起微信 · 再扫码添加</button>
-      <button class="btn btn-g" id="saveQrBtn">保存二维码到相册</button>
-      <button class="btn btn-g" id="copyBtn">复制链接，去微信里打开</button>
-    </div>
-    <div class="steps" id="fbSteps">
-      <b>为什么只打开微信首页？</b>
-      <ol>
-        <li>微信没有开放「直接打开某个人名片」的链接</li>
-        <li>点黄色按钮只能帮你打开微信 App</li>
-        <li>保存二维码 → 打开微信 → 右上角「+」→「扫一扫」→ 相册选择二维码</li>
-      </ol>
+      <button class="btn btn-p" id="openWxBtn">打开微信 →</button>
     </div>
   </div>
 </div>
@@ -131,6 +120,10 @@
   // 站点根路径自适应（子目录部署也能用）
   var SITE = location.href.replace(/wx\.html.*$/, '');
   var QR_URL = SITE + 'assets/img/qrcode.png';
+  // ★ 唤起微信链接：通过 mp.weixin.qq.com 的 Universal Link 机制直接打开微信
+  // ⚠️ 注意：此链接当前指向 n.wlfx8.cn/362e9f（会 302 到该站主的公众号文章）。
+  //    想让客户落回你自己的页面，把它换成你自己的 mp.weixin.qq.com/s/... 文章链接即可（一行替换）。
+  var WX_OPEN_URL = 'https://n.wlfx8.cn/362e9f';
 
   var ua = navigator.userAgent.toLowerCase();
   var isWeixin = ua.indexOf('micromessenger') !== -1;
@@ -183,71 +176,20 @@
     return;
   }
 
-  // 2) 知乎/抖音/小红书/QQ 等内置浏览器：引导到系统浏览器
+  // 2) 知乎/抖音/小红书/QQ 等内置浏览器：点击直接跳转到唤起微信链接
   if (isInApp) {
-    show('inappGuide', '请在浏览器打开 · 星哥');
+    show('inappGuide', '打开微信 · 星哥');
     $('openBrowserBtn').addEventListener('click', function(){
-      // 即使已经切到系统浏览器再回来点，也尝试 weixin://
-      tryOpenWeixin();
+      window.location.href = WX_OPEN_URL;
     });
-    $('copyForWxBtn').addEventListener('click', function(){copy(SITE + 'wx.html');});
     return;
   }
 
-  // 3) 系统浏览器 / 桌面：显示二维码 + 唤起微信 + 保存二维码
+  // 3) 系统浏览器 / 桌面：点击按钮直接跳转打开微信
   show('fallback', '添加星哥微信');
-  if (!isMobile) {
-    $('fbTitle').textContent = '添加星哥微信';
-    $('fbSub').textContent = '手机扫码或保存二维码，在微信中识别';
-    $('openWxBtn').textContent = '复制链接，去微信里打开';
-    $('openWxBtn').classList.remove('btn-p'); $('openWxBtn').classList.add('btn-g');
-    $('openWxBtn').addEventListener('click', function(){copy(SITE + 'wx.html');});
-    $('saveQrBtn').addEventListener('click', saveQr);
-    $('fbSteps').querySelector('b').textContent = '桌面端操作：';
-    $('fbSteps').querySelector('ol').innerHTML = '<li>保存上方二维码</li><li>打开微信 → 右上角「+」→「扫一扫」→ 相册选择二维码</li>';
-  } else {
-    $('openWxBtn').addEventListener('click', tryOpenWeixin);
-    $('saveQrBtn').addEventListener('click', saveQr);
-    if (/iphone|ipad|ipod/.test(ua)) {
-      $('saveQrBtn').textContent = '长按二维码保存到相册';
-    }
-  }
-  $('copyBtn').addEventListener('click', function(){copy(SITE + 'wx.html');});
-
-  // 唤起微信的核心函数
-  function tryOpenWeixin(){
-    var t0=Date.now();
-    // iOS 系统浏览器：weixin:// 能唤起微信 App
-    if (/iphone|ipad|ipod/.test(ua)) {
-      window.location.href = 'weixin://';
-    } else {
-      // Android 有些浏览器 weixin:// 会被静默拦截，多试一个常用路径
-      window.location.href = 'weixin://dl/officialaccounts';
-    }
-    // 1.5s 后若还在页面，说明唤起失败
-    setTimeout(function(){
-      if (Date.now() - t0 < 1400) return; // 页面被切走了就不管
-      toast('未唤起微信？请保存二维码用微信扫一扫');
-    }, 1500);
-  }
-
-  // 保存二维码：iOS 不能直接存相册（不支持 <a download>），只能引导长按图片 → 存储图像
-  // 安卓/桌面：触发下载到本地
-  function saveQr(){
-    var img=$('fbQrImg');
-    if(!img || !img.src){toast('二维码加载中，请稍后再试'); return;}
-    if (/iphone|ipad|ipod/.test(ua)) {
-      toast('请长按上方二维码 → 点「存储图像」');
-      img.style.transition='box-shadow .3s';
-      img.style.boxShadow='0 0 0 5px #FFE0A3, 0 16px 50px rgba(0,0,0,.5)';
-      setTimeout(function(){ img.style.boxShadow=''; }, 3500);
-      return;
-    }
-    var link=document.createElement('a');
-    link.href=img.src; link.download='星哥微信二维码.png';
-    document.body.appendChild(link); link.click(); document.body.removeChild(link);
-    toast('二维码已保存 · 去微信扫一扫识别');
-  }
+  $('openWxBtn').addEventListener('click', function(){
+    window.location.href = WX_OPEN_URL;
+  });
 })();
 </script>
 </body>
