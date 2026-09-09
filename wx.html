@@ -105,18 +105,20 @@
   <!-- 场景C：系统浏览器 / 桌面 —— 直接唤起或二维码兜底 -->
   <div id="fallback" class="hide">
     <h1 id="fbTitle">添加星哥微信</h1>
-    <p class="sub" id="fbSub">长按识别二维码，或点击下方按钮唤起微信</p>
-    <div class="qr-wrap"><img src="assets/img/qrcode.png" alt="星哥微信二维码"></div>
-    <div class="qr-hint">↑ 长按上面二维码，识别后添加</div>
+    <p class="sub" id="fbSub">微信限制：只能唤起微信，无法自动跳转到加好友页面</p>
+    <div class="qr-wrap"><img src="assets/img/qrcode.png" alt="星哥微信二维码" id="fbQrImg"></div>
+    <div class="qr-hint">↑ 保存上方二维码，用微信扫一扫识别</div>
     <div class="btns">
-      <button class="btn btn-p" id="openWxBtn">一键打开微信 →</button>
+      <button class="btn btn-p" id="openWxBtn">唤起微信 · 再扫码添加</button>
+      <button class="btn btn-g" id="saveQrBtn">保存二维码到相册</button>
       <button class="btn btn-g" id="copyBtn">复制链接，去微信里打开</button>
     </div>
     <div class="steps" id="fbSteps">
-      <b>还没唤起？手动两步：</b>
+      <b>为什么只打开微信首页？</b>
       <ol>
-        <li>点击上方黄色按钮唤起微信</li>
-        <li>若未唤起，保存二维码 → 在微信里用「扫一扫」识别</li>
+        <li>微信没有开放「直接打开某个人名片」的链接</li>
+        <li>点黄色按钮只能帮你打开微信 App</li>
+        <li>保存二维码 → 打开微信 → 右上角「+」→「扫一扫」→ 相册选择二维码</li>
       </ol>
     </div>
   </div>
@@ -192,7 +194,7 @@
     return;
   }
 
-  // 3) 系统浏览器 / 桌面：显示二维码 + 一键打开微信按钮
+  // 3) 系统浏览器 / 桌面：显示二维码 + 唤起微信 + 保存二维码
   show('fallback', '添加星哥微信');
   if (!isMobile) {
     $('fbTitle').textContent = '添加星哥微信';
@@ -200,10 +202,12 @@
     $('openWxBtn').textContent = '复制链接，去微信里打开';
     $('openWxBtn').classList.remove('btn-p'); $('openWxBtn').classList.add('btn-g');
     $('openWxBtn').addEventListener('click', function(){copy(SITE + 'wx.html');});
+    $('saveQrBtn').addEventListener('click', saveQr);
     $('fbSteps').querySelector('b').textContent = '桌面端操作：';
     $('fbSteps').querySelector('ol').innerHTML = '<li>保存上方二维码</li><li>打开微信 → 右上角「+」→「扫一扫」→ 相册选择二维码</li>';
   } else {
     $('openWxBtn').addEventListener('click', tryOpenWeixin);
+    $('saveQrBtn').addEventListener('click', saveQr);
   }
   $('copyBtn').addEventListener('click', function(){copy(SITE + 'wx.html');});
 
@@ -222,6 +226,16 @@
       if (Date.now() - t0 < 1400) return; // 页面被切走了就不管
       toast('未唤起微信？请保存二维码用微信扫一扫');
     }, 1500);
+  }
+
+  // 保存二维码到相册
+  function saveQr(){
+    var img=$('fbQrImg');
+    if(!img || !img.src){toast('二维码加载中，请稍后再试'); return;}
+    var link=document.createElement('a');
+    link.href=img.src; link.download='星哥微信二维码.png';
+    document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    toast('二维码已保存 · 去微信扫一扫识别');
   }
 })();
 </script>
