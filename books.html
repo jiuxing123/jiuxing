@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>星哥内部图书馆 · 19 部著作 + 10 节闭门音频 · 全部免费</title>
-<meta name="description" content="19 部内部著作、144 万字、10 节亲录闭门音频，全部免费看、免费听。人性开悟 · 财富破局 · 职场博弈 · 社交操控。">
+<meta name="description" content="19 部内部著作、143 万字、10 节亲录闭门音频，全部免费看、免费听。人性开悟 · 财富破局 · 职场博弈 · 社交操控。">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
 :root{
@@ -315,11 +315,11 @@ body{background:#07070B}
   <div class="inner">
     <span class="kicker"><i></i>F R E E &nbsp;· &nbsp;全 部 免 费</span>
     <h1>19 部内部著作<br>+ 10 节闭门音频</h1>
-    <p class="sub">四年写下的 <b>144 万字</b>，和我自己录的 <b>90 分钟</b> 音频课。<br>不用报名、不用付费、不用加群——<b>在这儿直接看、直接听</b>。</p>
+    <p class="sub">写下的 <b>143 万字</b>，和我自己录的 <b>90 分钟</b> 音频课。<br>不用报名、不用付费、不用加群——<b>在这儿直接看、直接听</b>。</p>
   </div>
   <div class="hero-stats">
     <div class="hs"><b>19</b><span>部内部著作</span></div>
-    <div class="hs"><b>144<span style="font-size:.55em">万</span></b><span>字原创内容</span></div>
+    <div class="hs"><b>143<span style="font-size:.55em">万</span></b><span>字原创内容</span></div>
     <div class="hs"><b>10</b><span>节亲录音频</span></div>
     <div class="hs"><b>0</b><span>元 · 无门槛</span></div>
   </div>
@@ -391,10 +391,10 @@ body{background:#07070B}
 
 <!-- FINAL -->
 <section class="lb-final">
-  <h2>完整 19 部 PDF + 文档原稿<br><em>加微信，我直接发你</em></h2>
-  <p>网站上每本都能免费试读开头，完整版和 20 份文档原稿，我打包发你。</p>
-  <a href="https://n.wlfx8.cn/362e9f" class="cta">加微信 · 领完整版 →</a>
-  <p class="tip">免费送，不推销。看完再说要不要聊别的。</p>
+  <h2>19 部全部免费读完<br><em>读完有收获，再来找星哥</em></h2>
+  <p>书全在这儿，不用买、不用领、不用转发。哪本帮你解决了实际问题，<br>或者你正卡在一件具体的事上，把你的情况写三行发我。</p>
+  <a href="https://n.wlfx8.cn/362e9f" class="cta">写三行 · 链接星哥 →</a>
+  <p class="tip">先读后聊。写了具体问题的，都会认真看。</p>
 </section>
 
 <!-- MINI PLAYER -->
@@ -460,7 +460,7 @@ function renderBooks(){
         '<div style="min-width:0"><h3>《'+esc(b.t)+'》</h3>'+
         '<p class="hook">'+esc(b.hook)+'</p>'+
         '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span></div>'+
-        '<div class="go">免费试读 →</div></div></div></div>';
+        '<div class="go">免费读全文 →</div></div></div></div>';
     }).join('');
   }
   var rest = curCat==='全部'? list.slice(3) : list;
@@ -497,9 +497,10 @@ function openBook(id){
     (toc?'<div class="toc"><h5>目 录 节 选</h5>'+toc+'</div>':'')+
     '<h5>正 文 试 读</h5>'+
     '<div class="reader"><div class="fade">'+paras+'</div></div>'+
-    '<div class="dr-cta"><b>看完了？完整版在这里</b>'+
-    '<p>上面只是开头。完整 19 部 PDF + 20 份文档原稿，<br>加微信我打包发你，不收费、不推销。</p>'+
-    '<a href="https://n.wlfx8.cn/362e9f">加微信 · 领完整版 →</a></div>';
+    '<div class="dr-cta"><b>全本免费，现在就能读完</b>'+
+    '<p>不用加微信、不用转发，点开就是全书。<br>读完有收获，再去链接星哥也不迟。</p>'+
+    '<a href="'+(b.read||"")+'">免费读完整本 →</a>'+
+    '<a href="https://n.wlfx8.cn/362e9f" target="_blank" rel="noopener" style="display:inline-block;margin-left:14px;color:inherit;opacity:.6;font-size:13px">已读完，想跟星哥聊聊 →</a></div>';
   document.getElementById('mask').classList.add('on');
   document.getElementById('drawer').classList.add('on');
   document.body.style.overflow='hidden';
