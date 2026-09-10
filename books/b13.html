@@ -73,7 +73,7 @@ strong{ font-weight:700; }
   table{ display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
 }
 </style><style id="xgtopbar-css">@media(max-width:640px){body>div[style*="position:sticky"]{padding:8px 10px!important;gap:5px!important}body>div[style*="position:sticky"]>a{font-size:12px!important;white-space:nowrap}body>div[style*="position:sticky"] span[style*="flex:1"]{font-size:10.5px!important}body>div[style*="position:sticky"] span[style*="flex:none"]{gap:4px!important}body>div[style*="position:sticky"] span[style*="flex:none"] button{padding:5px 7px!important;font-size:11px!important;min-height:26px!important;border-radius:5px!important}}</style></head>
-<body><div id="xgprog" style="position:fixed;top:0;left:0;height:3px;width:0;background:#e8b04b;z-index:99"></div><div style="position:sticky;top:0;z-index:50;background:#16130fee;border-bottom:1px solid #332c24;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;backdrop-filter:blur(6px)"><a href="../books.html" style="color:#e8b04b;text-decoration:none;font-size:14px;font-weight:700;flex:none">← 返回书库</a><span style="color:#a2968a;font-size:12px;flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">《职场跃迁》 · 全本免费</span><span style="flex:none;display:flex;gap:6px;align-items:center"><button onclick="xgShare(this)" style="background:#332c24;color:#f0e9de;border:none;border-radius:6px;padding:6px 12px;font-size:12px;cursor:pointer">分享</button><button onclick="xgFont(-1)" style="background:#332c24;color:#f0e9de;border:none;border-radius:6px;padding:6px 12px;font-size:12px;cursor:pointer;min-height:30px">A−</button><button onclick="xgFont(1)" style="background:#332c24;color:#f0e9de;border:none;border-radius:6px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:30px">A+</button></span></div><div class="page cover">
+<body><div id="xgprog" style="position:fixed;top:0;left:0;height:3px;width:0;background:#e8b04b;z-index:99"></div><div style="position:sticky;top:0;z-index:50;background:#16130fee;border-bottom:1px solid #332c24;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;backdrop-filter:blur(6px)"><a href="../books.html" style="color:#e8b04b;text-decoration:none;font-size:14px;font-weight:700;flex:none">← 返回书库</a><span style="color:#a2968a;font-size:12px;flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">《职场跃迁》 · 全本免费</span></div><div class="page cover">
 <span class="series">星哥实战成长与创业系列</span>
 <h1>职场跃迁</h1>
 <p class="sub">从生存到晋升的完整路径</p>
@@ -2038,15 +2038,86 @@ function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.te
     };
   }
 })();
-/* ===== 顶栏注入按钮 ===== */
+/* ===== 右上角 ⋮ 阅读设置（对标番茄：亮度/字号/背景皮肤/行距 + 留言/笔记/分享入口，全站记忆） ===== */
 (function(){
-  var bar=document.querySelector('span[style*="flex:none"]');
+  var bar=document.querySelector('body>div[style*="position:sticky"]');
   if(!bar)return;
-  var w=document.createElement("button");w.textContent="💬留言";w.setAttribute("data-xg-track","book.wall.entry");
-  w.onclick=xgGoWall;
-  var nb=document.createElement("button");nb.id="xgNoteBtn";nb.textContent="📓笔记("+xgNotes().length+")";nb.setAttribute("data-xg-track","book.notes.open");
-  nb.onclick=xgNotesPanel;
-  [w,nb].forEach(function(x){x.style.cssText="\"background:#332c24;color:#f0e9de;border:none;border-radius:6px;padding:6px 12px;font-size:12px;cursor:pointer;min-height:30px\"";bar.insertBefore(x,bar.firstChild);});
+  var RS={fs:0,sk:"",lh:"",br:1};
+  try{var rs=JSON.parse(localStorage.getItem("xgrs")||"{}");["fs","sk","lh","br"].forEach(function(k){if(rs[k]!=null)RS[k]=rs[k]})}catch(e){}
+  function saveRS(){try{localStorage.setItem("xgrs",JSON.stringify(RS))}catch(e){}}
+  if(!document.getElementById("xgskin-css")){
+    var st=document.createElement("style");st.id="xgskin-css";
+    st.textContent='body.xgsk-cream{background:#f5efdc!important}body.xgsk-green{background:#e3ebd9!important}body.xgsk-blue{background:#e6edf4!important}body.xgsk-gray{background:#2b2a27!important}body.xgsk-black{background:#100f0d!important}'+
+      'body.xgsk-cream .page,body.xgsk-cream .page p{color:#4a4030!important}body.xgsk-green .page,body.xgsk-green .page p{color:#3d4436!important}body.xgsk-blue .page,body.xgsk-blue .page p{color:#3c4550!important}'+
+      'body.xgsk-gray .page,body.xgsk-gray .page p,body.xgsk-black .page,body.xgsk-black .page p{color:#cfc5b2!important}'+
+      'body.xgsk-gray .page .quote p,body.xgsk-black .page .quote p{color:#f0e4c8!important}'+
+      'body.xglh-1 .page p{line-height:1.55!important}body.xglh-2 .page p{line-height:1.85!important}body.xglh-3 .page p{line-height:2.15!important}';
+    document.head.appendChild(st);
+  }
+  var dim=document.createElement("div");dim.id="xgdim";
+  dim.style.cssText="position:fixed;inset:0;z-index:96;pointer-events:none;background:#000;opacity:0;transition:opacity .2s";
+  document.body.appendChild(dim);
+  function applyAll(){
+    var b=document.body;
+    b.className=b.className.replace(/xgsk-\S+/g,"").replace(/xglh-\S+/g,"");
+    if(RS.sk)b.classList.add(RS.sk);
+    if(RS.lh)b.classList.add(RS.lh);
+    dim.style.opacity=String((1-RS.br)*0.62);
+    if(RS.fs){[].forEach.call(document.querySelectorAll(".page"),function(p){p.style.fontSize=RS.fs+"px"})}
+    if(RS.fs){try{localStorage.setItem("xgfs",String(RS.fs))}catch(e){}}
+  }
+  applyAll();
+  var btn=document.createElement("button");
+  btn.textContent="\u22ee";btn.id="xgsetbtn";btn.setAttribute("aria-label","阅读设置");btn.setAttribute("data-xg-track","book.settings.open");
+  btn.style.cssText='background:#332c24;color:#f0e9de;border:none;border-radius:6px;padding:6px 12px;font-size:15px;cursor:pointer;min-height:30px;line-height:1;font-weight:700';
+  bar.appendChild(btn);
+  btn.onclick=function(){openSet()};
+  function openSet(){
+    if(document.getElementById("xgsetov"))return;
+    var ov=document.createElement("div");ov.id="xgsetov";
+    ov.style.cssText="position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.5)";
+    var sh=document.createElement("div");
+    sh.style.cssText="position:absolute;left:0;right:0;bottom:0;background:#1f1b16;border:1px solid #332c24;border-bottom:none;border-radius:18px 18px 0 0;padding:16px 18px calc(16px + env(safe-area-inset-bottom));max-height:80vh;overflow-y:auto";
+    var h='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><b style="color:#f0e9de;font-size:15px">阅读设置</b><button id="xgsetX" style="background:#332c24;color:#f0e9de;border:1px solid #4a4238;border-radius:99px;padding:6px 14px;font-size:12px;cursor:pointer">\u2715 关闭</button></div>';
+    h+='<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><span style="flex:none;color:#a2968a;font-size:12px;width:32px">亮度</span><input id="xgbr" type="range" min="35" max="100" value="'+Math.round(RS.br*100)+'" style="flex:1;accent-color:#e8b04b"><span style="flex:none;width:46px;height:26px;border-radius:99px;background:#332c24;display:flex;align-items:center;justify-content:center;font-size:14px">\u2600</span></div>';
+    h+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px"><span style="flex:none;color:#a2968a;font-size:12px;width:32px">字体</span><button id="xgfm" style="flex:1;background:#332c24;color:#f0e9de;border:none;border-radius:8px;padding:9px 0;font-size:13px;cursor:pointer">A\u2212</button><span id="xgfv" style="flex:none;color:#e8b04b;font-weight:800;font-size:14px;min-width:26px;text-align:center">'+(RS.fs||16)+'</span><button id="xgfp" style="flex:1;background:#332c24;color:#f0e9de;border:none;border-radius:8px;padding:9px 0;font-size:15px;cursor:pointer">A+</button><span style="flex:1;background:#332c24;color:#a2968a;border-radius:8px;padding:9px 0;font-size:12px;text-align:center;cursor:default">系统字体</span></div>';
+    h+='<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><span style="flex:none;color:#a2968a;font-size:12px;width:32px">背景</span><div style="flex:1;display:flex;gap:12px" id="xgsks">';
+    [[""," #ffffff"],["xgsk-cream","#f5efdc"],["xgsk-green","#e3ebd9"],["xgsk-blue","#e6edf4"],["xgsk-gray","#2b2a27"],["xgsk-black","#100f0d"]].forEach(function(x){
+      var on=(RS.sk||"")===x[0];
+      h+='<span data-sk="'+x[0]+'" style="flex:1;max-width:44px;height:44px;border-radius:50%;background:'+x[1]+';border:'+(on?'3px solid #e8b04b':'1px solid #4a4238')+';cursor:pointer;display:inline-block"></span>';
+    });
+    h+='</div></div>';
+    h+='<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><span style="flex:none;color:#a2968a;font-size:12px;width:32px">行距</span><div style="flex:1;display:flex;gap:8px">';
+    [["xglh-1","紧凑"],["","标准"],["xglh-3","宽松"]].forEach(function(x){
+      var on=(RS.lh||"")===x[0];
+      h+='<button data-lh="'+x[0]+'" style="flex:1;background:'+(on?'#e8b04b':'#332c24')+';color:'+(on?'#16130f':'#f0e9de')+';border:none;border-radius:8px;padding:9px 0;font-size:12.5px;font-weight:700;cursor:pointer">'+x[1]+'</button>';
+    });
+    h+='</div></div>';
+    h+='<div style="display:flex;gap:8px;margin-top:4px">'+
+      '<button id="xgswall" style="flex:1;background:#332c24;color:#f0e9de;border:1px solid #4a4238;border-radius:10px;padding:12px 0;font-size:13px;font-weight:700;cursor:pointer">\ud83d\udcac 留言</button>'+
+      '<button id="xgsnote" style="flex:1;background:#332c24;color:#f0e9de;border:1px solid #4a4238;border-radius:10px;padding:12px 0;font-size:13px;font-weight:700;cursor:pointer">\ud83d\udcd3 笔记</button>'+
+      '<button id="xgsshare" style="flex:1;background:#332c24;color:#f0e9de;border:1px solid #4a4238;border-radius:10px;padding:12px 0;font-size:13px;font-weight:700;cursor:pointer">\ud83d\udce4 分享</button></div>';
+    sh.innerHTML=h;ov.appendChild(sh);document.body.appendChild(ov);
+    ov.onclick=function(e){if(e.target===ov)ov.remove()};
+    sh.querySelector("#xgsetX").onclick=function(){ov.remove()};
+    var br=sh.querySelector("#xgbr");
+    br.oninput=function(){RS.br=parseInt(br.value,10)/100;dim.style.opacity=String((1-RS.br)*0.62);saveRS()};
+    sh.querySelector("#xgfm").onclick=function(){RS.fs=Math.max(14,(RS.fs||16)-1);sh.querySelector("#xgfv").textContent=RS.fs;applyAll();saveRS()};
+    sh.querySelector("#xgfp").onclick=function(){RS.fs=Math.min(22,(RS.fs||16)+1);sh.querySelector("#xgfv").textContent=RS.fs;applyAll();saveRS()};
+    [].forEach.call(sh.querySelectorAll("[data-sk]"),function(el){
+      el.onclick=function(){RS.sk=el.getAttribute("data-sk");applyAll();saveRS();
+        [].forEach.call(sh.querySelectorAll("[data-sk]"),function(x){x.style.border=x===el?"3px solid #e8b04b":"1px solid #4a4238"});
+      };
+    });
+    [].forEach.call(sh.querySelectorAll("[data-lh]"),function(el){
+      el.onclick=function(){RS.lh=el.getAttribute("data-lh");applyAll();saveRS();
+        [].forEach.call(sh.querySelectorAll("[data-lh]"),function(x){x.style.background=x===el?"#e8b04b":"#332c24";x.style.color=x===el?"#16130f":"#f0e9de"});
+      };
+    });
+    sh.querySelector("#xgswall").onclick=function(){ov.remove();try{xgGoWall()}catch(e){}};
+    sh.querySelector("#xgsnote").onclick=function(){ov.remove();try{xgNotesPanel()}catch(e){}};
+    sh.querySelector("#xgsshare").onclick=function(){ov.remove();try{window.xgShare()}catch(e){}};
+  }
 })();
 /* ===== 书末卡按钮重排：星哥主按钮整行，再看一本+留言并排 ===== */
 (function(){

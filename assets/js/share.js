@@ -188,12 +188,6 @@
       copyLink(function (ok) { closePanel(); toast(ok ? '链接已复制，直接粘贴发给朋友' : '复制失败，请长按地址栏复制'); });
     }));
 
-    /* 底部说明 */
-    var tip = document.createElement('div');
-    tip.style.cssText = 'margin-top:14px;font-size:11px;color:#8a7f70;text-align:center;line-height:1.6';
-    tip.textContent = '手机上选「更多方式」会弹出系统分享，微信、朋友圈、QQ、小红书、抖音一次全到位';
-    sheet.appendChild(tip);
-
     document.body.appendChild(ov);
   }
 
