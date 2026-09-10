@@ -12,6 +12,30 @@
 <meta name="theme-color" content="#07070B" data-page-node-id="AlHHB9GpMX5tkImZxN67CP">
 <link rel="icon" href="assets/img/avatar.png" data-page-node-id="gPT8IEUrqXQAnVmGLVjKN0">
 <link rel="stylesheet" href="assets/css/style.css" data-page-node-id="HTxO4wDRTGrAGNq1vF3h9R">
+<style>
+/* ---------- 主页书架区（只新增，不覆盖任何既有样式） ---------- */
+.xg-shelf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:980px){.xg-shelf-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.xg-shelf-grid{grid-template-columns:1fr}}
+.xg-book{position:relative;display:block;padding:20px 22px;border-radius:16px;text-decoration:none;
+  background:var(--panel);border:1px solid var(--line);transition:.25s;overflow:hidden}
+.xg-book:hover{transform:translateY(-4px);border-color:rgba(247,200,115,.45);box-shadow:0 20px 44px -18px rgba(247,200,115,.25)}
+.xg-book .cat{font-size:11px;letter-spacing:2px;color:var(--gold-2)}
+.xg-book .no{position:absolute;right:16px;top:12px;font-size:38px;font-weight:900;line-height:1;opacity:.08;letter-spacing:-2px;color:#fff}
+.xg-book h3{margin:8px 0 8px;font-size:16.5px;font-weight:800;color:var(--text);line-height:1.4}
+.xg-book .hook{margin:0 0 12px;font-size:12.5px;color:var(--muted);line-height:1.65;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.xg-book .meta{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--dim)}
+.xg-book .meta span{padding:3px 9px;border-radius:5px;background:rgba(255,255,255,.05)}
+.xg-book .go{margin-top:12px;font-size:12.5px;font-weight:700;color:var(--gold-2)}
+.xg-audio{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  margin-top:14px;padding:20px 24px;border-radius:16px;text-decoration:none;
+  background:linear-gradient(135deg,rgba(139,92,246,.14),rgba(247,200,115,.10));border:1px solid var(--line);transition:.25s}
+.xg-audio:hover{border-color:rgba(196,181,253,.5);transform:translateY(-3px)}
+.xg-audio .l b{display:block;font-size:16px;font-weight:800;color:var(--text);margin-bottom:4px}
+.xg-audio .l i{font-style:normal;font-size:12.5px;color:var(--muted)}
+.xg-audio .r{flex:none;font-size:13.5px;font-weight:700;color:var(--gold-2)}
+.xg-shelf-note{margin-top:18px;text-align:center;font-size:12.5px;color:var(--dim)}
+</style>
 </head>
 <body data-page-node-id="7KaJsPitcYBChBNdvtO4y7">
 
@@ -112,12 +136,29 @@
   <div class="scroll-hint" data-page-node-id="MAbXgO7Ij1It2xHBp669V8"><span data-page-node-id="B03L5wnV7US6E0vsaDDFqp"></span>往下看，答案在下面</div>
 </section>
 
+<!-- ============ 书架 · 19部著作 + 10节音频（免费直接读） ============ -->
+<section class="sec" id="shelf" data-page-node-id="xgShelfSec001">
+  <div class="wrap" data-page-node-id="xgShelfWrap001">
+    <div class="sec-head reveal" data-page-node-id="xgShelfHead001">
+      <span class="tag" data-page-node-id="xgShelfTag001">全部免费 · 直接读</span>
+      <h2 data-page-node-id="xgShelfTitle001">19 部内部著作 + 10 节亲录音频，<br data-page-node-id="xgShelfBr001">点开<span class="hl-gold" data-page-node-id="xgShelfHl001">就是全书</span></h2>
+      <p class="sec-sub" data-page-node-id="xgShelfSub001">不用加微信、不用转发、不用领——书是证据，你自己看。</p>
+    </div>
+    <div class="xg-shelf-grid" id="xgShelfGrid" data-page-node-id="xgShelfGrid001"></div>
+    <a class="xg-audio reveal" href="books.html#audio" data-xg-track="shelf.audio" data-page-node-id="xgShelfAudio001">
+      <span class="l"><b>🎧 10 节闭门音频 · 星哥亲自录</b><i>逆袭、钱、认知，90 分钟讲透——免费听完</i></span>
+      <span class="r">去听 →</span>
+    </a>
+    <p class="xg-shelf-note" data-page-node-id="xgShelfNote001">先读后聊 · 全部免费 · 读完觉得有用，再决定要不要找我</p>
+  </div>
+</section>
+
 <!-- ============ PAIN ============ -->
 <section class="sec" id="pain" data-page-node-id="PQAmVINf5UPFJJpwdb1TtH">
   <div class="wrap" data-page-node-id="ymWLIP8BA8yjy4xyYabqd6">
     <div class="sec-head reveal" data-page-node-id="kCQ92HDA6MtRVOaiFF0hrs">
       <span class="tag" data-page-node-id="DD1dwDYAMG1OXOTMpAmT2L">先对号入座</span>
-      <h2 data-page-node-id="50kXfinzgrf2oNbWTTDN7G">你不是缺项目，<br data-page-node-id="wAq3xx05jK4MPDQNHOpcdl">你是缺一个<span class="hl" data-page-node-id="ckBxTYBPHulomePEIGviUM">替你把坑踩完的人</span></h2>
+      <h2 data-page-node-id="50kXfinzgrf2oNbWTTDN7G">卡住你的从来不是能力，<br data-page-node-id="wAq3xx05jK4MPDQNHOpcdl">是没人帮你<span class="hl" data-page-node-id="ckBxTYBPHulomePEIGviUM">把事看清楚</span></h2>
       <p class="sec-sub" data-page-node-id="BASbMI6Enf1enImsxaZaXB">下面这 6 条，中 1 条，你今天就不该空手走。</p>
     </div>
 
@@ -126,7 +167,7 @@
       <div class="pcard reveal" data-page-node-id="LmXpSlwovnZPrqa8jwjr7C"><span class="pnum" data-page-node-id="HOVXv4WUEpyPOdpDuSO73s">02</span><h3 data-page-node-id="tUnVad1axudMB26kACGdZe">上班 10 小时，剩下的时间只想躺着</h3><p data-page-node-id="EEsBJEYMk1aDYkZ6avHMts">你知道要搞副业，但你连今天吃什么都懒得想。不是你懒，是你不知道做了有没有用。</p></div>
       <div class="pcard reveal" data-page-node-id="6G0paH9SOfvFCW1IN3R0ib"><span class="pnum" data-page-node-id="8r655dGOcEFllJlKBKHdcD">03</span><h3 data-page-node-id="HxrSWwZSc0EbhpSn1GuMGZ">买过课、进过群，学完还是不会落地</h3><p data-page-node-id="PdcytJbhAUnjxV2cdPqA9c">老师讲的是他的路，不是你的路。你缺的不是知识，是有人拿着你的情况，给你改一版。</p></div>
       <div class="pcard reveal" data-page-node-id="us4qOrlLRLL0hwSX9Oardt"><span class="pnum" data-page-node-id="jHKx7y31xzbta2LGhhkrsB">04</span><h3 data-page-node-id="1hNIXtkicTJdCv2H2gqhrU">有点资源、有点人脉，不知道怎么换成钱</h3><p data-page-node-id="FkHbF5uNoRlXMGFGHcIrOg">明明手里有牌，就是不知道该先出哪张。别人一张 3 都能赢，你攥着王炸不敢打。</p></div>
-      <div class="pcard reveal" data-page-node-id="qiXGLRD8mTd3HNLUQ2Iiue"><span class="pnum" data-page-node-id="RqjKPmMzle6jWKN1rL47om">05</span><h3 data-page-node-id="DHJTx9JSJIe3W8CY6YRqvW">已经在做了，但客户进不来</h3><p data-page-node-id="WaLi0OKfpCLHcm8DGZbQlh">产品有了、服务有了，流量卡死。每天发朋友圈，只有你妈点赞。</p></div>
+      <div class="pcard reveal" data-page-node-id="qiXGLRD8mTd3HNLUQ2Iiue"><span class="pnum" data-page-node-id="RqjKPmMzle6jWKN1rL47om">05</span><h3 data-page-node-id="DHJTx9JSJIe3W8CY6YRqvW">书读了不少，事到临头还是拿不准</h3><p data-page-node-id="WaLi0OKfpCLHcm8DGZbQlh">道理都懂，一到自己身上就不会判断。不是你笨，是没人拿你的事，给你掰开揉碎讲一遍。</p></div>
       <div class="pcard reveal" data-page-node-id="dmvjKnYiRt3fGKoAr5aHro"><span class="pnum" data-page-node-id="rBgZKD9LGAArxPrpkOKGhq">06</span><h3 data-page-node-id="nIUKBcelq6iNv71khExxMR">被割过，现在谁都不敢信</h3><p data-page-node-id="RIuIclTIx0aoscG3xGTyqH">交过学费、踩过坑，现在看到「带你赚钱」四个字就先皱眉。<b data-page-node-id="6ARpiGsYvUANnR1KrBy3o2">这很正常，而且我认为你该继续警惕。</b></p></div>
     </div>
   </div>
@@ -148,14 +189,14 @@
       </div>
       <div class="vs-mid" data-page-node-id="UuiAnUAHDIarYW6NQp6xQJ">VS</div>
       <div class="vs-col vs-good" data-page-node-id="AnpXIfXPeXDs2oi0gSKoOA">
-        <div class="vs-head" data-page-node-id="89ZKqVgHhOZdQd2e5TDMFL">有人替你踩过坑</div>
+        <div class="vs-head" data-page-node-id="89ZKqVgHhOZdQd2e5TDMFL">有人帮你看清楚</div>
         <ul data-page-node-id="0cJgIHmvqXpbKASax7Z7rD">
-          <li data-page-node-id="FsfbkV5z06L02PFKtDG43z"><b data-page-node-id="ohb3O2vEdPR1DdS4dEhWem">第 1 天</b>把你的情况讲清楚，我给你定方向</li>
-          <li data-page-node-id="46EIyfeZZ5bQAWVTdEtcf6"><b data-page-node-id="QXsv2lA1ZIvsX1qnyDXDPX">第 1 周</b>给你一个能上手的小项目，先见钱</li>
-          <li data-page-node-id="LlTK0RZDrP0hf3ifXke9wL"><b data-page-node-id="sRKAMgwIHV5Jk6FkdHVVEW">第 1 个月</b>跑通流量，客户开始主动来</li>
-          <li data-page-node-id="xoZVNkgEUwi7QhrbTcpXBv"><b data-page-node-id="GmqqTkWxGnpEnehakPKgyF">第 12 个月</b>项目跑通了，我出钱，你放大</li>
+          <li data-page-node-id="FsfbkV5z06L02PFKtDG43z"><b data-page-node-id="ohb3O2vEdPR1DdS4dEhWem">第 1 天</b>把你的情况讲清楚，先自己长出判断</li>
+          <li data-page-node-id="46EIyfeZZ5bQAWVTdEtcf6"><b data-page-node-id="QXsv2lA1ZIvsX1qnyDXDPX">第 1 周</b>按书里的方法，在自己身上试一遍</li>
+          <li data-page-node-id="LlTK0RZDrP0hf3ifXke9wL"><b data-page-node-id="sRKAMgwIHV5Jk6FkdHVVEW">第 1 个月</b>带着具体问题来，把卡点看透</li>
+          <li data-page-node-id="xoZVNkgEUwi7QhrbTcpXBv"><b data-page-node-id="GmqqTkWxGnpEnehakPKgyF">第 12 个月</b>路越走越顺，判断力长在你自己身上</li>
         </ul>
-        <div class="vs-foot" data-page-node-id="MGAdpk236NQCBdXqTPHYo7">一年后：<span data-page-node-id="5MweLDKOYhMrCerwwGIure">现金流 +，路子 +，判断力 +</span></div>
+        <div class="vs-foot" data-page-node-id="MGAdpk236NQCBdXqTPHYo7">一年后：<span data-page-node-id="5MweLDKOYhMrCerwwGIure">路子 +，判断力 +，心里有底 +</span></div>
       </div>
     </div>
     <p class="vs-note reveal" data-page-node-id="xKC34gKVUcSuQFQI4u5m4o">差别不在能力，在<b data-page-node-id="E8N3wLxj8CGEJRSyVdNOUa">你身边有没有一个已经走通、并且愿意拉你的人</b>。</p>
@@ -167,7 +208,7 @@
   <div class="wrap" data-page-node-id="Jvkqbb1CPrSFsNgH1cAIeS">
     <div class="sec-head reveal" data-page-node-id="gqEoyzphuC4zKkn9s9i0Fi">
       <span class="tag" data-page-node-id="byLtAvnGVueuP3MswQPzz3">为什么是我</span>
-      <h2 data-page-node-id="7rh62JP4yKoUl056tcHT1r">我不讲课。<br data-page-node-id="4zGDzHEOhH5XqHZFXTcpDJ">我只做一件事：<span class="hl-gold" data-page-node-id="B6pCgNQsrH8mHtAGCvaCmq">把你扶上能赚钱的那条路</span></h2>
+      <h2 data-page-node-id="7rh62JP4yKoUl056tcHT1r">我不讲课。<br data-page-node-id="4zGDzHEOhH5XqHZFXTcpDJ">我只做一件事：<span class="hl-gold" data-page-node-id="B6pCgNQsrH8mHtAGCvaCmq">帮你把路看清楚，再走稳</span></h2>
     </div>
 
     <div class="why-grid" data-page-node-id="3pz9W33GVuNKB99RotLYGJ">
@@ -180,7 +221,7 @@
       <div class="wcard reveal" data-page-node-id="sflHLFQUi8BmJxaAt9N0lq">
         <div class="wico" data-page-node-id="PHUsBxnOEvlTEUTC8MV1LP">02</div>
         <h3 data-page-node-id="jHzORUVNLq8JUaROLGwNtU">四年，一万多个人已经先试过了</h3>
-        <p data-page-node-id="wcf7vdmAQmKxD2xEQ9q1pt">做这件事今年第 <b data-page-node-id="ulc5eamUNYVlpRBaEGs33j">4 年</b>，从疫情那年我一个人，到今天 <b data-page-node-id="ucY1yssaDx9tLIAslphqAV">1 万多人找过我</b>。<br data-page-node-id="Xl3EXuzccfdXrWZo8wUJZD">我没搞过什么组织，这四年就是一个人一个人地聊、一个项目一个项目地跑出来的。</p>
+        <p data-page-node-id="wcf7vdmAQmKxD2xEQ9q1pt">做这件事今年第 <b data-page-node-id="ulc5eamUNYVlpRBaEGs33j">4 年</b>，从疫情那年我一个人，到今天 <b data-page-node-id="ucY1yssaDx9tLIAslphqAV">1 万多人找过我</b>。<br data-page-node-id="Xl3EXuzccfdXrWZo8wUJZD">我没搞过什么组织，这四年就是一个人一个人地看、一件事一件事地看过来的。</p>
         <span class="wtag" data-page-node-id="bnNcY9lbhmt2ZFmiJ3hboJ">一对一 · 第 4 年 · 本人亲自跟</span>
       </div>
       <div class="wcard card-gold reveal" data-page-node-id="W7xtkXq9bDWUPyjQ7cJ16n">
@@ -340,9 +381,9 @@
       <span class="tag" data-page-node-id="EZOLqi3u5kMgnJ7rZNBtgL">说清楚，别浪费彼此时间</span>
       <h2 data-page-node-id="G7mjwmhouBHD7E6Rz6cyc8">这四种人，<span class="hl" data-page-node-id="cHD1I0YRF9259Arr4QpepK">别加我</span></h2>
       <div class="filter-grid" data-page-node-id="frhXkVfxEiKDaWL85iOgHJ">
-        <div class="fc" data-page-node-id="lnFIy0BKklv6eoUFUoFOzn"><span class="fx" data-page-node-id="M34bpemOiXz0XBHqFr36bq">✕</span><div data-page-node-id="Q7KQa8bOglAYEYOxKBazbH"><b data-page-node-id="WgCVjl2qIz5sA1ERzCNcvO">想躺赚、等我喂饭的</b><i data-page-node-id="oe0MVTPXs7hv9ntEQQPH97">我能给你路、给你资源、给你钱，但我替不了你走。</i></div></div>
+        <div class="fc" data-page-node-id="lnFIy0BKklv6eoUFUoFOzn"><span class="fx" data-page-node-id="M34bpemOiXz0XBHqFr36bq">✕</span><div data-page-node-id="Q7KQa8bOglAYEYOxKBazbH"><b data-page-node-id="WgCVjl2qIz5sA1ERzCNcvO">想躺赚、等我喂饭的</b><i data-page-node-id="oe0MVTPXs7hv9ntEQQPH97">路和判断我可以给你，但路要你自己走。我替不了你。</i></div></div>
         <div class="fc" data-page-node-id="wrKirxgDvFa8wTrlRSADuM"><span class="fx" data-page-node-id="hef1eFDWrwzF6dErrZwo7U">✕</span><div data-page-node-id="i49wCoBCMu8uClZgU8FLaW"><b data-page-node-id="VxD8Y6QtRvMOfexRAlvoT3">想一夜暴富的</b><i data-page-node-id="Tn5E1fdQLRfMOQIqHhZK0h">我做投资这么多年，只见过一步步跑通的，没见过一夜暴富的。</i></div></div>
-        <div class="fc" data-page-node-id="c3lxmJn9dlv055h7e1WHNB"><span class="fx" data-page-node-id="7fGVl7KiXKpzvyLyECg7tG">✕</span><div data-page-node-id="b7yqSMyKShyLXpUCgGcvnU"><b data-page-node-id="UzeRoPdrydpT2zCCrK0w0T">只想空手套、一点不想投入的</b><i data-page-node-id="gVT7vIZhdrnJa6DpBF1jkw">路、资源、钱我都能给，但时间和执行得你自己出。只想白嫖的，别来。</i></div></div>
+        <div class="fc" data-page-node-id="c3lxmJn9dlv055h7e1WHNB"><span class="fx" data-page-node-id="7fGVl7KiXKpzvyLyECg7tG">✕</span><div data-page-node-id="b7yqSMyKShyLXpUCgGcvnU"><b data-page-node-id="UzeRoPdrydpT2zCCrK0w0T">只想空手套、一点不想投入的</b><i data-page-node-id="gVT7vIZhdrnJa6DpBF1jkw">路和判断我都能给你，但时间和执行得你自己出。只想白嫖的，别来。</i></div></div>
         <div class="fc" data-page-node-id="FkrT1bMENut9CiExgf2Ir8"><span class="fx" data-page-node-id="FrRGVZjK73Bpy7k9y85uRD">✕</span><div data-page-node-id="hujsDNNXrnEc4nhSuj5lPl"><b data-page-node-id="s1ZUqqn32mze2pamvvlnkZ">不肯把真实情况讲清楚的</b><i data-page-node-id="40kipEEgAet7H5JviWsfoS">你给我假信息，我只能给你假方案。因材施教，前提是「材」是真的。</i></div></div>
       </div>
       <p class="filter-end" data-page-node-id="XoQ0xFbBELySd9DeDfW2nu">看到这里你还没走 —— 那你大概，就是我要找的那个人。</p>
@@ -365,23 +406,23 @@
       </div>
       <div class="faq-item reveal" data-page-node-id="gzaDzhkMYIfPHtC38STKNe">
         <button class="faq-q" data-page-node-id="RDL1ohSW9zB2jFjKeuISGM">我是纯小白，什么都不会，能做吗？<span class="faq-i" data-page-node-id="IhoeCnqocvPUTvkZhWrSgW">+</span></button>
-        <div class="faq-a" data-page-node-id="ZqAlQNhDDICYdddR0n9viY"><p data-page-node-id="uaMRyaxHD29Lc99GCHvFBd">能。而且小白反而更好带——因为没有一堆错误的习惯要先纠正。我会先给你一个 7 天内能见现金流的小项目，让你先尝到甜头，再往上加码。很多现在年入百万的人，来找我也是从零开始。</p></div>
+        <div class="faq-a" data-page-node-id="ZqAlQNhDDICYdddR0n9viY"><p data-page-node-id="uaMRyaxHD29Lc99GCHvFBd">能。书就是写给从零开始的人的——免费读，读完先把眼前这件事看清楚。你带着具体情况来，我按你的处境给判断：路在哪、卡在哪、第一步做什么。判断对了，路才不会白走。</p></div>
       </div>
       <div class="faq-item reveal" data-page-node-id="A0S9nqZDuqKCCMl6NlWFCW">
         <button class="faq-q" data-page-node-id="l3kzGqAb5xvtjVCgjX12CP">我上班很忙，每天只有两三个小时。<span class="faq-i" data-page-node-id="vt8XgEyhvja5XtmCf4LLSD">+</span></button>
-        <div class="faq-a" data-page-node-id="MyFlbtenyzcgBHkFsZYBni"><p data-page-node-id="j5DKtzkeOE7entq9XCWw39">那就按两三个小时给你设计方案。我不会拿一套「每天 12 小时」的打法去要求你——那是给你添堵，不是给你方案。你把真实时间告诉我，我按你的时间设计。</p></div>
+        <div class="faq-a" data-page-node-id="MyFlbtenyzcgBHkFsZYBni"><p data-page-node-id="j5DKtzkeOE7entq9XCWw39">那就按两三个小时看你的事。我不会拿一套「每天 12 小时」的标准去要求你——那是给你添堵，不是帮你看事。你把真实情况告诉我，我按你的处境给判断。</p></div>
       </div>
       <div class="faq-item reveal" data-page-node-id="BiHZVz1E6QFAD13BuCSQ3B">
         <button class="faq-q" data-page-node-id="4d9tt2le3kvOFTqqyhMTKN">我之前被割过韭菜，怎么保证你不一样？<span class="faq-i" data-page-node-id="53SZo51isvc4j9SDP4iPmF">+</span></button>
-        <div class="faq-a" data-page-node-id="wXSUVGDHMKXEQKCCAcL6Fy"><p data-page-node-id="qgAFH1HkhVAOW5ahqtXZUG">我不保证。任何跟你保证「一定赚钱」的人，你都该离他远点。我能给你的保证只有三条：不会收了钱就消失；一对一语音不限次；开始 7 天内觉得不合适，直接跟我说。剩下的，你自己去知乎看我那篇长文，判断我是个什么样的人。</p></div>
+        <div class="faq-a" data-page-node-id="wXSUVGDHMKXEQKCCAcL6Fy"><p data-page-node-id="qgAFH1HkhVAOW5ahqtXZUG">我不保证。任何跟你保证「一定赚钱」的人，你都该离他远点。我能给的：书全免费、全文可读，先读后聊——你看完再决定要不要找我。剩下的，去知乎看我那篇长文，判断我是个什么样的人。</p></div>
       </div>
       <div class="faq-item reveal" data-page-node-id="DrOMWZRBcdJYyZfMQxOF8o">
         <button class="faq-q" data-page-node-id="s9zJeKrLyiXwAcHsT5wDPc">加了微信之后，是不是就没人理了？<span class="faq-i" data-page-node-id="J4WilO1SvLmpFvqxSlLQ2v">+</span></button>
         <div class="faq-a" data-page-node-id="7bDQJwe0vBITmFl62s6rjH"><p data-page-node-id="Bm3Pb0Ka25qBbZR7aefwtr">不管你在哪看到我，从知乎过来的每一位，我都会认真回。找我的人确实多，但你有问题可以直接找我本人语音——这是我给每一个人的承诺，不是客服的话术。</p></div>
       </div>
       <div class="faq-item reveal" data-page-node-id="9W3lDRsBeAZBdsm0KCcDCe">
-        <button class="faq-q" data-page-node-id="5vsdqxsuaaokjJrDDs2Wld">具体是什么项目？能先告诉我吗？<span class="faq-i" data-page-node-id="mbnss9UAh3Z0ROIHYDBN6S">+</span></button>
-        <div class="faq-a" data-page-node-id="AKJ8bhSu6ObsAI97jr7kfp"><p data-page-node-id="BgLRGmxUCavfbmFbMeN2zb">不能。项目是给你定制的，不是一份统一的说明书。同样的项目给不同的人，结果天差地别。你把你的情况发我，我给你匹配适合你的那一个——这一步在微信里聊，一句话两句话就能说清楚。</p></div>
+        <button class="faq-q" data-page-node-id="5vsdqxsuaaokjJrDDs2Wld">你怎么帮我看？能先说说吗？<span class="faq-i" data-page-node-id="mbnss9UAh3Z0ROIHYDBN6S">+</span></button>
+        <div class="faq-a" data-page-node-id="AKJ8bhSu6ObsAI97jr7kfp"><p data-page-node-id="BgLRGmxUCavfbmFbMeN2zb">能。我的判断方法全写在 19 部书里，免费看——那就是我的底牌。书解决的是通用的事，你的事里有书没覆盖到的变量，才需要具体看。你把情况发我：你在做什么、卡在哪、想解决什么。写得越具体，我看得越准。</p></div>
       </div>
     </div>
   </div>
@@ -441,6 +482,24 @@
 </div>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/js/library-data.js"></script>
+<script>
+/* 主页书架：直接渲染 19 部著作（点击直达全文阅读页） */
+(function () {
+  var g = document.getElementById('xgShelfGrid');
+  if (!g || !window.BOOKS) return;
+  g.innerHTML = window.BOOKS.map(function (b, i) {
+    return '<a class="xg-book reveal" data-xg-track="shelf.book.open" data-xg-info="' + b.id + '" href="books/' + b.id + '.html">'
+      + '<span class="no">' + (i < 9 ? '0' : '') + (i + 1) + '</span>'
+      + '<span class="cat">' + b.cat + '</span>'
+      + '<h3>《' + b.t + '》</h3>'
+      + '<p class="hook">' + b.hook + '</p>'
+      + '<span class="meta"><span>' + b.ch + ' 章</span><span>约 ' + Math.round(b.words / 10000 * 10) / 10 + ' 万字</span><span>免费读全文</span></span>'
+      + '<span class="go">点开直接读 →</span>'
+      + '</a>';
+  }).join('');
+})();
+</script>
 <script>window.GOATCOUNTER_CODE='YOUR_GOATCOUNTER_CODE';/*注册 GoatCounter 后把占位符换成你的 site code，全站即生效*/</script>
 <script src="assets/js/analytics.js"></script>
 </body>
