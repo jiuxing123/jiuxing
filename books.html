@@ -262,6 +262,12 @@ body{background:#07070B}
 /* ---------- FINAL ---------- */
 .lb-final{padding:90px 20px 130px;text-align:center;margin-top:50px;
   background:linear-gradient(180deg,transparent,rgba(139,92,246,.07))}
+/* WHO strip：旧主页浓缩来的查证信息 */
+.who{max-width:640px;margin:0 auto;padding:0 20px 8px}
+.who-in{max-width:600px;margin:0 auto;padding:20px 22px;border-radius:16px;background:var(--panel);border:1px solid var(--line);text-align:left}
+.who-in b{display:block;font-size:15px;color:var(--text);margin-bottom:8px}
+.who-in p{font-size:13.5px;color:var(--muted);line-height:1.8;margin:0 0 10px}
+.who-in a{font-size:13px;color:var(--gold-2);text-decoration:none;font-weight:700}
 .lb-final h2{font-size:clamp(26px,4.4vw,42px);font-weight:900;margin:0 0 16px;line-height:1.25}
 .lb-final h2 em{font-style:normal;background:linear-gradient(135deg,var(--gold),var(--gold-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .lb-final p{color:var(--muted);margin:0 0 30px;font-size:15px}
@@ -292,7 +298,18 @@ body{background:#07070B}
   .tracks{grid-template-columns:1fr}
   .dr-head{padding:18px 18px 15px}
   .dr-body{padding:18px 18px 60px}
-  .lb-final{padding:60px 18px 120px}
+  .lb-final{padding:44px 18px 110px}
+  /* 移动端榜单压缩：链路变短，首屏往下 3 屏内看完 19 本 */
+  .podium{gap:8px;margin-bottom:20px}
+  .pod{padding:12px 14px;border-radius:14px}
+  .pod .row{gap:12px}
+  .pod .cover{width:56px}
+  .pod h3{font-size:14.5px;margin:0 0 4px}
+  .pod .hook{display:none}
+  .pod .facts{display:none}
+  .pod .go{margin-top:6px;font-size:12px}
+  .medal{margin-bottom:8px;padding:3px 9px;font-size:10.5px}
+  .pod .ranknum{font-size:34px;right:12px;top:10px}
   body{min-height:100vh}
 }
 @media(max-width:400px){
@@ -306,7 +323,6 @@ body{background:#07070B}
 <nav class="lb-nav">
   <a href="index.html" class="brand">✳ 星哥 · 内部图书馆</a>
   <div class="r">
-    <a href="index.html">主页</a>
     <a data-xg-track="books.nav.link-star" href="https://n.wlfx8.cn/362e9f" class="cta">链接星哥</a>
   </div>
 </nav>
@@ -391,6 +407,15 @@ body{background:#07070B}
       <p style="color:#a2968a;font-size:13.5px;margin:6px 0 14px">19 部著作，约 125 万字，全部免费读全文。</p>
       <a href="javascript:void(0)" data-xg-track="books.pane.go-shelf" onclick="switchTab('books')" style="display:inline-block;background:#e8b04b;color:#16130f;font-weight:700;font-size:14px;padding:10px 20px;border-radius:7px;text-decoration:none">📚 去 19 本书架免费读 →</a>
     </div>
+  </div>
+</section>
+
+<!-- WHO（旧主页浓缩） -->
+<section class="who">
+  <div class="who-in">
+    <b>星哥是谁？</b>
+    <p>做这件事第 4 年，1 万多人带着问题找过我；跑得最稳的十几个人，我是他们的投资人。书全免费——书就是证据，看完你自己判断。</p>
+    <a data-xg-track="books.who.zhihu" href="https://zhuanlan.zhihu.com/p/670474910" target="_blank" rel="noopener">去知乎查证我这几年写下的复盘 ↗</a>
   </div>
 </section>
 
