@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>星哥 · 破局提升 · 欢迎有缘人 | 19 部著作 + 10 节音频，全部免费长期更新</title>
+<link rel="icon" href="assets/img/avatar.jpg">
 <meta name="description" content="19 部内部著作、约 125 万字、10 节亲录闭门音频，全部免费看、免费听。人性开悟 · 财富破局 · 职场博弈 · 社交操控。">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
@@ -19,6 +20,7 @@ body{background:#07070B}
 /* ---------- NAV ---------- */
 .lb-nav{position:fixed;left:0;right:0;top:0;z-index:120;padding:13px 26px;display:flex;justify-content:space-between;align-items:center;
   background:rgba(7,7,11,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.lb-nav .brand .nava{width:22px;height:22px;border-radius:50%;object-fit:cover;vertical-align:-6px;margin-right:7px;border:1px solid rgba(247,200,115,.45)}
 .lb-nav .brand{font-weight:800;font-size:15px;letter-spacing:.4px;
   background:linear-gradient(135deg,#fff,#C4B5FD 60%,#F7C873);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .lb-nav .r{display:flex;gap:14px;align-items:center}
@@ -159,8 +161,7 @@ body{background:#07070B}
 .vinyl .label{position:absolute;left:50%;top:50%;width:84px;height:84px;transform:translate(-50%,-50%);border-radius:50%;
   background:linear-gradient(135deg,#F7C873,#E0A94A 60%,#8B5CF6);display:flex;flex-direction:column;align-items:center;justify-content:center;
   box-shadow:0 0 0 1px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.5)}
-.vinyl .label b{font-size:15px;font-weight:900;color:#2a1a04;line-height:1;letter-spacing:1px}
-.vinyl .label span{font-size:7.5px;color:rgba(42,26,4,.75);letter-spacing:2px;margin-top:3px}
+.vinyl .label img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:2px solid rgba(247,200,115,.55)}
 .vinyl .hole{position:absolute;left:50%;top:50%;width:11px;height:11px;transform:translate(-50%,-50%);border-radius:50%;background:#07070B;box-shadow:inset 0 0 3px rgba(0,0,0,.9)}
 .vinyl .shine{position:absolute;inset:0;border-radius:50%;background:linear-gradient(125deg,rgba(255,255,255,.16) 0%,transparent 40%,transparent 60%,rgba(255,255,255,.07) 100%)}
 .tonearm{position:absolute;right:6px;top:-6px;width:96px;height:96px;pointer-events:none;opacity:.5;
@@ -292,6 +293,7 @@ body{background:#07070B}
 @media(max-width:768px){
   .lb-nav{padding:11px 16px}
   .lb-nav .brand{font-size:13px}
+  .lb-nav .brand .nava{width:18px;height:18px;vertical-align:-5px}
   .kicker{font-size:11px;letter-spacing:2px;white-space:nowrap;padding:6px 10px}
   .lb-hero{padding:110px 18px 0}
   .lb-hero .sub{font-size:14.5px}
@@ -385,7 +387,7 @@ body{background:#07070B}
 <body>
 
 <nav class="lb-nav">
-  <a href="index.html" class="brand">✳ 星哥 · 破局提升 · 欢迎有缘人</a>
+  <a href="index.html" class="brand"><img src="assets/img/avatar.jpg" alt="" class="nava">星哥 · 破局提升 · 欢迎有缘人</a>
   <div class="r">
     <a data-xg-track="books.nav.link-star" href="https://n.wlfx8.cn/362e9f" class="cta">链接星哥</a>
   </div>
@@ -436,7 +438,7 @@ body{background:#07070B}
       <div class="vinyl-wrap">
         <div class="vinyl" id="vinyl">
           <div class="shine"></div>
-          <div class="label"><b>星哥</b><span>X I N G G E</span></div>
+          <div class="label"><img src="assets/img/avatar.jpg" alt="星哥"></div>
           <div class="hole"></div>
         </div>
         <div class="tonearm"></div>
@@ -485,11 +487,6 @@ body{background:#07070B}
 </section>
 
 <!-- ============ 信任带（旧主页浓缩：坦白 / 战绩 / 反筛） ============ -->
-<!-- ① 撤席式：不辩护，只留一行 -->
-<div style="max-width:640px;margin:30px auto 0;padding:0 20px;text-align:center">
-  <p style="font-size:15px;color:#c9bfae;line-height:1.9;margin:0">书在这儿，免费，长期更新。<b style="color:#f7c873">信不信，读完再判断。</b></p>
-</div>
-
 <!-- ② 战绩三画像 -->
 <div data-xg-track="books.trust.personas" style="max-width:640px;margin:14px auto 0;padding:0 20px;display:grid;gap:10px">
   <div style="background:#141017;border:1px solid #2b2434;border-radius:14px;padding:14px 16px">
@@ -668,6 +665,7 @@ function switchTab(t){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function xgRailGo(t){switchTab(t);}
+function pgToPlayer(){var v=document.getElementById('vinyl');if(v)setTimeout(function(){v.scrollIntoView({behavior:'smooth',block:'center'})},80);}
 if(location.hash==='#audio'){setTimeout(function(){switchTab('audio');},60);}
 
 /* ============ AUDIO ============ */
@@ -772,7 +770,10 @@ seekEl.addEventListener('touchmove',function(e){if(seeking)seekTo(e);},{passive:
 seekEl.addEventListener('touchend',function(){seeking=false;});
 
 /* real spectrum via Web Audio */
+var IS_MOBILE=/Mobi|Android|iPhone|iPad|MicroMessenger/i.test(navigator.userAgent);
+var fakeStarted=false;
 function setupAudioCtx(){
+  if(IS_MOBILE){fakeSpec();return;}
   try{
     if(!ctx){
       ctx=new (window.AudioContext||window.webkitAudioContext)();
@@ -795,6 +796,7 @@ function drawSpec(){
   }
 }
 function fakeSpec(){
+  if(fakeStarted)return;fakeStarted=true;
   var t=0;setInterval(function(){
     t+=.2;for(var i=0;i<bars.length;i++){
       bars[i].style.height=(6+Math.abs(Math.sin(t+i*.35))*26)+'px';
@@ -807,7 +809,7 @@ function fakeSpec(){
   var total=0;
   document.getElementById('tracks').innerHTML=window.TRACKS.map(function(t,i){
     total+=t.d;
-    return '<div class="tk" onclick="loadTrack('+i+',true)">'+
+    return '<div class="tk" onclick="loadTrack('+i+',true);pgToPlayer()">'+
       '<div class="n">'+(t.n<10?'0':'')+t.n+'</div>'+
       '<div class="m"><b>'+esc(t.t)+'</b><span>'+esc(t.tag)+'</span></div>'+
       '<div class="eq"><i></i><i></i><i></i><i></i></div>'+
