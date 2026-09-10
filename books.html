@@ -51,7 +51,8 @@ body{background:#07070B}
 .hero-stats .hs span{font-size:12px;color:var(--dim);letter-spacing:1px}
 
 /* ---------- TABS ---------- */
-.tabs{position:relative;z-index:50;display:flex;justify-content:center;gap:8px;padding:6px 20px 18px}
+.tabs{position:sticky;top:0;z-index:50;display:flex;justify-content:center;gap:8px;padding:10px 20px 16px;background:linear-gradient(180deg,#07070B 78%,transparent);scroll-margin-top:62px}
+.pane{scroll-margin-top:66px}
 .tabs::before{content:"";position:absolute;left:0;right:0;top:-20px;height:20px;background:linear-gradient(180deg,transparent,#07070B);pointer-events:none}
 .tabs button{padding:11px 26px;border-radius:999px;font-size:14.5px;font-weight:700;color:var(--muted);
   background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.25s}
@@ -296,9 +297,9 @@ body{background:#07070B}
 
 /* ---------- MOBILE ---------- */
 @media(max-width:900px){
-  .player{grid-template-columns:1fr;gap:22px;padding:24px 20px}
-  .vinyl{width:170px;height:170px}
-  .vinyl .label{width:70px;height:70px}
+  .player{grid-template-columns:1fr;gap:20px;padding:20px 16px}
+  .vinyl{width:190px;height:190px}
+  .vinyl .label{width:78px;height:78px}
   .tonearm{display:none}
 }
 @media(max-width:768px){
@@ -491,14 +492,14 @@ body{background:#07070B}
   </div>
 </header>
 
-<div id="savebar"></div>
-<div id="resume"></div>
-<div id="swipehint" onclick="document.getElementById('xgwall').scrollIntoView({behavior:'smooth'})"><i>↓</i> 往下滑 · 好多人在这儿看书聊书</div>
-
 <div class="tabs">
   <button id="tab-books" class="on" onclick="switchTab('books')">📚 内部著作榜 TOP 19</button>
   <button id="tab-audio" onclick="switchTab('audio')">🎧 闭门音频课 10 节</button>
 </div>
+
+<div id="savebar"></div>
+<div id="resume"></div>
+<div id="swipehint" onclick="document.getElementById('xgwall').scrollIntoView({behavior:'smooth'})"><i>↓</i> 往下滑 · 好多人在这儿看书聊书</div>
 
 <!-- 缘友留言墙 -->
 <div class="xgwall" data-xg-track="books.wall.view" id="xgwall">
@@ -790,7 +791,9 @@ function switchTab(t){
   document.getElementById('tab-audio').classList.toggle('on',t==='audio');
   var rb=document.getElementById('xgrail-books'),ra=document.getElementById('xgrail-audio');
   if(rb&&ra){rb.classList.toggle('on',t==='books');ra.classList.toggle('on',t==='audio');}
-  window.scrollTo({top:0,behavior:'smooth'});
+  /* 点 tabs/浮标 → 滚到对应榜单区（带吸顶导航偏移） */
+  var pane=document.getElementById(t==='books'?'pane-books':'pane-audio');
+  if(pane)setTimeout(function(){pane.scrollIntoView({behavior:'smooth',block:'start'});},60);
 }
 function xgRailGo(t){switchTab(t);}
 function pgToPlayer(){var v=document.getElementById('vinyl');if(v)setTimeout(function(){v.scrollIntoView({behavior:'smooth',block:'center'})},80);}
@@ -1177,7 +1180,7 @@ function xgwRender(){
   g.innerHTML=h;
   var c=document.getElementById('xgwCount');if(c)c.textContent=fmtCnt(xgwCountAll());
 }
-function xgwMore(){XGW_PAGE++;xgwRender();var w=document.getElementById('xgwall');if(w)w.scrollIntoView({behavior:'smooth',block:'start'});}
+function xgwMore(){XGW_PAGE++;xgwRender();}/* 原地换卡，不再强制滚回墙顶 */
 function xgwToggleForm(){var f=document.getElementById('xgwForm');f.classList.toggle('on');
   if(!f.classList.contains('on')){try{sessionStorage.setItem('xgwfClosed','1')}catch(e){}}
   else{try{sessionStorage.removeItem('xgwfClosed')}catch(e){}f.scrollIntoView({behavior:'smooth',block:'center'})}}
@@ -1301,7 +1304,9 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBook();
       var y=window.scrollY||document.documentElement.scrollTop;
       rail.classList.toggle('on',y>380);
       var hint=document.getElementById('swipehint');
-      if(hint)hint.classList.toggle('on',y<=240&&!document.getElementById('drawer').classList.contains('on'));
+      /* mini 播放条出现时隐藏下滑浮标，避免底部重叠 */
+      var miniOn=document.getElementById('mini').classList.contains('show');
+      if(hint)hint.classList.toggle('on',y<=240&&!document.getElementById('drawer').classList.contains('on')&&!miniOn);
     },80);
   },{passive:true});
   var hint0=document.getElementById('swipehint');
