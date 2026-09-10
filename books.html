@@ -39,12 +39,12 @@ body{background:#07070B}
   color:var(--gold-2);background:rgba(247,200,115,.10);border:1px solid rgba(247,200,115,.25);margin-bottom:22px}
 .kicker i{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);animation:pulse 1.6s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.lb-hero h1{font-size:clamp(34px,6.4vw,68px);font-weight:900;line-height:1.08;margin:0 0 20px;letter-spacing:-1px;
+.lb-hero h1{font-size:clamp(34px,6.4vw,68px);font-weight:900;line-height:1.08;margin:0 0 12px;letter-spacing:-1px;
   background:linear-gradient(135deg,#fff 0%,#C4B5FD 45%,#F7C873 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.lb-hero .sub{font-size:16px;color:var(--muted);max-width:600px;margin:0 auto 34px;line-height:1.75;text-wrap:balance}
+.lb-hero .sub{font-size:16px;color:var(--muted);max-width:600px;margin:0 auto 18px;line-height:1.75;text-wrap:balance}
 .lb-hero .sub b{color:var(--text);font-weight:700;white-space:nowrap}/* 关键短语绑行，防止断在词中间 */
 
-.hero-stats{display:flex;justify-content:center;gap:clamp(20px,6vw,64px);flex-wrap:wrap;padding:32px 0 44px;position:relative;z-index:2}
+.hero-stats{display:flex;justify-content:center;gap:clamp(20px,6vw,64px);flex-wrap:wrap;padding:20px 0 26px;position:relative;z-index:2}
 .hero-stats .hs{text-align:center}
 .hero-stats .hs b{display:block;font-size:clamp(26px,4.6vw,40px);font-weight:900;line-height:1;
   background:linear-gradient(135deg,var(--gold),var(--gold-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -306,10 +306,10 @@ body{background:#07070B}
   .lb-nav .brand{font-size:13px}
   .lb-nav .brand .nava{width:38px;height:38px;vertical-align:-13px}
   .kicker{font-size:11px;letter-spacing:2px;white-space:nowrap;padding:6px 10px}
-  .lb-hero{padding:116px 18px 0}
-  .lb-hero .sub{font-size:12.5px}
+  .lb-hero{padding:62px 18px 0}
+  .lb-hero .sub{font-size:12.5px;margin-bottom:8px}
   /* hero 数据四格：1:1 对齐电脑端，一行四列不折行 */
-  .hero-stats{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:0;padding:24px 0 28px}
+  .hero-stats{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:0;padding:8px 0 6px}
   .hero-stats .hs{flex:1;min-width:0}
   .hero-stats .hs b{font-size:20px}
   .hero-stats .hs span{font-size:10px;letter-spacing:0}
@@ -348,7 +348,7 @@ body{background:#07070B}
   .rk .cover{width:40px;--k:.455}
 }
 /* ---------- 收藏引导条 / 右侧浮标 ---------- */
-#savebar{max-width:600px;margin:16px auto 0;padding:8px 14px;font-size:12px;color:var(--gold-2);text-align:center;
+#savebar{max-width:600px;margin:10px auto 0;padding:8px 14px;font-size:12px;color:var(--gold-2);text-align:center;
   border:1px dashed rgba(247,200,115,.35);border-radius:10px;background:rgba(247,200,115,.05)}
 #xgrail{position:absolute;right:6px;top:42%;display:flex;flex-direction:column;gap:6px;padding:6px;
   transform:translateX(130%);transition:transform .3s;border-radius:12px;
@@ -451,6 +451,14 @@ body{background:#07070B}
   .rk .meta{font-size:10.5px;gap:5px;justify-content:center;flex-wrap:wrap;overflow:visible}
   .rk .meta i{padding:2px 5px;white-space:nowrap}
 }
+#swipehint{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:95;display:none;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:999px;background:rgba(18,15,28,.94);border:1px solid rgba(247,200,115,.45);
+  color:var(--gold-2);font-size:13px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.5);cursor:pointer;white-space:nowrap}
+#swipehint.on{display:flex;animation:hintb 1.6s ease-in-out infinite}
+#swipehint i{font-style:normal;animation:hintb2 1.6s ease-in-out infinite}
+@keyframes hintb{0%,100%{transform:translateX(-50%)}50%{transform:translateX(-50%) translateY(5px)}}
+@keyframes hintb2{0%,100%{opacity:1}50%{opacity:.4}}
+@media(min-width:769px){#swipehint{display:none!important}}
 </style>
 </head>
 <body>
@@ -478,6 +486,7 @@ body{background:#07070B}
 
 <div id="savebar"></div>
 <div id="resume"></div>
+<div id="swipehint" onclick="document.getElementById('xgwall').scrollIntoView({behavior:'smooth'})"><i>↓</i> 往下滑 · 好多人在这儿看书聊书</div>
 
 <!-- 缘友留言墙 -->
 <div class="xgwall" data-xg-track="books.wall.view" id="xgwall">
@@ -494,9 +503,9 @@ body{background:#07070B}
     <div class="fxg-q">② 最大的收获是？（点选后自动成句）</div>
     <div class="fxg-chips" id="xgwChipsGain"></div>
     <div class="fxg-preview" id="xgwPreview">选好上面两项，留言自动生成 ↗</div>
+    <input id="xgwCustom" maxlength="80" placeholder="或者直接打你想说的话（可不填，选了上面就自动成句）">
     <button class="fxg-sub" onclick="xgwPost()">发布留言</button>
-    <textarea id="xgwText" maxlength="120" style="display:none" placeholder="也可以自己写…"></textarea>
-    <a class="fxg-manual" onclick="xgwManualMode()">想自己写？切换手写输入</a>
+    <textarea id="xgwText" maxlength="120" style="display:none"></textarea>
   </div>
   <div class="xgw-foot">
     <button class="post" data-xg-track="books.wall.post" onclick="xgwToggleForm()">✍️ 写留言</button>
@@ -811,6 +820,7 @@ A.addEventListener('pause',function(){try{localStorage.setItem('xgaudio',JSON.st
 function loadTrack(n,auto){
   idx=(n+window.TRACKS.length)%window.TRACKS.length;
   var t=window.TRACKS[idx];
+  if(IS_MOBILE)loadMobileEnv(idx);
   A.src='assets/audio/track'+t.n+'.mp3';
   A.load();
   document.getElementById('plTag').textContent=t.tag.split('').join(' ');
@@ -909,17 +919,54 @@ function drawSpec(){
     bars[i].style.height=Math.max(4,v/255*44)+'px';
   }
 }
+/* 手机端：预解码音频头部 RMS 包络 → 频谱由真实音量驱动（对标电脑端，不碰播放路由） */
+var mobileEnvCache={},mobileEnv=null,ENV_STEP=0.25;
+function loadMobileEnv(n){
+  if(mobileEnvCache[n]){mobileEnv=mobileEnvCache[n];return;}
+  var AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC)return;
+  try{
+    var dc=new AC();
+    fetch(A.src,{headers:{Range:'bytes=0-4194303'}}).then(function(r){return r.arrayBuffer()}).then(function(buf){
+      return new Promise(function(res,rej){var q=dc.decodeAudioData(buf,res,rej);if(q&&q.then)q.then(res,rej);});
+    }).then(function(d){
+      var ch=d.getChannelData(0),sr=d.sampleRate,win=Math.floor(sr*ENV_STEP),env=[];
+      for(var off=0;off+win<ch.length;off+=win){
+        var sum=0,cnt=0;
+        for(var i=0;i<win;i+=16){var v=ch[off+i];sum+=v*v;cnt++;}
+        env.push(Math.sqrt(sum/cnt));
+      }
+      var mx=0;for(var k=0;k<env.length;k++)if(env[k]>mx)mx=env[k];
+      if(mx<=0)mx=1;
+      env=env.map(function(v){return v/mx});
+      mobileEnvCache[n]=env;mobileEnv=env;
+      try{dc.close()}catch(e){}
+    }).catch(function(){try{dc.close()}catch(e){}});
+  }catch(e){}
+}
 function fakeSpec(){
   if(fakeStarted)return;fakeStarted=true;
-  var t=0;setInterval(function(){
+  var t=0,cur=bars.map(function(){return 4});
+  setInterval(function(){
     var playing=!A.paused;t+=.2;
     for(var i=0;i<bars.length;i++){
-      /* 暂停时音浪必须静止贴底，不能继续跳 */
-      bars[i].style.height=(playing?(6+Math.abs(Math.sin(t+i*.35))*26):4)+'px';
+      var target=4;
+      if(playing){
+        if(mobileEnv&&mobileEnv.length){
+          var vi=Math.floor(A.currentTime/ENV_STEP);
+          if(vi>=mobileEnv.length)vi=mobileEnv.length-1;
+          var v=mobileEnv[vi]||0;
+          target=4+v*40*(0.72+0.28*Math.abs(Math.sin(i*.9+t*.7)));
+        }else{
+          target=6+Math.abs(Math.sin(t*.8+i*.33))*18+Math.abs(Math.sin(t*2.1+i*.71))*10;
+        }
+      }
+      cur[i]+=(target-cur[i])*.45;
+      if(cur[i]<4)cur[i]=4;
+      bars[i].style.height=cur[i]+'px';
     }
   },90);
 }
-
 /* ============ track list ============ */
 (function renderTracks(){
   var total=0;
@@ -982,6 +1029,7 @@ function xgResumeAudio(){
 
 /* ============ 缘友留言墙 ============ */
 var XGW_PAGE=0,XGW_TOTAL=3600,XGW_PER=9;
+var XGW_PRE=['','','','','二刷有感：','凌晨看完，','昨晚读完 ','第三章就停不下来，','同事荐的，','读了一半忍不住来留'];
 var XGW_BK=[
 '读完{bk}，最大的感觉是心里静了。以前是急着找答案，现在是先看清事情本身。',
 '把{bk}里那张对照表真的做了一遍，才发现卡了我半年的事，卡点那么明显。',
@@ -997,7 +1045,53 @@ var XGW_BK=[
 '反复看{bk}「先看清再决定」那章。看清这件事，最值钱。',
 '给家里孩子也存了一份{bk}。这种不藏着掖着的写法，现在不多见。',
 '40多岁才读到{bk}，可惜也不可惜。书免费，反而比花钱买的课实在。',
-'之前走过弯路。看完{bk}才知道，路看清了再走，一点都不慢。'
+'之前走过弯路。看完{bk}才知道，路看清了再走，一点都不慢。',
+'把{bk}推荐给了我姐。她读完只说了一句：早该看看这种书。',
+'{bk}最打动我的不是方法，是那种「先看清再动手」的底气压。',
+'笔记记了十几页。{bk}这种书，一年读一遍都不亏。',
+'读完{bk}，把手机静音坐了一小时。有些事真的不能急。',
+'{bk}里讲的坑，跟我上个月栽的一模一样。看完算复盘了。',
+'别的不敢说，{bk}至少句句是真话。现在真话太少了。',
+'看完{bk}，把之前不敢面对的那件事写下来了。写完就轻了一半。',
+'{bk}读到60%多，忍不住先来留一句。后面几章比我预想的还干。',
+'疫情那年生意黄了，一直缓不过来。{bk}里「先止血再稳住」那段，我看了三遍。',
+'在厂里干了八年，{bk}里写的那个「被看见」的问题，就是我的问题。',
+'开着小超市，最近跟隔壁竞争得厉害。{bk}里有一章正好讲这个，照着调了调，这周好了一点。',
+'不是所有书都敢把话说这么直的。{bk}有些段落我截屏存着，没事翻出来看。',
+'看完{bk}睡了个午觉。很久没有这种「心里有底」的感觉了。',
+'{bk}第三章那个例子，跟我们家的事几乎一样。看完跟我老公聊了一晚上。',
+'退休了闲着，儿女推荐看的{bk}。年轻人看的书，我这岁数看着也不费劲。',
+'{bk}免费这件事我到现在还有点不敢信。内容是真的顶。',
+'之前买课被割过，两千八。看完{bk}才发现，真东西其实写得明明白白。',
+'{bk}我是在跑长途的间隙听完又看的。堵车的时候想了很多，想通了不少。',
+'看完{bk}当晚，把我记账的表格改了。有些钱真不该花。',
+'读{bk}的时候一直在想我以前那个合伙人。早看懂这几页，可能就不会闹翻。',
+'{bk}有一段讲「别跟趋势较劲」，我看了好几遍。这些年就是太犟了。',
+'高二学生党，作业写完偷偷看{bk}。虽然有些事还没经历过，但先记下来。',
+'{bk}第七章建议所有人都看一眼。就一页纸的事，很多人一辈子没想明白。',
+'以前觉得书都是骗人的。{bk}是个例外，讲的都是身边看得见的事。',
+'读{bk}用了九天。比刷短视频那九个月值。',
+'看完{bk}，第一次主动给我爸打了个电话。书里有段话戳到我了。',
+'{bk}里讲饭局那部分太真实了，我逢酒必醉，看完知道以后怎么挡了。',
+'开店三年没起色，{bk}里「单位经济」那章我做了笔记。慢慢照着算。',
+'{bk}字数不少，但读起来不累，像有人坐在对面跟你聊。',
+'看完{bk}一个多月了，偶尔翻回去看划过的线。每次都有新的对上号。',
+'{bk}讲「先给一次」那段，我照做了，两周后对方先帮我了个忙。真有这么回事。',
+'身体出过一次大问题之后看的{bk}。健康那部分，字字都是教训。',
+'{bk}不绕弯子，开头就把底交了。就冲这个，看完了。',
+'32岁，失业第四个月。{bk}里「选赛道」那章看完，重新把简历捡起来了。',
+'看了{bk}两章，给我团队一人发了个链接。有些话我说不出来，书里说透了。',
+'{bk}里那段关于「跟家里把话说开」的，看完跟我爸和好了。三年没好好说过话。',
+'夜班下班看完{bk}，天刚好亮。有些事想通了，人就轻了。',
+'{bk}第十几章那里，我合上书想了半小时。这种书不多见了。',
+'是个卖建材的，看完{bk}把报价单重新做了一遍。思路清楚多了。',
+'{bk}适合反复看，一遍有一遍的收获。留言为证，我还会再来。',
+'之前不信这些，觉得是成功学。{bk}看完改观了：它只讲怎么判断，不画饼。',
+'{bk}里讲的边界感，帮我处理好了跟婆婆的关系。真的。',
+'读完{bk}，把收藏夹里那些「三天速成」全删了。',
+'{bk}有个特点：不催你做决定，先教你看清。这个路子我服。',
+'陪读妈妈一枚，{bk}是孩子家长群里传的。看完确实踏实。',
+'{bk}看到一半把店里的排班表改了。有些账，之前就是没算明白。'
 ];
 var XGW_AD=[
 '听完第{n}节音频最大的收获：不跟趋势较劲，也不跟自己较劲。顺过来了。',
@@ -1007,28 +1101,55 @@ var XGW_AD=[
 '第{n}节那段反复听了两遍。不急着做动作，先看清，这句话值钱。',
 '听星哥的音频像面对面聊天，没有喊口号，全是实实在在的话。',
 '睡前听一节，心里特别稳。比刷手机入睡强一百倍。',
-'第{n}节里举的例子，跟我身边发生的一模一样。听完知道该怎么看了。'
+'第{n}节里举的例子，跟我身边发生的一模一样。听完知道该怎么看了。',
+'第{n}节听了两遍。星哥不讲大道理，讲的都是能落地的判断。',
+'洗澡的时候外放第{n}节，突然就把一件事想通了。',
+'音频最大的好处：星哥的语气听着就踏实，比看字更有分量。',
+'第{n}节那句「先看清再决定」，我设成了手机壁纸。',
+'「{tt}」这节我是在地铁上听完的，听到一半差点坐过站。',
+'星哥的声音有种让人安静下来的本事。第{n}节听完，焦虑少了大半。',
+'第{n}节里那句关于钱的看法，我记在了本子第一页。跟我想的完全不一样。',
+'开车听完了「{tt}」，到地方之后我在车里又坐了十分钟。',
+'90分钟十节课，我拖了两个月才听完。后悔没早点听完，也庆幸没错过。',
+'第{n}节建议配着书一起看。音频是地图，书是路，一个都不能少。',
+'听完「{tt}」当天，我把欠了半年的决定做了。',
+'给老爸也拷了一份音频。他不爱看书，但这类话他听得进去。',
+'第{n}节的干货密度有点大，我拆成三天听的，每段都值得停一停。',
+'夜里跑完步坐在小区花坛边听第{n}节，风一吹，突然就不钻牛角尖了。',
+'「{tt}」——光是这个标题就值一回票价。内容比标题还实在。',
+'听了三节就忍不住来留言。免费的东西做成这个质量，说不过去啊。',
+'第{n}节里讲创业那四步，我拿小本子记下来了。等我做成了回来还愿。',
+'音频里星哥说他自己踩过的坑，那段最值钱。书里反而没有这么细。',
+'边做饭边听「{tt}」，油烟机上放着手机，一节听完菜刚好出锅。',
+'第{n}节听完，把「瞎忙」两个字写在了工位便签上。',
+'外放第{n}节的时候我妈在旁边听完了全节，末了说了句：这人讲话实在。',
+'第{n}节那段关于沉下心的话，送给也在熬着的缘友。都会过去的。'
 ];
 function xgwRnd(n){return function(){n|=0;n=n+0x6D2B79F5|0;var t=Math.imul(n^n>>>15,1|n);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function xgwName(idx){
   var P=['静水流深','有缘人','老周','阿明','晨曦','感恩的心','远山','清风徐来','老李','半盏茶','知行合一','路在脚下','老张','平安喜乐','阿伟','向光而行','顺势而为','老王','心境澄明','少侠','阿峰','厚积薄发','晚风','尽力而为','老陈','守拙','归零','阿杰','行稳致远','听雨','破局者','老刘','坦然','阿坤','慢慢来','上善若水','老杨','抱朴守拙','阿磊','见贤思齐','光而不耀','老孙','静待花开','阿强','脚踏实地','守正出奇','阿涛','如履薄冰','老赵','日拱一卒','阿良','知常曰明','老钱','虚怀若谷','阿斌','和光同尘','大智若愚','老何','慎独','阿乐','反求诸己','老宋','笃行','阿宏','藏器于身','老郭','格物','阿平','洗心','躬身入局','老徐','明心','致远','老林','修齐','阿文','正己','求缺','老郑','守一','阿辉','知止','深耕','老冯','慎思','阿龙','笃定','利他','老蒋','潜龙勿用','阿飞','事上练','老潘','中和','格物致知'];
   return P[idx%P.length]+(idx>=P.length?String(66+idx%933):'');
 }
-/* 内容与标签严格配对：书评必然带书名，音频评必然是听音频 */
+/* 内容与标签严格配对：书评必带书名，音频评必为听音频；音频占30%，模板子索引独立推进防连坐重复 */
 function xgwItem(idx){
   var r=xgwRnd(idx*13+7);
-  if(idx%2===1){
-    var t=XGW_AD[(Math.floor(idx/2))%XGW_AD.length];
-    return {txt:t.replace('{n}',(idx%10)+1),tag:'🎧 听音频'};
+  var pre=XGW_PRE[idx%XGW_PRE.length];
+  if(idx%10<3){
+    var sub=Math.floor(idx/10)*3+(idx%10);
+    var tr=window.TRACKS[(sub*7)%window.TRACKS.length];
+    var t=XGW_AD[sub%XGW_AD.length];
+    return {txt:pre+t.replace('{n}',tr.n).replace('{tt}',tr.t),tag:'🎧 听音频'};
   }
   var b=window.BOOKS[Math.floor(r()*window.BOOKS.length)];
-  var t=XGW_BK[(Math.floor(idx/2))%XGW_BK.length];
-  return {txt:t.replace('{bk}','《'+b.t+'》'),tag:'《'+b.t+'》'};
+  var sub=Math.floor(idx/10)*7+(idx%10-3);
+  var t=XGW_BK[sub%XGW_BK.length];
+  return {txt:pre+t.replace('{bk}','《'+b.t+'》'),tag:'《'+b.t+'》'};
 }
-function xgwTime(idx){var m=[1,2,3,4,5,6,9,12,15,18,21,25,30,45,60,90];var d=m[(idx*13)%m.length];
+/* 时间轴：首页=最新，「换一批」往回翻；线性基数+确定性抖动，避免整页同一天 */
+function xgwTime(idx){var d=Math.max(1,Math.round((idx+1)/XGW_TOTAL*300)+((idx*7)%5)-2);
   return d===1?'昨天':d<30?d+' 天前':Math.round(d/30)+' 个月前';}
 function xgwLocal(){try{return JSON.parse(localStorage.getItem('xg9_reviews')||'[]')}catch(e){return[]}}
-function xgwCountAll(){return 3205+cntDays()*5+xgwLocal().length;}
+function xgwCountAll(){return 1024+cntDays()*25+xgwLocal().length;}
 function xgwRender(){
   var g=document.getElementById('xgwGrid');if(!g)return;
   var mine=xgwLocal(),h='';
@@ -1036,9 +1157,10 @@ function xgwRender(){
     h+='<div class="xgw-card"><p>'+esc(m.txt)+'</p><div class="xgw-meta"><span class="xgw-ava">'+esc((m.n||'有')[0])+'</span><span>'+esc(m.n||'有缘人')+'</span><span class="bk">'+esc(m.tag||'🎧 听音频')+'</span><span class="tm">刚刚</span></div></div>';
   });
   for(var k=0;k<XGW_PER;k++){
-    var idx=(XGW_PAGE*XGW_PER+k)%XGW_TOTAL;
+    var pos=(XGW_PAGE*XGW_PER+k)%XGW_TOTAL;
+    var idx=XGW_TOTAL-1-pos;/* 展示序：pos 越小越新 */
     var it=xgwItem(idx),nm=xgwName(idx);
-    h+='<div class="xgw-card"><p>'+esc(it.txt)+'</p><div class="xgw-meta"><span class="xgw-ava">'+esc(nm[0])+'</span><span>'+esc(nm)+'</span><span class="bk">'+esc(it.tag)+'</span><span class="tm">'+xgwTime(idx)+'</span></div></div>';
+    h+='<div class="xgw-card"><p>'+esc(it.txt)+'</p><div class="xgw-meta"><span class="xgw-ava">'+esc(nm[0])+'</span><span>'+esc(nm)+'</span><span class="bk">'+esc(it.tag)+'</span><span class="tm">'+xgwTime(pos)+'</span></div></div>';
   }
   g.innerHTML=h;
   var c=document.getElementById('xgwCount');if(c)c.textContent=fmtCnt(xgwCountAll());
@@ -1076,32 +1198,23 @@ function xgwPreviewUpdate(){
   var pv=document.getElementById('xgwPreview');if(!pv)return;
   pv.textContent=(XGW_SEL.about&&XGW_SEL.gain)?'「'+xgwBuildTxt()+'」':'选好上面两项，留言自动生成 ↗';
 }
-function xgwManualMode(){
-  var t=document.getElementById('xgwText');
-  var on=t.style.display==='none';
-  t.style.display=on?'block':'none';
-  if(on)t.focus();
-}
+function xgwManualMode(){var t=document.getElementById('xgwCustom');if(t)t.focus();}
 function xgwPost(){
-  var tEl=document.getElementById('xgwText');
-  var manual=tEl.style.display!=='none';
+  var custom=document.getElementById('xgwCustom').value.trim();
+  var auto=(XGW_SEL.about&&XGW_SEL.gain)?xgwBuildTxt():'';
   var txt,tag;
-  if(manual){
-    txt=tEl.value.trim();
-    if(txt.length<4){tEl.focus();return;}
-    tag=XGW_SEL.about||'🎧 听音频';
-  }else{
-    if(!XGW_SEL.about||!XGW_SEL.gain){
-      var pv=document.getElementById('xgwPreview');
-      pv.textContent='先把上面两项选好，留言自动生成 ↗';
-      return;
-    }
-    txt=xgwBuildTxt();tag=XGW_SEL.about;
+  if(custom&&auto){txt=auto+' '+custom;tag=XGW_SEL.about;}
+  else if(custom){txt=custom;tag=XGW_SEL.about||'🎧 听音频';}
+  else if(auto){txt=auto;tag=XGW_SEL.about;}
+  else{
+    var pv=document.getElementById('xgwPreview');
+    pv.textContent='选一下上面任意一项，或直接在输入框打字 ↗';
+    return;
   }
   var n=document.getElementById('xgwNick').value.trim()||'有缘人';
   var arr=xgwLocal();arr.push({n:n,txt:txt,tag:tag,ts:Date.now()});
   try{localStorage.setItem('xg9_reviews',JSON.stringify(arr))}catch(e){}
-  tEl.value='';
+  document.getElementById('xgwCustom').value='';
   XGW_SEL={about:'',gain:''};
   xgwChipsRender();xgwPreviewUpdate();xgwRender();
   var f=document.getElementById('xgwForm');f.classList.remove('on');
@@ -1170,8 +1283,12 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBook();
     tk=setTimeout(function(){
       var y=window.scrollY||document.documentElement.scrollTop;
       rail.classList.toggle('on',y>380);
+      var hint=document.getElementById('swipehint');
+      if(hint)hint.classList.toggle('on',y<=240&&!document.getElementById('drawer').classList.contains('on'));
     },80);
   },{passive:true});
+  var hint0=document.getElementById('swipehint');
+  if(hint0)setTimeout(function(){hint0.classList.add('on')},1200);
 })();
 </script>
 <script>window.GOATCOUNTER_CODE='YOUR_GOATCOUNTER_CODE';/*注册 GoatCounter 后把占位符换成你的 site code，全站即生效*/</script>
