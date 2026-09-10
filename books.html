@@ -88,18 +88,23 @@ body{background:#07070B}
 .pod .ranknum{position:absolute;right:16px;top:14px;font-size:52px;font-weight:900;line-height:1;opacity:.09;letter-spacing:-3px}
 
 /* ---------- COVER ---------- */
-.cover{position:relative;width:100%;aspect-ratio:3/4;border-radius:8px 4px 4px 8px;overflow:hidden;flex:none;
+/* 封面等比缩放：--k = 当前封面宽 / 88（设计基准宽），所有内部尺寸 calc(px*var(--k)) */
+.cover{position:relative;width:100%;aspect-ratio:3/4;--k:1;border-radius:calc(8px*var(--k)) calc(4px*var(--k)) calc(4px*var(--k)) calc(8px*var(--k));overflow:hidden;flex:none;
   box-shadow:0 14px 34px -12px rgba(0,0,0,.85), inset 0 0 0 1px rgba(255,255,255,.07)}
-.cover::after{content:"";position:absolute;left:0;top:0;bottom:0;width:11px;
+.cover::after{content:"";position:absolute;left:0;top:0;bottom:0;width:calc(11px*var(--k));
   background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(255,255,255,.10),rgba(0,0,0,.35))}
 .cover .bg{position:absolute;inset:0}
-.cover .cat{position:absolute;left:18px;top:14px;right:12px;font-size:9.5px;letter-spacing:2px;opacity:.75;color:#fff}
-.cover .ttl{position:absolute;left:16px;right:12px;top:34%;transform:translateY(-50%);font-weight:800;line-height:1.28;color:#fff;
-  text-shadow:0 2px 14px rgba(0,0,0,.6);letter-spacing:1px}
-.cover .seal{position:absolute;right:11px;bottom:38px;width:26px;height:26px;border-radius:4px;border:1px solid rgba(255,255,255,.35);
-  display:flex;align-items:center;justify-content:center;font-size:9px;color:rgba(255,255,255,.6);transform:rotate(-8deg)}
-.cover .ft{position:absolute;left:16px;right:12px;bottom:11px;font-size:8.5px;letter-spacing:1.5px;color:rgba(255,255,255,.55);
-  border-top:1px solid rgba(255,255,255,.18);padding-top:6px}
+.cover .cat{position:absolute;left:calc(18px*var(--k));top:calc(14px*var(--k));right:calc(12px*var(--k));font-size:calc(9.5px*var(--k));letter-spacing:calc(2px*var(--k));opacity:.75;color:#fff}
+.cover .ttl{position:absolute;left:calc(16px*var(--k));right:calc(12px*var(--k));top:34%;transform:translateY(-50%);font-weight:800;line-height:1.28;color:#fff;
+  text-shadow:0 2px 14px rgba(0,0,0,.6);letter-spacing:calc(1px*var(--k))}
+.cover .ttl.t6{font-size:calc(26px*var(--k))}
+.cover .ttl.t9{font-size:calc(18px*var(--k))}
+.cover .ttl.t12{font-size:calc(17px*var(--k))}
+.cover .ttl.t13{font-size:calc(14px*var(--k))}
+.cover .seal{position:absolute;right:calc(11px*var(--k));bottom:calc(38px*var(--k));width:calc(26px*var(--k));height:calc(26px*var(--k));border-radius:calc(4px*var(--k));border:1px solid rgba(255,255,255,.35);
+  display:flex;align-items:center;justify-content:center;font-size:calc(9px*var(--k));color:rgba(255,255,255,.6);transform:rotate(-8deg)}
+.cover .ft{position:absolute;left:calc(16px*var(--k));right:calc(12px*var(--k));bottom:calc(11px*var(--k));font-size:calc(8.5px*var(--k));letter-spacing:calc(1.5px*var(--k));color:rgba(255,255,255,.55);
+  border-top:1px solid rgba(255,255,255,.18);padding-top:calc(6px*var(--k))}
 .cover .gloss{position:absolute;inset:0;background:linear-gradient(125deg,rgba(255,255,255,.16) 0%,transparent 38%)}
 .c-renxing .bg{background:linear-gradient(150deg,#7C3AED 0%,#4C1D95 55%,#1E1040 100%)}
 .c-money .bg{background:linear-gradient(150deg,#F7C873 0%,#A3620B 55%,#3A2205 100%)}
@@ -107,7 +112,7 @@ body{background:#07070B}
 .c-soc .bg{background:linear-gradient(150deg,#FF6F91 0%,#9D174D 55%,#3D0A20 100%)}
 
 .pod .row{display:flex;gap:16px;align-items:flex-start}
-.pod .cover{width:88px}
+.pod .cover{width:88px;--k:1}
 .pod h3{font-size:16.5px;font-weight:800;line-height:1.4;margin:0 0 8px;color:var(--text)}
 .pod .hook{font-size:13px;color:var(--muted);line-height:1.65;margin:0 0 12px}
 .pod .facts{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--dim)}
@@ -121,7 +126,9 @@ body{background:#07070B}
 .rk:hover{background:rgba(139,92,246,.09);border-color:rgba(139,92,246,.42);transform:translateX(4px)}
 .rk .no{width:32px;font-size:19px;font-weight:900;text-align:center;color:var(--dim);font-variant-numeric:tabular-nums;flex:none}
 .rk .no.top{color:var(--gold)}
-.rk .cover{width:46px}
+.rk .cover{width:46px;--k:.52}
+.rk .cover .cat,.rk .cover .ft,.rk .cover .seal{display:none}/* 小封面只留书名，序号看左侧 .no */
+.rk .cover .ttl{left:calc(8px*var(--k));right:calc(6px*var(--k))}
 .rk .mid{flex:1;min-width:0}
 .rk h4{font-size:15px;font-weight:700;margin:0 0 5px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rk .hook{font-size:12.5px;color:var(--muted);margin:0 0 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -232,7 +239,7 @@ body{background:#07070B}
   background:linear-gradient(180deg,#16132a,#0a0912);border-left:1px solid var(--line);display:flex;flex-direction:column}
 .drawer.on{transform:none}
 .dr-head{padding:22px 24px 18px;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:flex-start;position:relative}
-.dr-head .cover{width:76px}
+.dr-head .cover{width:76px;--k:.86}
 .dr-head .x{position:absolute;right:16px;top:16px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.07);color:#fff;
   display:flex;align-items:center;justify-content:center;font-size:17px}
 .dr-head h3{font-size:19px;font-weight:800;line-height:1.4;margin:0 26px 8px 0;color:#fff}
@@ -290,7 +297,7 @@ body{background:#07070B}
   .tabs button{padding:9px 14px;font-size:13px;white-space:nowrap;flex:none}
   .podium{grid-template-columns:1fr;gap:12px}
   .pod{padding:17px}
-  .pod .cover{width:74px}
+  .pod .cover{width:74px;--k:.84}
   .rk{padding:12px 13px;gap:11px}
   .rk .heatbox{display:none}
   .rk .hook{display:none}
@@ -303,7 +310,7 @@ body{background:#07070B}
   .podium{gap:8px;margin-bottom:20px}
   .pod{padding:12px 14px;border-radius:14px}
   .pod .row{gap:12px}
-  .pod .cover{width:56px}
+  .pod .cover{width:56px;--k:.636}
   .pod h3{font-size:14.5px;margin:0 0 4px}
   .pod .hook{display:none}
   .pod .facts{display:none}
@@ -313,8 +320,8 @@ body{background:#07070B}
   body{min-height:100vh}
 }
 @media(max-width:400px){
-  .pod .cover{width:64px}
-  .rk .cover{width:40px}
+  .pod .cover{width:64px;--k:.727}
+  .rk .cover{width:40px;--k:.455}
 }
 </style>
 </head>
@@ -503,11 +510,11 @@ function fmt(s){s=Math.max(0,Math.floor(s||0));var m=Math.floor(s/60);return (m<
 function wcn(n){return n>=10000?(Math.round(n/1000)/10)+'万字':n+'字';}
 function coverHTML(b,rank){
   var t=b.t.replace(/[《》]/g,'');
-  var fs = t.length<=6?26:t.length<=9?21:t.length<=12?17:14;
+  var fs = t.length<=6?'t6':t.length<=9?'t9':t.length<=12?'t12':'t13'; /* 字号档位，px 值 × var(--k) 随封面等比缩放 */
   return '<div class="cover '+CATCLS[b.cat]+'">'+
     '<div class="bg"></div><div class="gloss"></div>'+
     '<div class="cat">'+esc(b.cat)+'</div>'+
-    '<div class="ttl" style="font-size:'+fs+'px">'+esc(t)+'</div>'+
+    '<div class="ttl '+fs+'">'+esc(t)+'</div>'+
     '<div class="seal">'+rank+'</div>'+
     '<div class="ft">星哥 · 内部著作</div></div>';
 }
