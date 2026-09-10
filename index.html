@@ -16,7 +16,7 @@
 /* ---------- 主页书架区（只新增，不覆盖任何既有样式） ---------- */
 .xg-shelf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 @media(max-width:980px){.xg-shelf-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){.xg-shelf-grid{grid-template-columns:1fr}}
+@media(max-width:640px){.xg-shelf-grid{grid-template-columns:repeat(2,1fr);gap:9px}.xg-book{padding:13px 14px;border-radius:12px}.xg-book h3{font-size:14px}.xg-book .hook{display:none}.xg-book .no{font-size:28px;right:12px;top:10px}.xg-book .go{margin-top:8px;font-size:11.5px}}
 .xg-book{position:relative;display:block;padding:20px 22px;border-radius:16px;text-decoration:none;
   background:var(--panel);border:1px solid var(--line);transition:.25s;overflow:hidden}
 .xg-book:hover{transform:translateY(-4px);border-color:rgba(247,200,115,.45);box-shadow:0 20px 44px -18px rgba(247,200,115,.25)}
@@ -59,7 +59,7 @@
       <span class="brand-txt" data-page-node-id="7eATjknObFFoMzEie1cD71">星哥<em data-page-node-id="iiPuF3HjDOef0pyhF7MqZP">内部图书馆</em></span>
     </a>
     <nav class="nav-links" data-page-node-id="VPwKNSE9hZEcFI7khCdtsZ">
-      <a href="#pain" data-page-node-id="t4D3mVtQ5iSAp6gUUCkBmt">你卡在哪</a>
+      <a href="#shelf" data-page-node-id="t4D3mVtQ5iSAp6gUUCkBmt">免费书架</a>
       <a href="#why" data-page-node-id="KvGI8LLN2FHt8OKHUZ0gN7">为什么是我</a>
       <a href="#value" data-page-node-id="4XvNoBlzl2FHgulU1g4gvG">你能拿到什么</a>
       <a href="#proof" data-page-node-id="lKQRqrVm4orb5BqVVeAZfu">真实战绩</a>
@@ -150,56 +150,6 @@
       <span class="r">去听 →</span>
     </a>
     <p class="xg-shelf-note" data-page-node-id="xgShelfNote001">先读后聊 · 全部免费 · 读完觉得有用，再决定要不要找我</p>
-  </div>
-</section>
-
-<!-- ============ PAIN ============ -->
-<section class="sec" id="pain" data-page-node-id="PQAmVINf5UPFJJpwdb1TtH">
-  <div class="wrap" data-page-node-id="ymWLIP8BA8yjy4xyYabqd6">
-    <div class="sec-head reveal" data-page-node-id="kCQ92HDA6MtRVOaiFF0hrs">
-      <span class="tag" data-page-node-id="DD1dwDYAMG1OXOTMpAmT2L">先对号入座</span>
-      <h2 data-page-node-id="50kXfinzgrf2oNbWTTDN7G">卡住你的从来不是能力，<br data-page-node-id="wAq3xx05jK4MPDQNHOpcdl">是没人帮你<span class="hl" data-page-node-id="ckBxTYBPHulomePEIGviUM">把事看清楚</span></h2>
-      <p class="sec-sub" data-page-node-id="BASbMI6Enf1enImsxaZaXB">下面这 6 条，中 1 条，你今天就不该空手走。</p>
-    </div>
-
-    <div class="pain-grid" data-page-node-id="oiDZq4SHFIy8Ba6XxiAvJA">
-      <div class="pcard reveal" data-page-node-id="eZuOxMGpbLIza14GGtW409"><span class="pnum" data-page-node-id="fgRFU8dMfsmEHY4vVNLWEE">01</span><h3 data-page-node-id="ZsaNbcdEvEgSZ0AqRsE17Y">收藏了上百个项目，一个都没开始</h3><p data-page-node-id="qsCgAhoX6fbIZOvawapWkC">每天刷、每天存、每天觉得「明天再研究」。半年过去，收藏夹满了，银行卡没变。</p></div>
-      <div class="pcard reveal" data-page-node-id="LmXpSlwovnZPrqa8jwjr7C"><span class="pnum" data-page-node-id="HOVXv4WUEpyPOdpDuSO73s">02</span><h3 data-page-node-id="tUnVad1axudMB26kACGdZe">上班 10 小时，剩下的时间只想躺着</h3><p data-page-node-id="EEsBJEYMk1aDYkZ6avHMts">你知道要搞副业，但你连今天吃什么都懒得想。不是你懒，是你不知道做了有没有用。</p></div>
-      <div class="pcard reveal" data-page-node-id="6G0paH9SOfvFCW1IN3R0ib"><span class="pnum" data-page-node-id="8r655dGOcEFllJlKBKHdcD">03</span><h3 data-page-node-id="HxrSWwZSc0EbhpSn1GuMGZ">买过课、进过群，学完还是不会落地</h3><p data-page-node-id="PdcytJbhAUnjxV2cdPqA9c">老师讲的是他的路，不是你的路。你缺的不是知识，是有人拿着你的情况，给你改一版。</p></div>
-      <div class="pcard reveal" data-page-node-id="us4qOrlLRLL0hwSX9Oardt"><span class="pnum" data-page-node-id="jHKx7y31xzbta2LGhhkrsB">04</span><h3 data-page-node-id="1hNIXtkicTJdCv2H2gqhrU">有点资源、有点人脉，不知道怎么换成钱</h3><p data-page-node-id="FkHbF5uNoRlXMGFGHcIrOg">明明手里有牌，就是不知道该先出哪张。别人一张 3 都能赢，你攥着王炸不敢打。</p></div>
-      <div class="pcard reveal" data-page-node-id="qiXGLRD8mTd3HNLUQ2Iiue"><span class="pnum" data-page-node-id="RqjKPmMzle6jWKN1rL47om">05</span><h3 data-page-node-id="DHJTx9JSJIe3W8CY6YRqvW">书读了不少，事到临头还是拿不准</h3><p data-page-node-id="WaLi0OKfpCLHcm8DGZbQlh">道理都懂，一到自己身上就不会判断。不是你笨，是没人拿你的事，给你掰开揉碎讲一遍。</p></div>
-      <div class="pcard reveal" data-page-node-id="dmvjKnYiRt3fGKoAr5aHro"><span class="pnum" data-page-node-id="rBgZKD9LGAArxPrpkOKGhq">06</span><h3 data-page-node-id="nIUKBcelq6iNv71khExxMR">被割过，现在谁都不敢信</h3><p data-page-node-id="RIuIclTIx0aoscG3xGTyqH">交过学费、踩过坑，现在看到「带你赚钱」四个字就先皱眉。<b data-page-node-id="6ARpiGsYvUANnR1KrBy3o2">这很正常，而且我认为你该继续警惕。</b></p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 时间线对比 ============ -->
-<section class="sec sec-tight" data-page-node-id="9IyQVm9yLVOFy55S0Qpjcq">
-  <div class="wrap" data-page-node-id="CkxFtOSd0NbAJe0lIAAZVM">
-    <div class="vs reveal" data-page-node-id="B0qw6iyTSgZdLwhK5PLCgB">
-      <div class="vs-col vs-bad" data-page-node-id="y2GFYsxOlo4AoHUrF5PJHG">
-        <div class="vs-head" data-page-node-id="sjkmQsophluIBDnL3qMlcW">一个人自己摸索</div>
-        <ul data-page-node-id="69pExs9BjJPVeBk0KKBIka">
-          <li data-page-node-id="RyCXhMwhcYBFtJNZRIFPI5"><b data-page-node-id="uyX2EwqG2hbC3n8ZId42eA">第 1 个月</b>刷项目，越刷越兴奋</li>
-          <li data-page-node-id="sv9CSzL7FHELmCSVfsGewK"><b data-page-node-id="q5iJnFXY6F4jSFU68beOfB">第 3 个月</b>挑花眼，开始怀疑</li>
-          <li data-page-node-id="8ZYKWFzHpbXAab1H0TRucL"><b data-page-node-id="XebV2wG9RYOmHMXBKndpFk">第 6 个月</b>交点学费，踩个坑</li>
-          <li data-page-node-id="HiqHlkyaKpMLfgJyNw5dkX"><b data-page-node-id="VwdT9MGZrqlIxKfo2wiFIy">第 12 个月</b>回到原点，安慰自己「明年再说」</li>
-        </ul>
-        <div class="vs-foot" data-page-node-id="2qCYAnfD4gl7EGFqsoSHCM">一年后：<span data-page-node-id="vubu4ntZzUvki3TcGVw1PO">银行卡 −，信心 −−</span></div>
-      </div>
-      <div class="vs-mid" data-page-node-id="UuiAnUAHDIarYW6NQp6xQJ">VS</div>
-      <div class="vs-col vs-good" data-page-node-id="AnpXIfXPeXDs2oi0gSKoOA">
-        <div class="vs-head" data-page-node-id="89ZKqVgHhOZdQd2e5TDMFL">有人帮你看清楚</div>
-        <ul data-page-node-id="0cJgIHmvqXpbKASax7Z7rD">
-          <li data-page-node-id="FsfbkV5z06L02PFKtDG43z"><b data-page-node-id="ohb3O2vEdPR1DdS4dEhWem">第 1 天</b>把你的情况讲清楚，先自己长出判断</li>
-          <li data-page-node-id="46EIyfeZZ5bQAWVTdEtcf6"><b data-page-node-id="QXsv2lA1ZIvsX1qnyDXDPX">第 1 周</b>按书里的方法，在自己身上试一遍</li>
-          <li data-page-node-id="LlTK0RZDrP0hf3ifXke9wL"><b data-page-node-id="sRKAMgwIHV5Jk6FkdHVVEW">第 1 个月</b>带着具体问题来，把卡点看透</li>
-          <li data-page-node-id="xoZVNkgEUwi7QhrbTcpXBv"><b data-page-node-id="GmqqTkWxGnpEnehakPKgyF">第 12 个月</b>路越走越顺，判断力长在你自己身上</li>
-        </ul>
-        <div class="vs-foot" data-page-node-id="MGAdpk236NQCBdXqTPHYo7">一年后：<span data-page-node-id="5MweLDKOYhMrCerwwGIure">路子 +，判断力 +，心里有底 +</span></div>
-      </div>
-    </div>
-    <p class="vs-note reveal" data-page-node-id="xKC34gKVUcSuQFQI4u5m4o">差别不在能力，在<b data-page-node-id="E8N3wLxj8CGEJRSyVdNOUa">你身边有没有一个已经走通、并且愿意拉你的人</b>。</p>
   </div>
 </section>
 
