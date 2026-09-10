@@ -925,44 +925,59 @@ function xgNotesPanel(){
 }
 window.xgNotesPanel=xgNotesPanel;
 function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.textContent="📓笔记("+xgNotes().length+")";}
-/* ===== 段评系统（对标番茄小说）：章标题评论数 + 金句段尾气泡 + 底部评论面板（每天+2条） ===== */
+/* ===== 段评系统 v2（对标番茄小说）：全书散布段评 + 章标题总数 + 面板条数与气泡严格一致、展开不回弹 ===== */
 (function(){
   var PCN="xgpc_"+T,PCL="xgpclike_"+T;
-  var CMT=["这段得抄下来贴在工位上。","看到这段我停了十分钟，说的就是我。","去年就是没想明白这句，栽了个大跟头。","转发给我老公了，让他也看看这段。","第一次被一本书说中，骂得对。","这段建议反复读三遍再往下走。","我师傅说过类似的话，今天在这儿又看到了。","要是十七年那会儿懂这个，至少少走三年弯路。","划下来，周一开会用得上。","扎心，但真实。","底层逻辑讲透了，剩下的就是做。","我在这个阶段卡了两年，看到这段才知道卡在哪。","已做笔记。这种书免费，真是离谱。","每读一遍都有新的体会。","这段我念给我爸听了，他沉默了好一会儿。","字不多，分量重。","以前的公司要是都懂这个就好了。","先看清再动手，这就是全书的题眼吧。","凌晨两点看到这段，突然就不焦虑了。","已转发三个群，都在问还有没有。","这一段就值一套课的钱。","大一学生路过，先存着，十年后见。","做小生意的看完这段，心里有底了。","道理都懂，就看谁真去做。"];
-  var WHO=["呐咔","白雪满川","油机面","蛋炒番茄酱","来人挖个坑埋了吧","用户84621","山高水长","不吃香菜","老树发新芽","半盏清欢","阿澜","南下","青萍之末","木头人","阿蛮","麦浪","晚来天欲雪","一路向北","拾光的人","大橘为重","不器","阿澈","慢半拍","知行小录"];
+  var BODY=["这段我读了三遍，越读越对味。","我师傅说过类似的话，今天在这儿又看到了。","已做笔记。这本书免费，真是离谱。","凌晨两点看到这段，突然就不焦虑了。","这段得抄下来贴在工位上。","看到这段我停了十分钟，说的就是我。","道理都懂，就看谁真去做。","大一学生路过，先存着，十年后见。","做小生意的看完这段，心里有底了。","这一段就值一套课的钱。","已转发三个群，都在问还有没有。","同一个坑摔一次是学费，摔两次是自己同意的。","去年就是没想明白这段，亏了六位数。","我妈没读过书，但把这些道理全活明白了。","打工第六年，今天才看懂这句话。","先点赞，再慢慢消化。","这段建议全文背诵。","有内味儿了，跟家里老人讲的一个意思。","写在手账本第一页了。","单位里的老油条，做的就是这段的反面。","看完立刻把手机屏保换了。","这话听着扎心，但没一句冤枉人。","凌晨的出租车司机都在践行这段。","别光收藏，去做一件就行。","读到这段的时候，正好领导在开会点名我。","十年后再看这段，应该又是另一番滋味。","这段适合打印出来贴门上。","刚创业失败的人，看这段会哭。","县城开店的，这段就是我的日常。","转发给我弟了，他正需要。","书越读越薄，这段就是精华。","上一个这么跟我说话的人，是我爷爷。","工作中遇到贵人，说的大概就是这段。","这段让我想起 2019 年那个决定。","不好听，但句句是真话。","收藏了，等孩子大点给他看。","这段讲透了，别处都是绕着说。","摆摊三年，段段都是我的血泪。","看完这段，把欠的人情记本子上了。","这段要是早十年看到就好了。","别问我怎么知道的，问就是踩过坑。","会议室里混不明白的，先看这段。","我爸一辈子就做到了这段，佩服。","这段我想设成闹钟铃声。","越穷的时候，越要把这段读十遍。","同事问我最近怎么变了，我让他来看这段。","被裁员那天看到这段，心态稳住了。","这段话，值一顿海底捞。","有意思，越读越有滋味。","农村出来的孩子，看这段最感触。","这段像一杯温水，不烫但解渴。","先存着，明天开会就用得上。","这段适合发朋友圈，但舍不得发。","看一段做一件事，这本书就值了。","十年老销售路过，这段说到根上了。","这段我截屏发给我对象了。","缺的就是这段点破。","边读边冒冷汗，说的全是以前的我。","这段让我把辞职信又咽回去了。","好东西，一字没改抄本子上了。","读完这段，把收藏夹里那些课都删了。","这段就是给老实人撑腰的。","昨晚失眠想的没用的事，这段给答案了。","带到工地午休看的，工友都凑过来了。","这段对得上我去年一整年。","文字朴实，但全是干货。","这段救了我这周的坏心情。","越琢磨越有味道，像是陈年老茶。","家里长辈要是会说，就是这么说的。","这段我准备教给我闺女。","别小看这段，做到的人不到一成。","刚加完班看到这段，值了。","这段配一碗热汤，绝了。","之前总觉得是鸡汤，现在懂了是实话。","这段我念给我爸听了，他沉默了很久。","出来混，迟早要读懂这段。","这段放在任何一本书里都是封面句。","二刷了，每次看都有新体会。","看完这段，决定给老家打个电话。","这话要是十年前有人跟我说就好了。","做自媒体的都该把这段裱起来。","这段就像镜子，照出了所有借口。","看完默默把购物车清空了。","这段像老中医把脉，一按一个准。","宝妈深夜喂奶看到这段，泪目。","这段我打出来贴在收银台后面。","这个道理，在医院走廊里最能体会。","别划太快，这段值得一个字一个字读。","这段说给所有不好意思谈钱的人。","读到这段才觉得前面没白读。","这段适合当座右铭，不空。","看完这段，把年会的敬酒词想好了。","书摊老板说得对，好内容不怕免费。","这段让我想起第一份工资是怎么花的。","通透，全在最后一句。","这段我看了五分钟，一动没动。","写成这样，是真经历过的人。","这段像把刀，把糊弄人的东西全切开了。","转给我爸了，他说写得实在。","看到这段，突然原谅了那年的自己。","每次开会前看一遍，心里就有底。","这段帮我省了一笔冤枉钱。","合上书第一件事，就是把这段发给搭档。","别人捂着掖着的东西，这段直接说透了。"];
+  var OPEN=["说实话，","讲真的，","不知道为啥，","夜深了读到这里，","刚踩完坑看到这段，","每次焦虑就翻到这句，"];
+  var WHO_YU=["有缘人","有缘人521","一位有缘人","低调的有缘人","深夜刷到的有缘人","有缘人2688","刚下载的有缘人","第三遍读的有缘人","有缘人小杨","不爱说话的有缘人","有缘人老周","广东的有缘人","凌晨三点的有缘人","有缘人736","蹲个后续的有缘人","做餐饮的有缘人","有缘人·慢步","租房党的有缘人","有缘人Momo","陪读妈妈有缘人"];
+  var WHO_NM=["拾光的人","晚来天欲雪","呐咔","白雪满川","老树发新芽","麦浪","南下","青萍之末","木头人","阿蛮","半盏清欢","慢半拍","知行小录","山高水长","不吃香菜","一路向北","大橘为重","阿澈","不器","油机面"];
   function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
   function myPC(){try{return JSON.parse(localStorage.getItem(PCN)||"[]")}catch(e){return[]}}
   function savePC(a){try{localStorage.setItem(PCN,JSON.stringify(a))}catch(e){}}
   function likes(){try{return JSON.parse(localStorage.getItem(PCL)||"[]")}catch(e){return[]}}
   function saveLikes(a){try{localStorage.setItem(PCL,JSON.stringify(a))}catch(e){}}
   function fmtDate(d){var t=new Date(Date.now()-d*86400000);return (t.getMonth()+1)+"月"+t.getDate()+"日"}
-  function segBase(si){var seed=T.length*7+si*13;return 5+((seed*17)%140)}
+  function h32(n){n=Math.abs(n|0);n=(n^61)^(n>>>16);n=(n+(n<<3))|0;n=n^(n>>>4);n=Math.imul(n,0x27d4eb2d);n=n^(n>>>15);return n>>>0}
+  function segBase(si){return 3+h32(T.length*7+si*13+977)%80}
   function segCnt(si){var m=0;myPC().forEach(function(x){if(x.seg===si)m++});return segBase(si)+DAYS()*2+m}
-  /* 选重点段：金句块 .quote p 优先，不足补章标题后首个长段 */
-  var segs=[],si=0,used=[];
-  [].slice.call(document.querySelectorAll(".quote p")).forEach(function(p){segs.push({el:p,si:si++});used.push(p)});
-  if(segs.length<4){[].slice.call(document.querySelectorAll("h2.chapter")).forEach(function(h2){
-    var n=h2.nextElementSibling;while(n&&n.tagName!=="P")n=n.nextElementSibling;
-    if(n&&n.textContent.trim().length>40&&used.indexOf(n)<0){segs.push({el:n,si:si++});used.push(n)}
-  });}
+  function genTxt(seed,k){var h=h32(seed*31+k*7+17);var body=BODY[h%BODY.length];var o=h32(seed*13+k*29+5);if(o%7<2)return body;return OPEN[o%OPEN.length]+body}
+  function genWho(seed,k){var h=h32(seed*17+k*23+3);return k%2===0?WHO_YU[h%WHO_YU.length]:WHO_NM[h%WHO_NM.length]}
+  function genDays(seed,k,total){if(k<=0)return 0;var h=h32(seed*19+k*11+7);return Math.min(200,Math.floor(Math.pow((k+1)/total,0.85)*140)+h%5)}
+  function genLk(seed,k,total){var h=h32(seed*23+k*13+1);return Math.max(0,Math.round((1-(k+1)/total)*170*(0.25+(h%60)/60)))}
+  /* 选段：金句块全收 + 普通长段确定性挑约三成（全书散布，不只金句） */
+  var segs=[],si=0,used={};
+  function pkey(p){return p.textContent.trim().slice(0,24)}
+  [].slice.call(document.querySelectorAll(".quote p")).forEach(function(p){var k=pkey(p);if(!used[k]){segs.push({el:p,si:si++,lite:false,tx:k});used[k]=1}});
+  [].slice.call(document.querySelectorAll("p")).forEach(function(p,i){
+    if(p.closest&&p.closest(".quote"))return;
+    if(p.querySelector&&p.querySelector("a,button,input,textarea"))return;
+    var t=p.textContent.trim();
+    if(t.length<40||t.length>420)return;
+    var cap=segs.length>=240?0:(segs.length>=160?18:32);
+    if(cap<=0)return;
+    if(h32(T.length*1009+i*613+55)%100>=cap)return;
+    var k=pkey(p);if(used[k])return;
+    segs.push({el:p,si:si++,lite:true,tx:k});used[k]=1;
+  });
   /* 章标题旁评论总数（本章范围内段评求和） */
   [].slice.call(document.querySelectorAll("h2.chapter")).forEach(function(h2){
     var sum=0,n=h2.nextElementSibling;
     while(n){
       if(n.classList&&n.classList.contains("chapter"))break;
-      segs.forEach(function(s){if(s.el.parentNode===n||(s.el===n))sum+=segCnt(s.si)});
-      if(n.querySelectorAll)[].forEach.call(n.querySelectorAll("p"),function(pp){segs.forEach(function(s){if(s.el===pp)sum+=0})});
+      segs.forEach(function(s){if(s.el===n||s.el.parentNode===n)sum+=segCnt(s.si)});
       n=n.nextElementSibling;
     }
     if(sum>0){var b=document.createElement("span");b.textContent=sum+" 条段评";
       b.style.cssText="display:inline-block;font-size:11px;color:#8a6d1f;background:rgba(216,201,168,.35);padding:2px 9px;border-radius:99px;margin-left:8px;vertical-align:3px;font-weight:700;white-space:nowrap";
       h2.appendChild(b);}
   });
-  /* 段尾气泡 */
+  /* 段尾气泡：金句=金圈数字，普通段=灰金小气泡 */
   segs.forEach(function(s){
     var b=document.createElement("span");b.className="xgpc";b.textContent=segCnt(s.si);
     b.setAttribute("data-xg-track","book.pc.open");
-    b.style.cssText="display:inline-block;min-width:20px;height:20px;line-height:18px;text-align:center;border:1px solid #d8c9a8;border-radius:10px;background:#fff;color:#8a6d1f;font-size:11.5px;font-weight:800;margin-left:8px;padding:0 6px;cursor:pointer;vertical-align:2px;font-family:inherit";
+    if(s.lite){b.style.cssText="display:inline-block;min-width:17px;height:17px;line-height:15px;text-align:center;border:1px solid #ddd2bd;border-radius:9px;background:#faf6ec;color:#a08c55;font-size:10.5px;font-weight:700;margin-left:7px;padding:0 5px;cursor:pointer;vertical-align:1.5px;font-family:inherit";}
+    else{b.style.cssText="display:inline-block;min-width:20px;height:20px;line-height:18px;text-align:center;border:1px solid #d8c9a8;border-radius:10px;background:#fff;color:#8a6d1f;font-size:11.5px;font-weight:800;margin-left:8px;padding:0 6px;cursor:pointer;vertical-align:2px;font-family:inherit";}
     b.onclick=function(e){e.stopPropagation();openPanel(s.si)};
     s.el.appendChild(document.createTextNode(" "));s.el.appendChild(b);
   });
@@ -979,8 +994,7 @@ function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.te
   }
   function openPanel(target){
     var si=(typeof target==="number")?target:0;
-    var cnt=segCnt(si);
-    var quote="";segs.forEach(function(s){if(s.si===si)quote=s.el.textContent.trim().slice(0,18)});
+    var quote="";segs.forEach(function(s){if(s.si===si)quote=s.tx.slice(0,18)});
     var ov=document.createElement("div");
     ov.style.cssText="position:fixed;inset:0;z-index:150;background:rgba(0,0,0,.45)";
     var sh=document.createElement("div");
@@ -991,32 +1005,33 @@ function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.te
     inputRow.style.cssText="display:flex;gap:8px;padding:10px 0 calc(10px + env(safe-area-inset-bottom));border-top:1px solid #efe7d6;background:#faf7f0";
     inputRow.innerHTML='<input id="xgpcIn" maxlength="120" placeholder="有趣段评千万，不如你也来一条？" style="flex:1;min-width:0;background:#fff;border:1px solid #e3d9c4;border-radius:99px;padding:10px 16px;font-size:13.5px;color:#2e2a22;font-family:inherit;outline:none">'+
       '<button id="xgpcGo" style="flex:none;background:#e8b04b;color:#16130f;font-weight:800;font-size:13.5px;border:none;border-radius:99px;padding:10px 18px;cursor:pointer">发布</button>';
-    var vn=Math.min(4+DAYS(),10);
-    function renderList(){
-      var seed=T.length*7+si*13,h='';
-      h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><b style="color:#2e2a22;font-size:15.5px">'+cnt+' 条评论</b><span id="xgpcX" style="color:#a89e8e;font-size:20px;cursor:pointer;padding:2px 10px;line-height:1">⌄</span></div>';
+    var myRows=myPC().filter(function(m){return m.seg===si}).length;
+    var shownV=Math.min(8,Math.max(1,segCnt(si)-myRows));
+    function renderList(keep){
+      var tot=segCnt(si),seed=T.length*7+si*13,h='';
+      myRows=myPC().filter(function(m){return m.seg===si}).length;
+      var virt=Math.max(0,tot-myRows);
+      if(shownV>virt)shownV=virt;
+      h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><b style="color:#2e2a22;font-size:15.5px">'+tot+' 条评论</b><span id="xgpcX" style="color:#a89e8e;font-size:20px;cursor:pointer;padding:2px 10px;line-height:1">⌄</span></div>';
       h+='<p style="color:#8a7f6e;font-size:11.5px;margin:0 0 4px">「'+esc(quote)+'…」</p>';
       var lk=likes();
       myPC().slice().reverse().forEach(function(m){
         if(m.seg!==si)return;
         h+=rowHTML(m.n||"有缘人",m.txt,"刚刚",1,false,si,"m"+m.ts);
       });
-      for(var k=0;k<vn;k++){
+      for(var k=0;k<shownV;k++){
         var dseed=seed+k*31;
-        var who=WHO[dseed%WHO.length],txt=CMT[(dseed*7+k*5)%CMT.length];
-        var days=k===0?0:(dseed%25)+1;
-        var lkN=(dseed*11)%120+3;
         var isLk=lk.indexOf(si+":"+k)>-1;
-        h+=rowHTML(who,txt,fmtDate(days),lkN+(isLk?1:0),isLk,si,k);
+        h+=rowHTML(genWho(dseed,k),genTxt(dseed,k),fmtDate(genDays(dseed,k,virt)),genLk(dseed,k,virt)+(isLk?1:0),isLk,si,k);
       }
-      if(vn<CMT.length)h+='<div id="xgpcMore" style="text-align:center;color:#8a6d1f;font-size:12.5px;font-weight:700;padding:12px 0;cursor:pointer">展开更多评论 ⌄</div>';
+      if(shownV<virt)h+='<div id="xgpcMore" style="text-align:center;color:#8a6d1f;font-size:12.5px;font-weight:700;padding:12px 0;cursor:pointer">展开更多评论 ⌄</div>';
       listWrap.innerHTML=h;
-      listWrap.scrollTop=0;
+      if(!keep)listWrap.scrollTop=0;
     }
     function bind(){
       listWrap.querySelector("#xgpcX").onclick=function(){ov.remove()};
       var more=listWrap.querySelector("#xgpcMore");
-      if(more)more.onclick=function(){vn=Math.min(vn+6,CMT.length);renderList();bind()};
+      if(more)more.onclick=function(){var st=listWrap.scrollTop;shownV=Math.min(shownV+12,segCnt(si));renderList(true);bind();listWrap.scrollTop=st;};
       [].forEach.call(listWrap.querySelectorAll(".pcrep"),function(el){
         el.onclick=function(){replyTo=el.getAttribute("data-nick");var inp=sh.querySelector("#xgpcIn");inp.placeholder="回复 @"+replyTo+"：";inp.focus();};
       });
@@ -1024,7 +1039,7 @@ function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.te
         el.onclick=function(){var k=el.getAttribute("data-k");if(k&&k.indexOf("m")===0)return;
           var a=likes(),key=si+":"+k,i=a.indexOf(key);
           if(i>-1){a.splice(i,1)}else{a.push(key)}
-          saveLikes(a);renderList();bind();
+          saveLikes(a);var st=listWrap.scrollTop;renderList(true);bind();listWrap.scrollTop=st;
         };
       });
     }
@@ -1038,7 +1053,6 @@ function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.te
       var t2=(replyTo?"回复 @"+replyTo+"："+v:v);
       var a=myPC();a.push({seg:si,txt:t2,n:null,ts:Date.now()});savePC(a);
       replyTo=null;inp.value="";inp.placeholder="有趣段评千万，不如你也来一条？";
-      cnt=segCnt(si);
       segs.forEach(function(s){if(s.si===si){var b=s.el.querySelector(".xgpc");if(b)b.textContent=segCnt(si)}});
       renderList();bind();
     };
