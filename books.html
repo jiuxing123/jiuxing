@@ -39,8 +39,8 @@ body{background:#07070B}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .lb-hero h1{font-size:clamp(34px,6.4vw,68px);font-weight:900;line-height:1.08;margin:0 0 20px;letter-spacing:-1px;
   background:linear-gradient(135deg,#fff 0%,#C4B5FD 45%,#F7C873 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.lb-hero .sub{font-size:16px;color:var(--muted);max-width:600px;margin:0 auto 34px;line-height:1.75}
-.lb-hero .sub b{color:var(--text);font-weight:700}
+.lb-hero .sub{font-size:16px;color:var(--muted);max-width:600px;margin:0 auto 34px;line-height:1.75;text-wrap:balance}
+.lb-hero .sub b{color:var(--text);font-weight:700;white-space:nowrap}/* 关键短语绑行，防止断在词中间 */
 
 .hero-stats{display:flex;justify-content:center;gap:clamp(20px,6vw,64px);flex-wrap:wrap;padding:32px 0 44px;position:relative;z-index:2}
 .hero-stats .hs{text-align:center}
@@ -292,9 +292,15 @@ body{background:#07070B}
 @media(max-width:768px){
   .lb-nav{padding:11px 16px}
   .lb-hero{padding:110px 18px 0}
-  .hero-stats{gap:20px;padding:26px 0 34px}
+  .lb-hero .sub{font-size:14.5px}
+  .hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 8px;padding:26px 0 30px}
+  .hero-stats .hs span{font-size:11px}
   .tabs{position:sticky;top:49px;padding:0 14px 14px;gap:6px;flex-wrap:wrap}
   .tabs button{padding:9px 14px;font-size:13px;white-space:nowrap;flex:none}
+  /* 分类筛选：移动端 5 个一行均分，不允许孤行 */
+  .filters{flex-wrap:nowrap;gap:0;margin:0 0 24px}
+  .filters button{flex:1;min-width:0;padding:8px 2px;font-size:12px;text-align:center;white-space:nowrap;border-radius:999px}
+  .filters button+button{margin-left:5px}
   .podium{grid-template-columns:1fr;gap:12px}
   .pod{padding:17px}
   .pod .cover{width:74px;--k:.84}
@@ -338,7 +344,7 @@ body{background:#07070B}
   <div class="inner">
     <span class="kicker"><i></i>F R E E &nbsp;· &nbsp;全 部 免 费</span>
     <h1>19 部内部著作<br>+ 10 节闭门音频</h1>
-    <p class="sub">写下的 <b>约 125 万字</b>，和我自己录的 <b>90 分钟</b> 音频课。<br>不用报名、不用付费、不用加群——<b>在这儿直接看、直接听</b>。</p>
+    <p class="sub">写下<b>约 125 万字</b>，亲自录<b>90 分钟</b>音频课。<br>不用报名、不用付费、不用加群——<b>在这儿直接看、直接听</b>。</p>
   </div>
   <div class="hero-stats">
     <div class="hs"><b>19</b><span>部内部著作</span></div>
