@@ -1161,18 +1161,18 @@ strong{ font-weight:700; }
 var T="《带人做事的底层逻辑》";
 var KEY2="xgpos2_"+T,KEYO="xg9o_"+T;
 try{if(!sessionStorage.getItem(KEYO)){sessionStorage.setItem(KEYO,"1");localStorage.setItem(KEYO,(parseInt(localStorage.getItem(KEYO)||"0",10)||0)+1);}}catch(e){}
-try{var BASE=7845;var EP=new Date("2026-09-11T00:00:00+08:00").getTime();
+try{var BASE=14840;var EP=new Date("2026-09-11T00:00:00+08:00").getTime();
 var days=Math.max(0,Math.floor((Date.now()-EP)/86400000));
 var loc=0;try{loc=parseInt(localStorage.getItem(KEYO)||"0",10)||0}catch(e){}
 var n=BASE+days*50+loc;
-var fs=n>=10000?((Math.round(n/1000)/10)+"").replace(/\.0$/,"")+"万":String(n);
+var fs2=n>=10000?((Math.round(n/1000)/10)+"").replace(/\.0$/,"")+"万":String(n);
 var sp=document.querySelector('div span[style*="flex:1"]');
-if(sp&&sp.textContent.indexOf("人读过")<0)sp.textContent=sp.textContent+" · "+fs+" 人读过";
+if(sp&&sp.textContent.indexOf("次阅读")<0)sp.textContent=sp.textContent+" · "+fs2+"次阅读";
 }catch(e){}
 function getSaved(){try{var v=JSON.parse(localStorage.getItem(KEY2)||"null");if(v&&v.y>800)return v}catch(e){}
  try{var y=parseInt(localStorage.getItem("xgpos_"+T)||"0",10)||0;if(y>800)return{y:y,pct:0,ts:0}}catch(e){}return null;}
 var sv=getSaved();
-if(sv&&!((location.hash||"").indexOf("page")===1)){setTimeout(function(){
+if(sv){setTimeout(function(){
   try{var p=document.querySelector(".xgpill");if(p)p.remove()}catch(e){}
   window.scrollTo(0,sv.y);
   var t=document.createElement("div");
@@ -1186,7 +1186,34 @@ window.addEventListener("scroll",function(){clearTimeout(tk2);tk2=setTimeout(fun
   var h=document.documentElement;var mx=h.scrollHeight-h.clientHeight;var st=h.scrollTop||document.body.scrollTop;
   var pct=mx>0?st/mx:0;
   if(st>500){try{localStorage.setItem(KEY2,JSON.stringify({y:Math.round(window.scrollY),pct:pct,ts:Date.now()}))}catch(e){}}
+  try{xgWxCheck(pct)}catch(e){}
 },250);},{passive:true});
+/* ===== 每 20% 微信引导卡（手动关闭 / 每阶段每次会话一次 / 3分钟冷却） ===== */
+var WXU="https://n.wlfx8.cn/362e9f";
+var WX_STAGES=[0.2,0.4,0.6,0.8],wxLast=0,wxOpen=false;
+window.xgWxCheck=function(pct){
+  if(wxOpen)return;var now=Date.now();if(now-wxLast<180000)return;
+  for(var s=0;s<WX_STAGES.length;s++){var st=WX_STAGES[s];
+    if(pct>=st){
+      var k="xgwx_"+st;
+      var fired=false;try{fired=!!sessionStorage.getItem(k)}catch(e){}
+      if(!fired){try{sessionStorage.setItem(k,"1")}catch(e){}wxLast=now;wxOpen=true;xgWxShow(st);}
+    }
+  }
+};
+function xgWxShow(st){
+  var d=document.createElement("div");
+  d.setAttribute("data-xg-track","book.wx.pop");
+  d.style.cssText="position:fixed;left:12px;right:12px;bottom:0;z-index:120;transform:translateY(110%);transition:transform .35s cubic-bezier(.22,.8,.3,1);background:#1f1b16;border:1px solid #4a4238;border-bottom:none;border-radius:16px 16px 0 0;padding:16px 16px calc(14px + env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.6)";
+  d.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b style="color:#f0e9de;font-size:14.5px">📖 读到 ' + Math.round(st*100) + '% 了，说句实话</b><span id="xgwxX" style="color:#a2968a;font-size:12px;cursor:pointer;padding:4px 8px">✕ 继续阅读</span></div>' +
+    '<p style="color:#a2968a;font-size:13px;line-height:1.8;margin:0 0 12px">书是路，聊天是地图。如果你正卡在一件具体的事上，把情况直接发星哥，看到了会认真回。</p>' +
+    '<a href="' + WXU + '" target="_blank" rel="noopener" style="display:block;text-align:center;background:#e8b04b;color:#16130f;font-weight:800;font-size:14.5px;padding:12px;border-radius:10px;text-decoration:none">把我的情况发星哥 →</a>';
+  document.body.appendChild(d);
+  requestAnimationFrame(function(){d.style.transform="translateY(0)"});
+  function close(){d.style.transform="translateY(110%)";setTimeout(function(){d.remove()},380);wxOpen=false;}
+  d.querySelector("#xgwxX").onclick=close;
+  d.querySelector("a").onclick=function(){close()};
+}
 })();</script><script>window.GOATCOUNTER_CODE='YOUR_GOATCOUNTER_CODE';/*注册 GoatCounter 后把占位符换成你的 site code，全站即生效*/</script>
 <script src="../assets/js/analytics.js"></script>
 <script src="../assets/js/share.js"></script>

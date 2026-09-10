@@ -219,6 +219,8 @@ body{background:#07070B}
 .eq i{width:2.5px;background:var(--gold);border-radius:1px;animation:eqb .9s ease-in-out infinite}
 .eq i:nth-child(2){animation-delay:.15s}.eq i:nth-child(3){animation-delay:.3s}.eq i:nth-child(4){animation-delay:.45s}
 @keyframes eqb{0%,100%{height:3px}50%{height:12px}}
+/* 选中但暂停时，音浪条不跳动 */
+.tk.on:not(.playing) .eq i{animation:none;height:4px}
 
 /* ---------- MINI PLAYER ---------- */
 .mini{position:fixed;left:12px;right:12px;bottom:12px;z-index:130;display:none;align-items:center;gap:12px;padding:10px 14px;border-radius:16px;
@@ -302,12 +304,15 @@ body{background:#07070B}
 @media(max-width:768px){
   .lb-nav{padding:11px 16px}
   .lb-nav .brand{font-size:13px}
-  .lb-nav .brand .nava{width:26px;height:26px;vertical-align:-9px}
+  .lb-nav .brand .nava{width:38px;height:38px;vertical-align:-13px}
   .kicker{font-size:11px;letter-spacing:2px;white-space:nowrap;padding:6px 10px}
-  .lb-hero{padding:110px 18px 0}
-  .lb-hero .sub{font-size:14.5px}
-  .hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 8px;padding:26px 0 30px}
-  .hero-stats .hs span{font-size:11px}
+  .lb-hero{padding:116px 18px 0}
+  .lb-hero .sub{font-size:12.5px}
+  /* hero 数据四格：1:1 对齐电脑端，一行四列不折行 */
+  .hero-stats{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:0;padding:24px 0 28px}
+  .hero-stats .hs{flex:1;min-width:0}
+  .hero-stats .hs b{font-size:20px}
+  .hero-stats .hs span{font-size:10px;letter-spacing:0}
   .tabs{position:sticky;top:49px;padding:0 14px 14px;gap:6px;flex-wrap:wrap}
   .tabs button{padding:9px 14px;font-size:13px;white-space:nowrap;flex:none}
   /* 分类筛选：移动端 5 个一行均分，不允许孤行 */
@@ -358,10 +363,9 @@ body{background:#07070B}
   /* 去掉吸顶 tabs：改用右侧浮标切换 */
   .tabs{position:static;padding-top:2px}
   .tracks>div{min-width:0;overflow:hidden}/* 防音轨条目撑破网格 */
-  /* TOP3 榜单改横滑条 */
-  .podium{display:flex;overflow-x:auto;gap:10px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
-  .podium::-webkit-scrollbar{display:none}
-  .pod{min-width:212px;scroll-snap-align:start}
+  /* TOP3 榜单：三排竖排不滑动（用户要求，取消横滑） */
+  .podium{display:grid;grid-template-columns:1fr;gap:10px}
+  .pod{min-width:0}
   .pod .cover{width:64px;--k:.727}
   /* 19 本列表 → 三列封面墙 */
   .rank-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
@@ -387,7 +391,7 @@ body{background:#07070B}
 #resume a .rs-go{margin-left:auto;flex:none;font-size:12.5px;color:var(--gold);font-weight:700}
 #resume .rs-tag{flex:none;font-size:11px;padding:2px 8px;border-radius:6px;background:rgba(139,92,246,.25);color:#C4B5FD}
 /* ---------- 留言墙 ---------- */
-.xgwall{max-width:860px;margin:46px auto 0;padding:0 20px}
+.xgwall{max-width:860px;margin:46px auto 64px;padding:0 20px}
 .xgwall-head{text-align:center;margin-bottom:22px}
 .xgwall-head b{display:block;font-size:20px;font-weight:900;color:var(--text);letter-spacing:1px}
 .xgwall-head span{display:block;font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7}
@@ -405,8 +409,13 @@ body{background:#07070B}
 .xgw-foot .more{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--muted)}
 .xgw-foot .more:hover{color:#fff}
 .xgw-foot .post{background:linear-gradient(135deg,rgba(139,92,246,.4),rgba(247,200,115,.3));border:1px solid rgba(196,181,253,.5);color:#fff}
-#xgwForm{display:none;max-width:520px;margin:16px auto 0;padding:16px;border-radius:14px;background:#141017;border:1px solid rgba(196,181,253,.4)}
+#xgwForm{display:none;max-width:520px;margin:16px auto 0;padding:16px;border-radius:14px;background:#141017;border:1px solid rgba(196,181,253,.4);position:relative}
 #xgwForm.on{display:block}
+#xgwForm .fxg-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 10px}
+#xgwForm .fxg-head b{font-size:13.5px;color:var(--text)}
+#xgwForm .fxg-close{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);border-radius:999px;
+  padding:5px 13px;font-size:12px;font-weight:700;cursor:pointer}
+#xgwForm .fxg-close:hover{color:#fff}
 #xgwForm input,#xgwForm textarea{width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:9px;
   color:var(--text);font-size:14px;padding:10px 12px;margin-bottom:10px;font-family:inherit;resize:vertical}
 #xgwForm input:focus,#xgwForm textarea:focus{outline:none;border-color:rgba(196,181,253,.6)}
@@ -417,18 +426,19 @@ body{background:#07070B}
   .xgwall-grid{grid-template-columns:1fr}
   .xgwall-head b{font-size:17px}
   .xgw-card p{font-size:13px}
+  /* 移动端链路控制：只展示 5 条，其余靠「换一批」轮换 */
+  .xgw-card:nth-child(n+6){display:none}
 }
 @media(min-width:769px){
-  .podium{display:flex;overflow-x:auto;gap:16px;padding-bottom:6px;scroll-snap-type:x proximity}
-  .podium::-webkit-scrollbar{display:none}
-  .pod{min-width:320px;flex:none;scroll-snap-align:start}
+  .podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;overflow:visible}
+  .pod{min-width:0}
   .rank-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
   .rk{flex-direction:column;align-items:stretch;gap:6px;padding:10px 10px 12px;position:relative;min-width:0}
   .rk .no{position:absolute;top:6px;right:8px;left:auto;width:auto;font-size:12px;background:rgba(0,0,0,.35);padding:1px 6px;border-radius:6px}
-  .rk .cover{width:72%;margin:4px auto 0;--k:1.5}
+  .rk .cover{width:58%;margin:4px auto 0;--k:1.2}
   .rk .mid{width:100%;flex:none}
   .rk h4{white-space:normal;font-size:14px;line-height:1.35;min-height:38px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .rk .meta{font-size:10.5px;gap:5px;justify-content:center;flex-wrap:nowrap;overflow:hidden}
+  .rk .meta{font-size:10.5px;gap:5px;justify-content:center;flex-wrap:wrap;overflow:visible}
   .rk .meta i{padding:2px 5px;white-space:nowrap}
 }
 </style>
@@ -579,6 +589,7 @@ body{background:#07070B}
   </div>
   <div class="xgwall-grid" id="xgwGrid"></div>
   <div id="xgwForm">
+    <div class="fxg-head"><b>写留言</b><button class="fxg-close" onclick="xgwToggleForm()">收起 ∧</button></div>
     <input id="xgwNick" maxlength="12" placeholder="怎么称呼你？（可不填，默认「有缘人」）">
     <textarea id="xgwText" maxlength="120" placeholder="读完哪本书、哪节音频，说一句你的真实感受…"></textarea>
     <button class="fxg-sub" onclick="xgwPost()">发布留言</button>
@@ -635,12 +646,13 @@ var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&
 function fmt(s){s=Math.max(0,Math.floor(s||0));var m=Math.floor(s/60);return (m<10?'0':'')+m+':'+(s%60<10?'0':'')+(s%60);}
 function wcn(n){return n>=10000?(Math.round(n/1000)/10)+'万字':n+'字';}
 
-/* ============ 人气计数（基数+每天+50+本机真实打开累计） ============ */
+/* ============ 人气计数（按名次严格递减 + 每天+50 + 本机真实打开累计） ============
+ * 榜首必须最高，杜绝「冠军阅读量垫底」的逻辑漏洞；相邻差 ≈ 一两千 */
 var CNT_EPOCH=new Date('2026-09-11T00:00:00+08:00').getTime();
 function cntDays(){return Math.max(0,Math.floor((Date.now()-CNT_EPOCH)/86400000));}
 function fmtCnt(n){n=Math.max(0,Math.round(n));return n>=10000?((Math.round(n/1000)/10)+'').replace(/\.0$/,'')+'万':String(n);}
-function bookBase(i){return 4863+((i*2573)%12000)+((i*7)%11)*313;}
-function trackBase(i){return 2847+((i*1471)%9000);}
+function bookBase(i){return 26400-i*1150-((i*7)%3)*60;}
+function trackBase(i){return 21500-i*1350-((i*5)%3)*80;}
 function localCnt(key){try{return parseInt(localStorage.getItem(key)||'0',10)||0}catch(e){return 0}}
 function readCount(title){var b=null;for(var i=0;i<window.BOOKS.length;i++){if(window.BOOKS[i].t===title){b=i;break}}
   return bookBase(b==null?0:b)+cntDays()*50+localCnt('xg9o_《'+title+'》');}
@@ -681,7 +693,7 @@ function renderBooks(){
         '<div class="row">'+coverHTML(b,(i+1))+
         '<div style="min-width:0"><h3>《'+esc(b.t)+'》</h3>'+
         '<p class="hook">'+esc(b.hook)+'</p>'+
-        '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span><span style="color:var(--gold-2)">👥 '+fmtCnt(readCount(b.t))+' 人已读</span></div>'+
+        '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span><span style="color:var(--gold-2)">▶ '+fmtCnt(readCount(b.t))+' 次阅读</span></div>'+
         '<div class="go">免费读全文 →</div></div></div></div>';
     }).join('');
   }
@@ -692,7 +704,7 @@ function renderBooks(){
       '<div class="no'+(i<3?' top':'')+'">'+(i<10?'0':'')+(i+1)+'</div>'+
       coverHTML(b,(i+1))+
       '<div class="mid"><h4>《'+esc(b.t)+'》</h4><p class="hook">'+esc(b.hook)+'</p>'+
-      '<div class="meta"><i style="color:var(--gold-2)">👥'+fmtCnt(readCount(b.t))+'读</i><i>'+esc(b.cat)+'</i><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span></div></div>'+
+      '<div class="meta"><i style="color:var(--gold-2)">'+fmtCnt(readCount(b.t))+'次读</i><i>'+esc(b.cat)+'</i><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span></div></div>'+
       '<div class="arrow">›</div></div>';
   }).join('');
 }
@@ -705,7 +717,7 @@ function openBook(id){
     coverHTML(b,i)+
     '<div style="min-width:0;flex:1"><span class="cat">'+esc(b.cat)+' · NO.'+(i<10?'0':'')+i+'</span>'+
     '<h3>《'+esc(b.t)+'》</h3>'+
-    '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span><span style="color:var(--gold-2)">👥 '+fmtCnt(readCount(b.t))+' 人已读</span></div></div>'+
+    '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span><span style="color:var(--gold-2)">▶ '+fmtCnt(readCount(b.t))+' 次阅读</span></div></div>'+
     '<button class="x" onclick="closeBook()">✕ 返回主页</button>';
 
   var q=(b.q||[]).map(function(x){return '<p>'+esc(x)+'</p>'}).join('');
@@ -723,7 +735,7 @@ function openBook(id){
     '<a class="cta-main" data-xg-track="books.drawer.read" href="'+(b.read||"")+'">📖 免费读完整本 →</a>'+
     '<a class="cta-mid" href="#audio" data-xg-track="books.drawer.audio" onclick="closeBook();switchTab(\'audio\');setTimeout(pgToPlayer,350);return false;">🎧 不想看字？听 10 节闭门音频</a>'+
     '<a class="cta-sub" data-xg-track="books.drawer.link-star" href="https://n.wlfx8.cn/362e9f" target="_blank" rel="noopener">已读完，想跟星哥聊聊 →</a>'+
-    '<p class="cta-note">👥 已有 '+fmtCnt(readCount(b.t))+' 人次读过这本书</p></div>';
+    '<p class="cta-note">本书已有 '+fmtCnt(readCount(b.t))+' 次阅读</p></div>';
   bumpCount(b.t);
   document.getElementById('mask').classList.add('on');
   document.getElementById('drawer').classList.add('on');
@@ -785,7 +797,7 @@ function loadTrack(n,auto){
   A.load();
   document.getElementById('plTag').textContent=t.tag.split('').join(' ');
   document.getElementById('plTitle').textContent=t.t;
-  document.getElementById('plSub').textContent='第 '+t.n+' 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(idx))+' 人听过 · 免费听完';
+  document.getElementById('plSub').textContent='第 '+t.n+' 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(idx))+' 次收听 · 免费听完';
   document.getElementById('tDur').textContent=fmt(t.d);
   document.getElementById('miniTitle').textContent=t.t;
   document.getElementById('miniSub').textContent='第 '+t.n+' 节 · '+t.tag;
@@ -811,6 +823,7 @@ A.addEventListener('play',function(){
   document.getElementById('miniPlay').style.display='none';
   document.getElementById('miniPause').style.display='';
   document.getElementById('mini').classList.add('show');
+  [].forEach.call(document.querySelectorAll('.tk'),function(el,i){el.classList.toggle('playing',i===idx)});
   setupAudioCtx();
 });
 A.addEventListener('pause',function(){
@@ -820,6 +833,7 @@ A.addEventListener('pause',function(){
   document.getElementById('icPause').style.display='none';
   document.getElementById('miniPlay').style.display='';
   document.getElementById('miniPause').style.display='none';
+  [].forEach.call(document.querySelectorAll('.tk'),function(el){el.classList.remove('playing')});
 });
 A.addEventListener('timeupdate',function(){
   var p=A.duration?A.currentTime/A.duration:0;setFill(p);
@@ -880,8 +894,10 @@ function drawSpec(){
 function fakeSpec(){
   if(fakeStarted)return;fakeStarted=true;
   var t=0;setInterval(function(){
-    t+=.2;for(var i=0;i<bars.length;i++){
-      bars[i].style.height=(6+Math.abs(Math.sin(t+i*.35))*26)+'px';
+    var playing=!A.paused;t+=.2;
+    for(var i=0;i<bars.length;i++){
+      /* 暂停时音浪必须静止贴底，不能继续跳 */
+      bars[i].style.height=(playing?(6+Math.abs(Math.sin(t+i*.35))*26):4)+'px';
     }
   },90);
 }
@@ -893,7 +909,7 @@ function fakeSpec(){
     total+=t.d;
     return '<div class="tk" onclick="loadTrack('+i+',true);pgToPlayer()">'+
       '<div class="n">'+(t.n<10?'0':'')+t.n+'</div>'+
-      '<div class="m"><b>'+esc(t.t)+'</b><span>'+esc(t.tag)+' · '+fmtCnt(tkCount(i))+' 人听过</span></div>'+
+      '<div class="m"><b>'+esc(t.t)+'</b><span>'+esc(t.tag)+' · '+fmtCnt(tkCount(i))+' 次收听</span></div>'+
       '<div class="eq"><i></i><i></i><i></i><i></i></div>'+
       '<div class="d">'+fmt(t.d)+'</div></div>';
   }).join('');
@@ -1029,9 +1045,9 @@ renderFilters();renderBooks();loadTrack(0,false);
   try{var r=JSON.parse(localStorage.getItem('xgaudio')||'null');
     if(r&&typeof r.i==='number'&&r.i>=0&&r.i<window.TRACKS.length){
       var el=document.getElementById('plSub');
-      if(el&&el.textContent.indexOf('上次听到')<0)el.textContent='第 '+window.TRACKS[r.i].n+' 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(r.i))+' 人听过';
+      if(el&&el.textContent.indexOf('上次听到')<0)el.textContent='第 '+window.TRACKS[r.i].n+' 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(r.i))+'次收听';
     }else{
-      document.getElementById('plSub').textContent='第 1 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(0))+' 人听过 · 免费听完';
+      document.getElementById('plSub').textContent='第 1 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(0))+' 次收听 · 免费听完';
     }
   }catch(e){}
   /* 本机真实收听计数：播放一次 +1（每节每次会话只计一次） */
