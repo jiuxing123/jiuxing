@@ -69,7 +69,7 @@ body{background:#07070B}
 .filters button.on{color:#0d0a18;font-weight:700;background:linear-gradient(135deg,var(--gold),var(--gold-2));border-color:transparent}
 
 /* ---------- PODIUM (TOP3) ---------- */
-.podium{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:34px}
+.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:34px}
 .pod{position:relative;padding:22px;border-radius:20px;cursor:pointer;overflow:hidden;
   background:linear-gradient(170deg,rgba(255,255,255,.055),rgba(255,255,255,.02));border:1px solid var(--line);transition:.3s}
 .pod:hover{transform:translateY(-5px)}
@@ -342,7 +342,6 @@ body{background:#07070B}
   font-size:15px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
 #xgrail button span{font-size:10.5px;letter-spacing:1px}
 #xgrail button.on{background:linear-gradient(135deg,rgba(139,92,246,.45),rgba(247,200,115,.32));color:#fff}
-@media(min-width:769px){#xgrail{display:none}}
 
 @media(max-width:768px){
   /* 去掉吸顶 tabs：改用右侧浮标切换 */
@@ -354,8 +353,8 @@ body{background:#07070B}
   .pod{min-width:212px;scroll-snap-align:start}
   .pod .cover{width:64px;--k:.727}
   /* 19 本列表 → 三列封面墙 */
-  .rank-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-  .rk{flex-direction:column;align-items:stretch;gap:5px;padding:7px 6px 8px;position:relative}
+  .rank-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .rk{flex-direction:column;align-items:stretch;gap:5px;padding:7px 6px 8px;position:relative;min-width:0}
   .rk .no{position:absolute;top:5px;right:6px;left:auto;width:auto;font-size:11px;background:rgba(0,0,0,.35);padding:1px 5px;border-radius:6px}
   .rk .cover{width:74%;margin:3px auto 0;--k:.84}
   .rk .mid{width:100%;flex:none}
@@ -366,6 +365,20 @@ body{background:#07070B}
 @media(max-width:400px){
   .rk .cover{--k:.8}
   .pod .cover{--k:.727}
+}
+/* ---------- 桌面端与移动端对齐：横滑榜 + 书墙 + 浮标 ---------- */
+@media(min-width:769px){
+  .podium{display:flex;overflow-x:auto;gap:16px;padding-bottom:6px;scroll-snap-type:x proximity}
+  .podium::-webkit-scrollbar{display:none}
+  .pod{min-width:320px;flex:none;scroll-snap-align:start}
+  .rank-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+  .rk{flex-direction:column;align-items:stretch;gap:6px;padding:10px 10px 12px;position:relative;min-width:0}
+  .rk .no{position:absolute;top:6px;right:8px;left:auto;width:auto;font-size:12px;background:rgba(0,0,0,.35);padding:1px 6px;border-radius:6px}
+  .rk .cover{width:72%;margin:4px auto 0;--k:1.5}
+  .rk .mid{width:100%;flex:none}
+  .rk h4{white-space:normal;font-size:14px;line-height:1.35;min-height:38px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .rk .meta{font-size:10.5px;gap:5px;justify-content:center;flex-wrap:nowrap;overflow:hidden}
+  .rk .meta i{padding:2px 5px;white-space:nowrap}
 }
 </style>
 </head>
@@ -472,15 +485,9 @@ body{background:#07070B}
 </section>
 
 <!-- ============ 信任带（旧主页浓缩：坦白 / 战绩 / 反筛） ============ -->
-<!-- ① 坦白区：我图你什么 -->
-<div data-xg-track="books.trust.confession" style="max-width:640px;margin:26px auto 0;padding:0 20px">
-  <div style="background:linear-gradient(135deg,#1f1b16,#251d12);border:1px solid rgba(247,200,115,.30);border-radius:16px;padding:22px 20px 20px">
-    <span style="display:inline-block;font-size:11px;letter-spacing:2px;color:#f7c873;background:rgba(247,200,115,.10);border:1px solid rgba(247,200,115,.25);padding:4px 12px;border-radius:99px;margin-bottom:12px">先把话说透</span>
-    <b style="display:block;font-size:17px;color:#f7c873;margin:0 0 10px">我图你什么？我直说，我不装。</b>
-    <p style="font-size:13.5px;color:#f0e9de;line-height:1.85;margin:0 0 8px">「那些打着教你赚钱的人，无一例外，都是想赚你的钱。」——这话对，<b>我也不例外</b>。要是跟你说「我不图你钱」，那我就是在骗你，直接关掉这页就行。</p>
-    <p style="font-size:13.5px;color:#a2968a;line-height:1.85;margin:0 0 8px">但我的钱，<b style="color:#f7c873">不是从你身上来的</b>。我做的是投资：你在前面跑，我在后面出钱、出场地、出人脉——<b style="color:#f0e9de">你跑通了我才有得赚，你跑不通，我一毛钱都没有。</b></p>
-    <p style="font-size:13.5px;color:#a2968a;line-height:1.85;margin:0">买卖关系，收完钱就没事了。<b style="color:#f7c873">投资关系，我必须让你赚到钱，我才有得赚。</b>这不是情怀，是利益。</p>
-  </div>
+<!-- ① 撤席式：不辩护，只留一行 -->
+<div style="max-width:640px;margin:30px auto 0;padding:0 20px;text-align:center">
+  <p style="font-size:15px;color:#c9bfae;line-height:1.9;margin:0">书在这儿，免费，长期更新。<b style="color:#f7c873">信不信，读完再判断。</b></p>
 </div>
 
 <!-- ② 战绩三画像 -->
