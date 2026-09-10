@@ -890,13 +890,15 @@ function xgNotesPanel(){
 }
 window.xgNotesPanel=xgNotesPanel;
 function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.textContent="📓笔记("+xgNotes().length+")";}
-/* ===== 段评系统 v2（对标番茄小说）：全书散布段评 + 章标题总数 + 面板条数与气泡严格一致、展开不回弹 ===== */
+/* ===== 段评系统 v3：分书定制深度评论 · 全员有缘人+楼层 · 热门赞数降序 · 全书文本唯一 · 预算制条数与阅读数自洽 ===== */
 (function(){
   var PCN="xgpc_"+T,PCL="xgpclike_"+T;
-  var BODY=["这段我读了三遍，越读越对味。","我师傅说过类似的话，今天在这儿又看到了。","已做笔记。这本书免费，真是离谱。","凌晨两点看到这段，突然就不焦虑了。","这段得抄下来贴在工位上。","看到这段我停了十分钟，说的就是我。","道理都懂，就看谁真去做。","大一学生路过，先存着，十年后见。","做小生意的看完这段，心里有底了。","这一段就值一套课的钱。","已转发三个群，都在问还有没有。","同一个坑摔一次是学费，摔两次是自己同意的。","去年就是没想明白这段，亏了六位数。","我妈没读过书，但把这些道理全活明白了。","打工第六年，今天才看懂这句话。","先点赞，再慢慢消化。","这段建议全文背诵。","有内味儿了，跟家里老人讲的一个意思。","写在手账本第一页了。","单位里的老油条，做的就是这段的反面。","看完立刻把手机屏保换了。","这话听着扎心，但没一句冤枉人。","凌晨的出租车司机都在践行这段。","别光收藏，去做一件就行。","读到这段的时候，正好领导在开会点名我。","十年后再看这段，应该又是另一番滋味。","这段适合打印出来贴门上。","刚创业失败的人，看这段会哭。","县城开店的，这段就是我的日常。","转发给我弟了，他正需要。","书越读越薄，这段就是精华。","上一个这么跟我说话的人，是我爷爷。","工作中遇到贵人，说的大概就是这段。","这段让我想起 2019 年那个决定。","不好听，但句句是真话。","收藏了，等孩子大点给他看。","这段讲透了，别处都是绕着说。","摆摊三年，段段都是我的血泪。","看完这段，把欠的人情记本子上了。","这段要是早十年看到就好了。","别问我怎么知道的，问就是踩过坑。","会议室里混不明白的，先看这段。","我爸一辈子就做到了这段，佩服。","这段我想设成闹钟铃声。","越穷的时候，越要把这段读十遍。","同事问我最近怎么变了，我让他来看这段。","被裁员那天看到这段，心态稳住了。","这段话，值一顿海底捞。","有意思，越读越有滋味。","农村出来的孩子，看这段最感触。","这段像一杯温水，不烫但解渴。","先存着，明天开会就用得上。","这段适合发朋友圈，但舍不得发。","看一段做一件事，这本书就值了。","十年老销售路过，这段说到根上了。","这段我截屏发给我对象了。","缺的就是这段点破。","边读边冒冷汗，说的全是以前的我。","这段让我把辞职信又咽回去了。","好东西，一字没改抄本子上了。","读完这段，把收藏夹里那些课都删了。","这段就是给老实人撑腰的。","昨晚失眠想的没用的事，这段给答案了。","带到工地午休看的，工友都凑过来了。","这段对得上我去年一整年。","文字朴实，但全是干货。","这段救了我这周的坏心情。","越琢磨越有味道，像是陈年老茶。","家里长辈要是会说，就是这么说的。","这段我准备教给我闺女。","别小看这段，做到的人不到一成。","刚加完班看到这段，值了。","这段配一碗热汤，绝了。","之前总觉得是鸡汤，现在懂了是实话。","这段我念给我爸听了，他沉默了很久。","出来混，迟早要读懂这段。","这段放在任何一本书里都是封面句。","二刷了，每次看都有新体会。","看完这段，决定给老家打个电话。","这话要是十年前有人跟我说就好了。","做自媒体的都该把这段裱起来。","这段就像镜子，照出了所有借口。","看完默默把购物车清空了。","这段像老中医把脉，一按一个准。","宝妈深夜喂奶看到这段，泪目。","这段我打出来贴在收银台后面。","这个道理，在医院走廊里最能体会。","别划太快，这段值得一个字一个字读。","这段说给所有不好意思谈钱的人。","读到这段才觉得前面没白读。","这段适合当座右铭，不空。","看完这段，把年会的敬酒词想好了。","书摊老板说得对，好内容不怕免费。","这段让我想起第一份工资是怎么花的。","通透，全在最后一句。","这段我看了五分钟，一动没动。","写成这样，是真经历过的人。","这段像把刀，把糊弄人的东西全切开了。","转给我爸了，他说写得实在。","看到这段，突然原谅了那年的自己。","每次开会前看一遍，心里就有底。","这段帮我省了一笔冤枉钱。","合上书第一件事，就是把这段发给搭档。","别人捂着掖着的东西，这段直接说透了。"];
-  var OPEN=["说实话，","讲真的，","不知道为啥，","夜深了读到这里，","刚踩完坑看到这段，","每次焦虑就翻到这句，"];
-  var WHO_YU=["有缘人","有缘人521","一位有缘人","低调的有缘人","深夜刷到的有缘人","有缘人2688","刚下载的有缘人","第三遍读的有缘人","有缘人小杨","不爱说话的有缘人","有缘人老周","广东的有缘人","凌晨三点的有缘人","有缘人736","蹲个后续的有缘人","做餐饮的有缘人","有缘人·慢步","租房党的有缘人","有缘人Momo","陪读妈妈有缘人"];
-  var WHO_NM=["拾光的人","晚来天欲雪","呐咔","白雪满川","老树发新芽","麦浪","南下","青萍之末","木头人","阿蛮","半盏清欢","慢半拍","知行小录","山高水长","不吃香菜","一路向北","大橘为重","阿澈","不器","油机面"];
+  var GEN=["这段我读了三遍，越读越对味。","我师傅说过类似的话，今天在这儿又看到了。","已做笔记。这本书免费，真是离谱。","凌晨两点看到这段，突然就不焦虑了。","这段得抄下来贴在工位上。","看到这段我停了十分钟，说的就是我。","道理都懂，就看谁真去做。","大一学生路过，先存着，十年后见。","做小生意的看完这段，心里有底了。","这一段就值一套课的钱。","已转发三个群，都在问还有没有。","同一个坑摔一次是学费，摔两次是自己同意的。","去年就是没想明白这段，亏了六位数。","我妈没读过书，但把这些道理全活明白了。","打工第六年，今天才看懂这句话。","先点赞，再慢慢消化。","这段建议全文背诵。","有内味儿了，跟家里老人讲的一个意思。","写在手账本第一页了。","单位里的老油条，做的就是这段的反面。","看完立刻把手机屏保换了。","这话听着扎心，但没一句冤枉人。","凌晨的出租车司机都在践行这段。","别光收藏，去做一件就行。","读到这段的时候，正好领导在开会点名我。","十年后再看这段，应该又是另一番滋味。","这段适合打印出来贴门上。","刚创业失败的人，看这段会哭。","县城开店的，这段就是我的日常。","转发给我弟了，他正需要。","书越读越薄，这段就是精华。","上一个这么跟我说话的人，是我爷爷。","工作中遇到贵人，说的大概就是这段。","这段让我想起 2019 年那个决定。","不好听，但句句是真话。","收藏了，等孩子大点给他看。","这段讲透了，别处都是绕着说。","摆摊三年，段段都是我的血泪。","看完这段，把欠的人情记本子上了。","这段要是早十年看到就好了。","别问我怎么知道的，问就是踩过坑。","会议室里混不明白的，先看这段。","我爸一辈子就做到了这段，佩服。","这段我想设成闹钟铃声。","越穷的时候，越要把这段读十遍。","同事问我最近怎么变了，我让他来看这段。","被裁员那天看到这段，心态稳住了。","这段话，值一顿海底捞。","有意思，越读越有滋味。","农村出来的孩子，看这段最感触。","这段像一杯温水，不烫但解渴。","先存着，明天开会就用得上。","这段适合发朋友圈，但舍不得发。","看一段做一件事，这本书就值了。","十年老销售路过，这段说到根上了。","这段我截屏发给我对象了。","缺的就是这段点破。","边读边冒冷汗，说的全是以前的我。","这段让我把辞职信又咽回去了。","好东西，一字没改抄本子上了。","读完这段，把收藏夹里那些课都删了。","这段就是给老实人撑腰的。","昨晚失眠想的没用的事，这段给答案了。","带到工地午休看的，工友都凑过来了。","这段对得上我去年一整年。","文字朴实，但全是干货。","这段救了我这周的坏心情。","越琢磨越有味道，像是陈年老茶。","家里长辈要是会说，就是这么说的。","这段我准备教给我闺女。","别小看这段，做到的人不到一成。","刚加完班看到这段，值了。","这段配一碗热汤，绝了。","之前总觉得是鸡汤，现在懂了是实话。","这段我念给我爸听了，他沉默了很久。","出来混，迟早要读懂这段。","这段放在任何一本书里都是封面句。","二刷了，每次看都有新体会。","看完这段，决定给老家打个电话。","这话要是十年前有人跟我说就好了。","做自媒体的都该把这段裱起来。","这段就像镜子，照出了所有借口。","看完默默把购物车清空了。","这段像老中医把脉，一按一个准。","宝妈深夜喂奶看到这段，泪目。","这段我打出来贴在收银台后面。","这个道理，在医院走廊里最能体会。","别划太快，这段值得一个字一个字读。","这段说给所有不好意思谈钱的人。","读到这段才觉得前面没白读。","这段适合当座右铭，不空。","看完这段，把年会的敬酒词想好了。","书摊老板说得对，好内容不怕免费。","这段让我想起第一份工资是怎么花的。","通透，全在最后一句。","这段我看了五分钟，一动没动。","写成这样，是真经历过的人。","这段像把刀，把糊弄人的东西全切开了。","转给我爸了，他说写得实在。","看到这段，突然原谅了那年的自己。","每次开会前看一遍，心里就有底。","这段帮我省了一笔冤枉钱。","合上书第一件事，就是把这段发给搭档。","别人捂着掖着的东西，这段直接说透了。"];
+  var TPL=["{s}看完这段才明白，{c}这一条，真是{t}","以前不信{c}，{s}之后全信了。","{s}，对{c}这段感触太深了。","把{c}琢磨透了，{t}","我师傅常说{c}，跟这段一个意思。","身边{c}做得最好的人，现在都混得不差。","这段把{c}讲透了，{t}","{s}的人，真的应该把这段读十遍。","别小看{c}，{t}","上半年就是没搞懂{c}，吃了大亏，{t}","{c}说起来简单，做到的人不到一成，{t}","把这段转给了{c}做得最差的那个朋友。","{s}的时候看到{c}这段，算是救了我。","越混越觉得，{c}才是硬道理。","公司里那些混得好的人，个个都在用{c}，{t}","读三遍：先看{c}，再看自己。","{c}这段建议抄下来，{t}","这段没一句废话，{c}全说明白了。","{s}这么多年，原来输就输在没弄懂{c}。","看完这段，把{c}写进了下周的计划里。","敢把{c}写出来的人，是真懂。","{c}，听着扎心，但就是真相，{t}","越来越信一句话：{c}，{t}","家里长辈不懂什么大道理，但{c}全做到了。"];
+  var SCN=["打工六年","开店三年","带过十几个人的团队","刚被裁员的那个月","创业失败之后","在县城做小生意","刚升基层管理","在医院陪护的那段日子","刚毕业那年","跑业务那几年","半夜加完班","跟合伙人闹掰之后"];
+  var TAIL=["急不来的。","谁试谁知道。","都是血换来的经验。","别等人教。","慢慢品。","越想越对。","一句顶一万句。","先记下来再说。","看懂的人自然懂。","全是过来人的话。","值得反复读。","比外面几万的课强。","做人做事都用得上。","说透不说破。","能救一个是一个。"];
+  var TH=["逆推思维","客户资产价值","换算思维","那根能拉的线头","财富思维","永远不缺客户","机会和资源","思维黑魔法","破关修仙","看穿人性","把资源拿回来","倒着推"];
+  if(!TH.length)TH=["这本书","这段话","这些道理","做事的分寸","看人的眼光","人情世故","说话的分寸","翻身的路子"];
   function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
   function myPC(){try{return JSON.parse(localStorage.getItem(PCN)||"[]")}catch(e){return[]}}
   function savePC(a){try{localStorage.setItem(PCN,JSON.stringify(a))}catch(e){}}
@@ -904,13 +906,7 @@ function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.te
   function saveLikes(a){try{localStorage.setItem(PCL,JSON.stringify(a))}catch(e){}}
   function fmtDate(d){var t=new Date(Date.now()-d*86400000);return (t.getMonth()+1)+"月"+t.getDate()+"日"}
   function h32(n){n=Math.abs(n|0);n=(n^61)^(n>>>16);n=(n+(n<<3))|0;n=n^(n>>>4);n=Math.imul(n,0x27d4eb2d);n=n^(n>>>15);return n>>>0}
-  function segBase(si){return 3+h32(T.length*7+si*13+977)%80}
-  function segCnt(si){var m=0;myPC().forEach(function(x){if(x.seg===si)m++});return segBase(si)+DAYS()*2+m}
-  function genTxt(seed,k){var h=h32(seed*31+k*7+17);var body=BODY[h%BODY.length];var o=h32(seed*13+k*29+5);if(o%7<2)return body;return OPEN[o%OPEN.length]+body}
-  function genWho(seed,k){var h=h32(seed*17+k*23+3);return k%2===0?WHO_YU[h%WHO_YU.length]:WHO_NM[h%WHO_NM.length]}
-  function genDays(seed,k,total){if(k<=0)return 0;var h=h32(seed*19+k*11+7);return Math.min(200,Math.floor(Math.pow((k+1)/total,0.85)*140)+h%5)}
-  function genLk(seed,k,total){var h=h32(seed*23+k*13+1);return Math.max(0,Math.round((1-(k+1)/total)*170*(0.25+(h%60)/60)))}
-  /* 选段：金句块全收 + 普通长段确定性挑约三成（全书散布，不只金句） */
+  /* 选段：金句全收 + 普通长段确定性挑约三成 */
   var segs=[],si=0,used={};
   function pkey(p){return p.textContent.trim().slice(0,24)}
   [].slice.call(document.querySelectorAll(".quote p")).forEach(function(p){var k=pkey(p);if(!used[k]){segs.push({el:p,si:si++,lite:false,tx:k});used[k]=1}});
@@ -925,7 +921,36 @@ function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.te
     var k=pkey(p);if(used[k])return;
     segs.push({el:p,si:si++,lite:true,tx:k});used[k]=1;
   });
-  /* 章标题旁评论总数（本章范围内段评求和） */
+  /* 预算制：每段评论数与顶栏阅读数自洽（全书段评≈阅读数的两成），金句段权重更高 */
+  function segBase(si){
+    var B=(typeof BASE==="number"&&BASE>1000)?BASE:22000;
+    var n=segs.length||1;
+    var w=0.35+(h32(T.length*31+si*57+13)%120)/100;
+    if(segs[si]&&segs[si].lite)w*=0.55;
+    return Math.max(2,Math.min(80,Math.round(B*0.22/n*w)));
+  }
+  function grow(){return Math.floor(DAYS()/3)}
+  function segCnt(si){var m=0;myPC().forEach(function(x){if(x.seg===si)m++});return segBase(si)+grow()+m}
+  /* 文本生成：模板填本书概念槽，全局序贯去重（同书评论永不重复、确定性、与打开顺序无关） */
+  var usedW={},PG=[],g=0;
+  function pickTxt(gi){
+    for(var t=0;t<10;t++){
+      var h=h32(gi*97+t*131+7),s;
+      if(h%10<3){s=GEN[(h>>>3)%GEN.length];}
+      else{
+        var tpl=TPL[(h>>>4)%TPL.length];
+        s=tpl.replace("{c}",TH[(h>>>8)%TH.length]).replace("{s}",SCN[(h>>>12)%SCN.length]).replace("{t}",TAIL[(h>>>16)%TAIL.length]);
+      }
+      if(!usedW[s]){usedW[s]=1;return s}
+    }
+    s=GEN[(gi>>>2)%GEN.length]+" "+["真不骗人。","句句实在。","字字见血。"][gi%3];
+    if(usedW[s])s=s+["","共勉。","与君同。"][gi%3];
+    usedW[s]=1;return s;
+  }
+  (function(){segs.forEach(function(s){var arr=[],len=segBase(s.si)+grow()+40;for(var j=0;j<len;j++)arr.push(pickTxt(g++));PG.push(arr)})})();
+  function genLk(gseed,k,n){var h=h32(gseed*23+k*13+1);var base=Math.pow(1-(k+1)/(n+2),1.7)*180;return Math.max(1,Math.round(base*(0.4+(h%60)/60)))}
+  function genDays(gseed,k,n){if(k===0)return h32(gseed+9)%3;var h=h32(gseed*19+k*11+7);return Math.min(200,Math.floor(Math.pow((k+1)/n,0.85)*140)+h%5)}
+  /* 章标题旁评论总数（本章范围内段评求和，与面板条数同源） */
   [].slice.call(document.querySelectorAll("h2.chapter")).forEach(function(h2){
     var sum=0,n=h2.nextElementSibling;
     while(n){
@@ -946,20 +971,23 @@ function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.te
     b.onclick=function(e){e.stopPropagation();openPanel(s.si)};
     s.el.appendChild(document.createTextNode(" "));s.el.appendChild(b);
   });
-  /* ===== 底部评论面板 ===== */
+  /* ===== 底部评论面板：全量渲染·热门降序·全员有缘人+楼层 ===== */
   var replyTo=null;
-  function rowHTML(nick,txt,date,likes,liked,seg,k){
-    var hue=(nick.length*47+nick.charCodeAt(0)*13)%360;
-    return '<div style="display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #efe7d6">'+
-      '<span style="flex:none;width:34px;height:34px;border-radius:50%;color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;background:hsl('+hue+',45%,55%)">'+esc(nick[0])+'</span>'+
-      '<div style="flex:1;min-width:0"><b style="color:#5a5248;font-size:13px">'+esc(nick)+'</b>'+
+  function rowHTML(nick,txt,date,lks,floor,k,hot){
+    var liked=false,a=likes();
+    if(typeof k==="number"&&a.indexOf(si+":"+k)>-1)liked=true;
+    var hue=h32(segs.length*7+(typeof k==="number"?k:0)*13+txt.length*31)%360;
+    var bg=hot?"background:#fff8ea;":"";
+    return '<div class="pcrow" data-k="'+k+'" style="'+bg+'display:flex;gap:10px;padding:12px 6px;border-bottom:1px solid #efe7d6;border-radius:8px">'+
+      '<span style="flex:none;width:34px;height:34px;border-radius:50%;color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;background:hsl('+hue+',38%,58%)">有</span>'+
+      '<div style="flex:1;min-width:0"><b style="color:#5a5248;font-size:13px">'+esc(nick)+'</b><span style="color:#c4b8a4;font-size:10.5px;margin-left:6px">'+floor+'楼</span>'+
       '<p style="margin:4px 0;color:#2e2a22;font-size:14px;line-height:1.7;word-break:break-word">'+esc(txt)+'</p>'+
-      '<span style="color:#a89e8e;font-size:11px">'+date+' · <span class="pcrep" data-nick="'+esc(nick)+'" style="cursor:pointer">回复</span></span></div>'+
-      '<span class="pclike" data-k="'+k+'" style="flex:none;align-self:flex-start;margin-top:14px;color:'+(liked?"#c0392b":"#a89e8e")+';font-size:12.5px;cursor:pointer;white-space:nowrap">'+(liked?"♥":"♡")+" "+likes+'</span></div>';
+      '<span style="color:#a89e8e;font-size:11px">'+date+' · <span class="pcrep" style="cursor:pointer">回复</span></span></div>'+
+      '<span class="pclike" data-k="'+k+'" style="flex:none;align-self:flex-start;margin-top:14px;color:'+(liked?"#c0392b":"#a89e8e")+';font-size:12.5px;cursor:pointer;white-space:nowrap">'+(liked?"♥":"♡")+" "+lks+'</span></div>';
   }
   function openPanel(target){
     var si=(typeof target==="number")?target:0;
-    var quote="";segs.forEach(function(s){if(s.si===si)quote=s.tx.slice(0,18)});
+    var quote=segs[si]?segs[si].tx.slice(0,18):"";
     var ov=document.createElement("div");
     ov.style.cssText="position:fixed;inset:0;z-index:150;background:rgba(0,0,0,.45)";
     var sh=document.createElement("div");
@@ -968,43 +996,49 @@ function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.te
     listWrap.style.cssText="flex:1;overflow-y:auto;min-height:0;-webkit-overflow-scrolling:touch";
     var inputRow=document.createElement("div");
     inputRow.style.cssText="display:flex;gap:8px;padding:10px 0 calc(10px + env(safe-area-inset-bottom));border-top:1px solid #efe7d6;background:#faf7f0";
-    inputRow.innerHTML='<input id="xgpcIn" maxlength="120" placeholder="有趣段评千万，不如你也来一条？" style="flex:1;min-width:0;background:#fff;border:1px solid #e3d9c4;border-radius:99px;padding:10px 16px;font-size:13.5px;color:#2e2a22;font-family:inherit;outline:none">'+
+    inputRow.innerHTML='<input id="xgpcIn" maxlength="120" placeholder="说点你的看法，有缘人都在等" style="flex:1;min-width:0;background:#fff;border:1px solid #e3d9c4;border-radius:99px;padding:10px 16px;font-size:13.5px;color:#2e2a22;font-family:inherit;outline:none">'+
       '<button id="xgpcGo" style="flex:none;background:#e8b04b;color:#16130f;font-weight:800;font-size:13.5px;border:none;border-radius:99px;padding:10px 18px;cursor:pointer">发布</button>';
-    var myRows=myPC().filter(function(m){return m.seg===si}).length;
-    var shownV=Math.min(8,Math.max(1,segCnt(si)-myRows));
-    function renderList(keep){
-      var tot=segCnt(si),seed=T.length*7+si*13,h='';
-      myRows=myPC().filter(function(m){return m.seg===si}).length;
-      var virt=Math.max(0,tot-myRows);
-      if(shownV>virt)shownV=virt;
-      h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><b style="color:#2e2a22;font-size:15.5px">'+tot+' 条评论</b><span id="xgpcX" style="color:#a89e8e;font-size:20px;cursor:pointer;padding:2px 10px;line-height:1">⌄</span></div>';
+    var tot=0;
+    function renderList(scrollToMine){
+      tot=segCnt(si);
+      var seed=T.length*7+si*13;
+      var virt=Math.max(0,tot-myPC().filter(function(m){return m.seg===si}).length);
+      var rows=[];
+      for(var k=0;k<virt;k++){
+        var dseed=seed+k*31;
+        rows.push({k:k,txt:(PG[si]&&PG[si][k])||GEN[k%GEN.length],lks:genLk(dseed,k,virt),days:genDays(dseed,k,virt)});
+      }
+      rows.sort(function(a,b){return b.lks-a.lks});
+      var h='';
+      h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><b style="color:#2e2a22;font-size:15.5px">'+tot+' 条评论</b><span style="color:#a89e8e;font-size:11px">按热门排序</span><span id="xgpcX" style="color:#a89e8e;font-size:20px;cursor:pointer;padding:2px 10px;line-height:1;margin-left:auto">⌄</span></div>';
       h+='<p style="color:#8a7f6e;font-size:11.5px;margin:0 0 4px">「'+esc(quote)+'…」</p>';
-      var lk=likes();
+      var fl=1;
+      rows.forEach(function(r){h+=rowHTML("有缘人",r.txt,fmtDate(r.days),r.lks,fl++,r.k,fl<=4)});
       myPC().slice().reverse().forEach(function(m){
         if(m.seg!==si)return;
-        h+=rowHTML(m.n||"有缘人",m.txt,"刚刚",1,false,si,"m"+m.ts);
+        h+=rowHTML("有缘人",m.txt,"刚刚",1,fl++,"m"+m.ts,false);
       });
-      for(var k=0;k<shownV;k++){
-        var dseed=seed+k*31;
-        var isLk=lk.indexOf(si+":"+k)>-1;
-        h+=rowHTML(genWho(dseed,k),genTxt(dseed,k),fmtDate(genDays(dseed,k,virt)),genLk(dseed,k,virt)+(isLk?1:0),isLk,si,k);
-      }
-      if(shownV<virt)h+='<div id="xgpcMore" style="text-align:center;color:#8a6d1f;font-size:12.5px;font-weight:700;padding:12px 0;cursor:pointer">展开更多评论 ⌄</div>';
       listWrap.innerHTML=h;
-      if(!keep)listWrap.scrollTop=0;
+      listWrap.scrollTop=0;
+      if(scrollToMine){
+        var mine=listWrap.querySelectorAll('.pcrow[data-k^="m"]');
+        if(mine.length){var el=mine[mine.length-1];el.scrollIntoView({block:"center"});el.style.transition="background 2.5s";el.style.background="#f3e8c8";setTimeout(function(){el.style.background="transparent"},2200);}
+      }
     }
     function bind(){
       listWrap.querySelector("#xgpcX").onclick=function(){ov.remove()};
-      var more=listWrap.querySelector("#xgpcMore");
-      if(more)more.onclick=function(){var st=listWrap.scrollTop;shownV=Math.min(shownV+12,segCnt(si));renderList(true);bind();listWrap.scrollTop=st;};
       [].forEach.call(listWrap.querySelectorAll(".pcrep"),function(el){
-        el.onclick=function(){replyTo=el.getAttribute("data-nick");var inp=sh.querySelector("#xgpcIn");inp.placeholder="回复 @"+replyTo+"：";inp.focus();};
+        el.onclick=function(){replyTo="有缘人";var inp=sh.querySelector("#xgpcIn");inp.placeholder="回复 有缘人：";inp.focus();};
       });
       [].forEach.call(listWrap.querySelectorAll(".pclike"),function(el){
-        el.onclick=function(){var k=el.getAttribute("data-k");if(k&&k.indexOf("m")===0)return;
+        el.onclick=function(){var k=el.getAttribute("data-k");if(!k||k.indexOf("m")===0)return;
           var a=likes(),key=si+":"+k,i=a.indexOf(key);
           if(i>-1){a.splice(i,1)}else{a.push(key)}
-          saveLikes(a);var st=listWrap.scrollTop;renderList(true);bind();listWrap.scrollTop=st;
+          saveLikes(a);
+          var n=parseInt(el.textContent.slice(1),10)||0;
+          var on=a.indexOf(key)>-1;
+          el.textContent=(on?"♥":"♡")+" "+(n+(on?1:-1));
+          el.style.color=on?"#c0392b":"#a89e8e";
         };
       });
     }
@@ -1015,11 +1049,11 @@ function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.te
     sh.querySelector("#xgpcGo").onclick=function(){
       var inp=sh.querySelector("#xgpcIn"),v=inp.value.trim();
       if(!v){inp.focus();return}
-      var t2=(replyTo?"回复 @"+replyTo+"："+v:v);
+      var t2=(replyTo?"回复 有缘人："+v:v);
       var a=myPC();a.push({seg:si,txt:t2,n:null,ts:Date.now()});savePC(a);
-      replyTo=null;inp.value="";inp.placeholder="有趣段评千万，不如你也来一条？";
+      replyTo=null;inp.value="";inp.placeholder="说点你的看法，有缘人都在等";
       segs.forEach(function(s){if(s.si===si){var b=s.el.querySelector(".xgpc");if(b)b.textContent=segCnt(si)}});
-      renderList();bind();
+      renderList(true);bind();
     };
   }
 })();
