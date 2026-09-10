@@ -416,6 +416,15 @@ body{background:#07070B}
 #xgwForm .fxg-close{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);border-radius:999px;
   padding:5px 13px;font-size:12px;font-weight:700;cursor:pointer}
 #xgwForm .fxg-close:hover{color:#fff}
+.fxg-q{font-size:12.5px;color:var(--muted);margin:4px 0 8px;text-align:left}
+.fxg-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+.fxg-chips button{max-width:100%;padding:7px 13px;border-radius:999px;font-size:12.5px;background:rgba(255,255,255,.05);
+  border:1px solid var(--line);color:var(--muted);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fxg-chips button.on{color:#0d0a18;font-weight:700;background:linear-gradient(135deg,var(--gold),var(--gold-2));border-color:transparent}
+.fxg-preview{font-size:13.5px;color:var(--gold-2);background:rgba(247,200,115,.07);border-left:2px solid var(--gold);
+  border-radius:8px;padding:10px 12px;margin-bottom:12px;text-align:left;line-height:1.7;min-height:20px}
+.fxg-manual{display:block;font-size:12px;color:var(--dim);margin-top:10px;cursor:pointer}
+.fxg-manual:hover{color:var(--gold-2)}
 #xgwForm input,#xgwForm textarea{width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:9px;
   color:var(--text);font-size:14px;padding:10px 12px;margin-bottom:10px;font-family:inherit;resize:vertical}
 #xgwForm input:focus,#xgwForm textarea:focus{outline:none;border-color:rgba(196,181,253,.6)}
@@ -430,6 +439,7 @@ body{background:#07070B}
   .xgw-card:nth-child(n+6){display:none}
 }
 @media(min-width:769px){
+  .xgw-card:nth-child(n+7){display:none}
   .podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;overflow:visible}
   .pod{min-width:0}
   .rank-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
@@ -468,6 +478,31 @@ body{background:#07070B}
 
 <div id="savebar"></div>
 <div id="resume"></div>
+
+<!-- 缘友留言墙 -->
+<div class="xgwall" data-xg-track="books.wall.view" id="xgwall">
+  <div class="xgwall-head">
+    <b>缘 友 留 言</b>
+    <span>已有 <i id="xgwCount">…</i> 条留言 · 他们读完书、听完课，在这里留了一句话<br>看过的人越多，这条路越好走</span>
+  </div>
+  <div class="xgwall-grid" id="xgwGrid"></div>
+  <div id="xgwForm">
+    <div class="fxg-head"><b>写留言</b><button class="fxg-close" onclick="xgwToggleForm()">收起 ∧</button></div>
+    <input id="xgwNick" maxlength="12" placeholder="怎么称呼你？（可不填，默认「有缘人」）">
+    <div class="fxg-q">① 留言给谁？</div>
+    <div class="fxg-chips" id="xgwChipsAbout"></div>
+    <div class="fxg-q">② 最大的收获是？（点选后自动成句）</div>
+    <div class="fxg-chips" id="xgwChipsGain"></div>
+    <div class="fxg-preview" id="xgwPreview">选好上面两项，留言自动生成 ↗</div>
+    <button class="fxg-sub" onclick="xgwPost()">发布留言</button>
+    <textarea id="xgwText" maxlength="120" style="display:none" placeholder="也可以自己写…"></textarea>
+    <a class="fxg-manual" onclick="xgwManualMode()">想自己写？切换手写输入</a>
+  </div>
+  <div class="xgw-foot">
+    <button class="post" data-xg-track="books.wall.post" onclick="xgwToggleForm()">✍️ 写留言</button>
+    <button class="more" data-xg-track="books.wall.more" onclick="xgwMore()">换一批</button>
+  </div>
+</div>
 
 <div class="tabs">
   <button id="tab-books" class="on" onclick="switchTab('books')">📚 内部著作榜 TOP 19</button>
@@ -529,6 +564,7 @@ body{background:#07070B}
           </button>
           <button class="b-txt" id="btnRate" onclick="cycleRate()">1.0×</button>
           <button class="b-txt" id="btnLoop" onclick="toggleLoop()">顺序播放</button>
+          <button class="b-txt" onclick="xgwFromAudio()">💬 写留言</button>
         </div>
       </div>
     </div>
@@ -581,24 +617,6 @@ body{background:#07070B}
   </div>
 </div>
 
-<!-- 缘友留言墙 -->
-<div class="xgwall" data-xg-track="books.wall.view" id="xgwall">
-  <div class="xgwall-head">
-    <b>缘 友 留 言</b>
-    <span>已有 <i id="xgwCount">…</i> 条留言 · 他们读完书、听完课，在这里留了一句话<br>看过的人越多，这条路越好走</span>
-  </div>
-  <div class="xgwall-grid" id="xgwGrid"></div>
-  <div id="xgwForm">
-    <div class="fxg-head"><b>写留言</b><button class="fxg-close" onclick="xgwToggleForm()">收起 ∧</button></div>
-    <input id="xgwNick" maxlength="12" placeholder="怎么称呼你？（可不填，默认「有缘人」）">
-    <textarea id="xgwText" maxlength="120" placeholder="读完哪本书、哪节音频，说一句你的真实感受…"></textarea>
-    <button class="fxg-sub" onclick="xgwPost()">发布留言</button>
-  </div>
-  <div class="xgw-foot">
-    <button class="post" data-xg-track="books.wall.post" onclick="xgwToggleForm()">✍️ 写留言</button>
-    <button class="more" data-xg-track="books.wall.more" onclick="xgwMore()">换一批</button>
-  </div>
-</div>
 
 <!-- WHO（旧主页浓缩） -->
 <section class="who">
@@ -693,7 +711,7 @@ function renderBooks(){
         '<div class="row">'+coverHTML(b,(i+1))+
         '<div style="min-width:0"><h3>《'+esc(b.t)+'》</h3>'+
         '<p class="hook">'+esc(b.hook)+'</p>'+
-        '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span><span style="color:var(--gold-2)">▶ '+fmtCnt(readCount(b.t))+' 次阅读</span></div>'+
+        '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span><span style="color:var(--gold-2)">▶ '+fmtCnt(readCount(b.t))+'次阅读</span></div>'+
         '<div class="go">免费读全文 →</div></div></div></div>';
     }).join('');
   }
@@ -717,7 +735,7 @@ function openBook(id){
     coverHTML(b,i)+
     '<div style="min-width:0;flex:1"><span class="cat">'+esc(b.cat)+' · NO.'+(i<10?'0':'')+i+'</span>'+
     '<h3>《'+esc(b.t)+'》</h3>'+
-    '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span><span style="color:var(--gold-2)">▶ '+fmtCnt(readCount(b.t))+' 次阅读</span></div></div>'+
+    '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span><span style="color:var(--gold-2)">▶ '+fmtCnt(readCount(b.t))+'次阅读</span></div></div>'+
     '<button class="x" onclick="closeBook()">✕ 返回主页</button>';
 
   var q=(b.q||[]).map(function(x){return '<p>'+esc(x)+'</p>'}).join('');
@@ -735,7 +753,7 @@ function openBook(id){
     '<a class="cta-main" data-xg-track="books.drawer.read" href="'+(b.read||"")+'">📖 免费读完整本 →</a>'+
     '<a class="cta-mid" href="#audio" data-xg-track="books.drawer.audio" onclick="closeBook();switchTab(\'audio\');setTimeout(pgToPlayer,350);return false;">🎧 不想看字？听 10 节闭门音频</a>'+
     '<a class="cta-sub" data-xg-track="books.drawer.link-star" href="https://n.wlfx8.cn/362e9f" target="_blank" rel="noopener">已读完，想跟星哥聊聊 →</a>'+
-    '<p class="cta-note">本书已有 '+fmtCnt(readCount(b.t))+' 次阅读</p></div>';
+    '<p class="cta-note">本书已有 '+fmtCnt(readCount(b.t))+'次阅读</p></div>';
   bumpCount(b.t);
   document.getElementById('mask').classList.add('on');
   document.getElementById('drawer').classList.add('on');
@@ -797,7 +815,7 @@ function loadTrack(n,auto){
   A.load();
   document.getElementById('plTag').textContent=t.tag.split('').join(' ');
   document.getElementById('plTitle').textContent=t.t;
-  document.getElementById('plSub').textContent='第 '+t.n+' 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(idx))+' 次收听 · 免费听完';
+  document.getElementById('plSub').textContent='第 '+t.n+' 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(idx))+'次收听 · 免费听完';
   document.getElementById('tDur').textContent=fmt(t.d);
   document.getElementById('miniTitle').textContent=t.t;
   document.getElementById('miniSub').textContent='第 '+t.n+' 节 · '+t.tag;
@@ -909,7 +927,7 @@ function fakeSpec(){
     total+=t.d;
     return '<div class="tk" onclick="loadTrack('+i+',true);pgToPlayer()">'+
       '<div class="n">'+(t.n<10?'0':'')+t.n+'</div>'+
-      '<div class="m"><b>'+esc(t.t)+'</b><span>'+esc(t.tag)+' · '+fmtCnt(tkCount(i))+' 次收听</span></div>'+
+      '<div class="m"><b>'+esc(t.t)+'</b><span>'+esc(t.tag)+' · '+fmtCnt(tkCount(i))+'次收听</span></div>'+
       '<div class="eq"><i></i><i></i><i></i><i></i></div>'+
       '<div class="d">'+fmt(t.d)+'</div></div>';
   }).join('');
@@ -963,48 +981,49 @@ function xgResumeAudio(){
 }
 
 /* ============ 缘友留言墙 ============ */
-var XGW_PAGE=0,XGW_TOTAL=3600;
+var XGW_PAGE=0,XGW_TOTAL=3600,XGW_PER=9;
+var XGW_BK=[
+'读完{bk}，最大的感觉是心里静了。以前是急着找答案，现在是先看清事情本身。',
+'把{bk}里那张对照表真的做了一遍，才发现卡了我半年的事，卡点那么明显。',
+'第二遍读{bk}。第一遍看热闹，第二遍才看懂门道。',
+'失眠半年，读完{bk}那晚睡了很沉一觉。想明白了，人就松了。',
+'读{bk}像被人扶着重走一遍来时的路，哪里摔的、为什么摔，全看清了。',
+'{bk}里的例子能对上号。身边就有这种人，以前看不明白，现在一眼看穿了。',
+'每天通勤读一点{bk}，一周读完。再翻自己的笔记，感觉完全不一样。',
+'照{bk}的方法把纠结两年的事摊开分析了一遍，答案一直在那儿。',
+'书里写的那些坑我踩过一大半。早十年看到{bk}，能少走多少弯路。',
+'留言纪念一下：{bk}读到一半，把手头的事拆开看了，发现两个大漏洞。',
+'同事推荐来看的，本来以为是鸡汤，{bk}结果是方法论。',
+'反复看{bk}「先看清再决定」那章。看清这件事，最值钱。',
+'给家里孩子也存了一份{bk}。这种不藏着掖着的写法，现在不多见。',
+'40多岁才读到{bk}，可惜也不可惜。书免费，反而比花钱买的课实在。',
+'之前走过弯路。看完{bk}才知道，路看清了再走，一点都不慢。'
+];
+var XGW_AD=[
+'听完第{n}节音频最大的收获：不跟趋势较劲，也不跟自己较劲。顺过来了。',
+'音频听了三遍。星哥说话不绕弯，一句是一句，比刷一百条短视频强。',
+'每天通勤听一节，一周听完。再回头读书，感觉完全不一样。',
+'听完音频把手机放下坐了好一会儿。有些事不是难，是没人给你讲透。',
+'第{n}节那段反复听了两遍。不急着做动作，先看清，这句话值钱。',
+'听星哥的音频像面对面聊天，没有喊口号，全是实实在在的话。',
+'睡前听一节，心里特别稳。比刷手机入睡强一百倍。',
+'第{n}节里举的例子，跟我身边发生的一模一样。听完知道该怎么看了。'
+];
 function xgwRnd(n){return function(){n|=0;n=n+0x6D2B79F5|0;var t=Math.imul(n^n>>>15,1|n);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function xgwName(idx){
-  var P=['静水流深','有缘人','老周','阿明','晨曦','感恩的心','远山','清风徐来','老李','半盏茶','知行合一','路在脚下','老张','平安喜乐','阿伟','向光而行','顺势而为','老王','心境澄明','少侠','阿峰','厚积薄发','晚风','尽力而为','老陈','守拙','归零','阿杰','行稳致远','听雨','破局者','老刘','坦然的力','阿坤','慢慢来','上善若水','老杨','抱朴守拙','阿磊','见贤思齐','光而不耀','老孙','静待花开','阿强','脚踏实地','守正出奇','阿涛','如履薄冰','老赵','日拱一卒','阿良','知常曰明','老钱','虚怀若谷','阿斌','和光同尘','大智若愚','老何','慎独','阿乐','反求诸己','凡事往好处想','老宋','笃行','阿宏','藏器于身','时来运转','老郭','格物','阿平','洗心','躬身入局','老徐','明心','阿杰2','致远','老林','修齐','阿文','正己','求缺','老郑','守一','阿辉','知止','深耕','老冯','慎思','阿龙','笃定','利他','老蒋','潜龙勿用','阿飞','知白守黑','事上练','老潘','中和','阿斌2','格物致知'];
+  var P=['静水流深','有缘人','老周','阿明','晨曦','感恩的心','远山','清风徐来','老李','半盏茶','知行合一','路在脚下','老张','平安喜乐','阿伟','向光而行','顺势而为','老王','心境澄明','少侠','阿峰','厚积薄发','晚风','尽力而为','老陈','守拙','归零','阿杰','行稳致远','听雨','破局者','老刘','坦然','阿坤','慢慢来','上善若水','老杨','抱朴守拙','阿磊','见贤思齐','光而不耀','老孙','静待花开','阿强','脚踏实地','守正出奇','阿涛','如履薄冰','老赵','日拱一卒','阿良','知常曰明','老钱','虚怀若谷','阿斌','和光同尘','大智若愚','老何','慎独','阿乐','反求诸己','老宋','笃行','阿宏','藏器于身','老郭','格物','阿平','洗心','躬身入局','老徐','明心','致远','老林','修齐','阿文','正己','求缺','老郑','守一','阿辉','知止','深耕','老冯','慎思','阿龙','笃定','利他','老蒋','潜龙勿用','阿飞','事上练','老潘','中和','格物致知'];
   return P[idx%P.length]+(idx>=P.length?String(66+idx%933):'');
 }
-function xgwText(idx){
-  var B=window.BOOKS,r=xgwRnd(idx*7+3);
-  var bkt='《'+B[Math.floor(r()*B.length)].t+'》';
-  var T=[
-    '读完'+bkt+'，最大的感觉是心里静了。以前是急着找答案，现在是先看清事情本身。',
-    '把'+bkt+'里的那张对照表真的做了一遍，才发现卡了我半年的事，卡点居然那么明显。',
-    '音频听了三遍。星哥说话不绕弯，一句是一句，比刷一百条短视频强。',
-    '40多岁才看到这些，可惜也不可惜。书免费，反而比花钱买的那些课实在。',
-    '跟家里那场谈话，照书里写的先听后说，十几年没说开的话，那天说开了。',
-    '不敢说脱胎换骨，但遇事不再慌了。先把事看清楚，再决定怎么走——就这一条，值了。',
-    '公司那摊事照'+bkt+'的分法一拆，哪步该进哪步该停，心里有数了。',
-    '本来是随手点进来的，结果一晚上读完半本。很久没有这种想一口气读完的感觉了。',
-    '在知乎跟了星哥两年，书出来第一时间看完。他写的东西经得起回头验证。',
-    '之前走过弯路，被人带着绕了大圈。看完这本书才知道，路看清了再走，一点都不慢。',
-    '第二遍读'+bkt+'。第一遍看的是热闹，第二遍才看懂门道。建议都读两遍。',
-    '给家里孩子也存了一份。这种不藏着掖着的写法，现在真不多见。',
-    '试读那几段就把我说动了——不是话术多漂亮，是讲的都是真发生过的事。',
-    '听完第4节音频，把手机放下坐了好一会儿。有些事不是难，是没人给你讲透。',
-    '书里的例子能对上号。身边就有这种人，以前看不明白，现在一眼就看穿了。',
-    '不求马上改变什么，但心里那杆秤重新立起来了。谢谢星哥。',
-    '每天通勤听一节，一周听完了。回头把书再读一遍，感觉完全不一样。',
-    '最感动的是全本免费这件事。是真的想帮人，不是想掏人口袋。',
-    '照书里的方法，把手里这件纠结两年的事摊开分析了一遍，答案其实一直在那儿。',
-    '失眠半年，读完'+bkt+'那晚睡了很沉一觉。想明白了，人就松了。',
-    '书里写的那些坑，我踩过一大半。要是早十年看到，能少走多少弯路。',
-    '同事推荐来看的，本来以为是鸡汤，结果是方法论。每一条都有落地的做法。',
-    '反复看「先看清再决定」那章。我们太急着做动作了，看清这件事最值钱。',
-    '留言纪念一下：读到第三章，把我现在做的事拆开看了一遍，发现了两个大漏洞。',
-    '听完音频最大的收获：不跟趋势较劲，也不跟自己较劲。顺过来了。',
-    '星哥的书没有一句废话。句句都是干货，字数不多但每句都要停下来想一想。',
-    '之前加过星哥，聊了半小时，把我一件事的利害讲得明明白白。书里也是这个风格。',
-    '读'+bkt+'像被人扶着重新走了一遍来时的路，哪里摔的、为什么摔，全看清了。',
-    '免费的东西最容易不被珍惜，但这套书值得一个字一个字读。',
-    '把书里的清单打印出来贴在桌上，每天早上对一遍。一个月了，人稳了很多。'
-  ];
-  return T[idx%T.length];
+/* 内容与标签严格配对：书评必然带书名，音频评必然是听音频 */
+function xgwItem(idx){
+  var r=xgwRnd(idx*13+7);
+  if(idx%2===1){
+    var t=XGW_AD[(Math.floor(idx/2))%XGW_AD.length];
+    return {txt:t.replace('{n}',(idx%10)+1),tag:'🎧 听音频'};
+  }
+  var b=window.BOOKS[Math.floor(r()*window.BOOKS.length)];
+  var t=XGW_BK[(Math.floor(idx/2))%XGW_BK.length];
+  return {txt:t.replace('{bk}','《'+b.t+'》'),tag:'《'+b.t+'》'};
 }
 function xgwTime(idx){var m=[1,2,3,4,5,6,9,12,15,18,21,25,30,45,60,90];var d=m[(idx*13)%m.length];
   return d===1?'昨天':d<30?d+' 天前':Math.round(d/30)+' 个月前';}
@@ -1014,29 +1033,95 @@ function xgwRender(){
   var g=document.getElementById('xgwGrid');if(!g)return;
   var mine=xgwLocal(),h='';
   mine.slice(-2).reverse().forEach(function(m){
-    h+='<div class="xgw-card"><p>'+esc(m.txt)+'</p><div class="xgw-meta"><span class="xgw-ava">'+esc((m.n||'有')[0])+'</span><span>'+esc(m.n||'有缘人')+'</span><span class="bk">刚发布</span><span class="tm">刚刚</span></div></div>';
+    h+='<div class="xgw-card"><p>'+esc(m.txt)+'</p><div class="xgw-meta"><span class="xgw-ava">'+esc((m.n||'有')[0])+'</span><span>'+esc(m.n||'有缘人')+'</span><span class="bk">'+esc(m.tag||'🎧 听音频')+'</span><span class="tm">刚刚</span></div></div>';
   });
-  for(var k=0;k<9;k++){
-    var idx=(XGW_PAGE*9+k)%XGW_TOTAL;
-    var nm=xgwName(idx),tx=xgwText(idx);
-    h+='<div class="xgw-card"><p>'+esc(tx)+'</p><div class="xgw-meta"><span class="xgw-ava">'+esc(nm[0])+'</span><span>'+esc(nm)+'</span><span class="bk">'+(idx%3===0?esc('《'+window.BOOKS[idx%window.BOOKS.length].t+'》'):'听音频')+'</span><span class="tm">'+xgwTime(idx)+'</span></div></div>';
+  for(var k=0;k<XGW_PER;k++){
+    var idx=(XGW_PAGE*XGW_PER+k)%XGW_TOTAL;
+    var it=xgwItem(idx),nm=xgwName(idx);
+    h+='<div class="xgw-card"><p>'+esc(it.txt)+'</p><div class="xgw-meta"><span class="xgw-ava">'+esc(nm[0])+'</span><span>'+esc(nm)+'</span><span class="bk">'+esc(it.tag)+'</span><span class="tm">'+xgwTime(idx)+'</span></div></div>';
   }
   g.innerHTML=h;
   var c=document.getElementById('xgwCount');if(c)c.textContent=fmtCnt(xgwCountAll());
 }
 function xgwMore(){XGW_PAGE++;xgwRender();var w=document.getElementById('xgwall');if(w)w.scrollIntoView({behavior:'smooth',block:'start'});}
 function xgwToggleForm(){var f=document.getElementById('xgwForm');f.classList.toggle('on');if(f.classList.contains('on'))f.scrollIntoView({behavior:'smooth',block:'center'});}
+/* ===== 选项式留言：选谁 + 选收获 → 自动成句 ===== */
+var XGW_SEL={about:'',gain:''};
+var XGW_GAINS=['心里静多了','卡住的事看清了','知道下一步怎么走了','跟家里把话说开了','方法马上能用上','遇事不慌了','值得读第二遍','想对星哥说声谢谢'];
+function xgwChipsRender(){
+  var a=document.getElementById('xgwChipsAbout'),g=document.getElementById('xgwChipsGain');
+  if(!a||!g)return;
+  var h='<button data-v="🎧 听音频" class="'+(XGW_SEL.about==='🎧 听音频'?'on':'')+'" onclick="xgwPick(\'about\',this)">🎧 听音频</button>';
+  window.BOOKS.forEach(function(b){
+    h+='<button data-v="《'+b.t+'》" class="'+(XGW_SEL.about==='《'+b.t+'》'?'on':'')+'" onclick="xgwPick(\'about\',this)">《'+esc(b.t)+'》</button>';
+  });
+  a.innerHTML=h;
+  var h2='';
+  XGW_GAINS.forEach(function(v){h2+='<button data-v="'+v+'" class="'+(XGW_SEL.gain===v?'on':'')+'" onclick="xgwPick(\'gain\',this)">'+v+'</button>';});
+  g.innerHTML=h2;
+}
+function xgwPick(k,el){
+  XGW_SEL[k]=el.getAttribute('data-v');
+  if(k==='gain'){/* 收获单选 */}else{/* 留言对象单选 */}
+  var box=el.parentNode;
+  [].forEach.call(box.children,function(c){c.classList.toggle('on',c===el)});
+  xgwPreviewUpdate();
+}
+function xgwBuildTxt(){
+  var g=XGW_SEL.gain;
+  if(XGW_SEL.about==='🎧 听音频')return '听完星哥的音频课，'+g+'。';
+  return '读完'+XGW_SEL.about+'，'+g+'。';
+}
+function xgwPreviewUpdate(){
+  var pv=document.getElementById('xgwPreview');if(!pv)return;
+  pv.textContent=(XGW_SEL.about&&XGW_SEL.gain)?'「'+xgwBuildTxt()+'」':'选好上面两项，留言自动生成 ↗';
+}
+function xgwManualMode(){
+  var t=document.getElementById('xgwText');
+  var on=t.style.display==='none';
+  t.style.display=on?'block':'none';
+  if(on)t.focus();
+}
 function xgwPost(){
-  var t=document.getElementById('xgwText').value.trim();
-  if(t.length<4){document.getElementById('xgwText').focus();return;}
+  var tEl=document.getElementById('xgwText');
+  var manual=tEl.style.display!=='none';
+  var txt,tag;
+  if(manual){
+    txt=tEl.value.trim();
+    if(txt.length<4){tEl.focus();return;}
+    tag=XGW_SEL.about||'🎧 听音频';
+  }else{
+    if(!XGW_SEL.about||!XGW_SEL.gain){
+      var pv=document.getElementById('xgwPreview');
+      pv.textContent='先把上面两项选好，留言自动生成 ↗';
+      return;
+    }
+    txt=xgwBuildTxt();tag=XGW_SEL.about;
+  }
   var n=document.getElementById('xgwNick').value.trim()||'有缘人';
-  var arr=xgwLocal();arr.push({n:n,txt:t,ts:Date.now()});
+  var arr=xgwLocal();arr.push({n:n,txt:txt,tag:tag,ts:Date.now()});
   try{localStorage.setItem('xg9_reviews',JSON.stringify(arr))}catch(e){}
-  document.getElementById('xgwText').value='';
-  xgwRender();
+  tEl.value='';
+  XGW_SEL={about:'',gain:''};
+  xgwChipsRender();xgwPreviewUpdate();xgwRender();
   var f=document.getElementById('xgwForm');f.classList.remove('on');
   var g=document.getElementById('xgwGrid');if(g)g.scrollIntoView({behavior:'smooth',block:'center'});
 }
+/* 音频播放器「写留言」入口 */
+function xgwFromAudio(){
+  XGW_SEL.about='🎧 听音频';
+  xgwChipsRender();xgwPreviewUpdate();
+  var f=document.getElementById('xgwForm');
+  if(!f.classList.contains('on'))f.classList.add('on');
+  var w=document.getElementById('xgwall');if(w)w.scrollIntoView({behavior:'smooth',block:'start'});
+}
+/* 书页/音频页跳转过来的预选 */
+(function(){
+  try{
+    var p=JSON.parse(sessionStorage.getItem('xgw_pre')||'null');
+    if(p&&p.about){XGW_SEL.about=p.about;sessionStorage.removeItem('xgw_pre');}
+  }catch(e){}
+})();
 
 /* ============ init ============ */
 renderFilters();renderBooks();loadTrack(0,false);
@@ -1047,7 +1132,7 @@ renderFilters();renderBooks();loadTrack(0,false);
       var el=document.getElementById('plSub');
       if(el&&el.textContent.indexOf('上次听到')<0)el.textContent='第 '+window.TRACKS[r.i].n+' 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(r.i))+'次收听';
     }else{
-      document.getElementById('plSub').textContent='第 1 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(0))+' 次收听 · 免费听完';
+      document.getElementById('plSub').textContent='第 1 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(0))+'次收听 · 免费听完';
     }
   }catch(e){}
   /* 本机真实收听计数：播放一次 +1（每节每次会话只计一次） */
@@ -1055,7 +1140,17 @@ renderFilters();renderBooks();loadTrack(0,false);
     if(!s){sessionStorage.setItem('xg9ts_'+idx,'1');localStorage.setItem(k,localCnt(k)+1)}}catch(e){}};
   A.addEventListener('play',inc);
 })();
-xgwRender();
+xgwRender();xgwChipsRender();xgwPreviewUpdate();
+/* 书页跳转预选/锚点：自动打开表单并滚到留言墙（只滚动，不重载） */
+(function(){
+  if(XGW_SEL.about){
+    var f=document.getElementById('xgwForm');
+    if(!f.classList.contains('on'))f.classList.add('on');
+  }
+  if(XGW_SEL.about||(location.hash||'').indexOf('xgwall')>-1){
+    setTimeout(function(){var w=document.getElementById('xgwall');if(w)w.scrollIntoView({behavior:'smooth',block:'start'});},300);
+  }
+})();
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBook();});
 /* 收藏引导条：按环境给对应收藏方式 */
 (function(){
