@@ -533,6 +533,23 @@ var A=new Audio();A.preload='none';
 var idx=0,rates=[1,1.25,1.5,0.75],ri=0,loopAll=true,started=false;
 var ctx=null,analyser=null,freq=null,bars=[];
 
+/* 续播记忆：记住听到哪一节、哪一秒 */
+var rAt=0;
+try{var r=JSON.parse(localStorage.getItem('xgaudio')||'null');
+  if(r&&typeof r.i==='number'&&r.i>=0&&r.i<window.TRACKS.length){
+    idx=r.i;rAt=r.t||0;loadTrack(idx,false);
+    if(rAt>5){var once=function(){A.removeEventListener('loadedmetadata',once);
+      if(rAt<(A.duration||1e9)-5)A.currentTime=rAt;};
+      A.addEventListener('loadedmetadata',once);
+      document.getElementById('plSub').textContent='上次听到 '+fmt(rAt)+' · 点播放接着听';}
+  }
+}catch(e){}
+var lastSv=0;
+A.addEventListener('timeupdate',function(){var now=Date.now();
+  if(!A.paused&&now-lastSv>3000){lastSv=now;
+    try{localStorage.setItem('xgaudio',JSON.stringify({i:idx,t:A.currentTime}))}catch(e){}}});
+A.addEventListener('pause',function(){try{localStorage.setItem('xgaudio',JSON.stringify({i:idx,t:A.currentTime}))}catch(e){}});
+
 (function initSpec(){
   var s=document.getElementById('spec'),h='';
   for(var i=0;i<48;i++)h+='<i></i>';
