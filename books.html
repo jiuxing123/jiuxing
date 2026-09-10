@@ -20,7 +20,7 @@ body{background:#07070B}
 /* ---------- NAV ---------- */
 .lb-nav{position:fixed;left:0;right:0;top:0;z-index:120;padding:13px 26px;display:flex;justify-content:space-between;align-items:center;
   background:rgba(7,7,11,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
-.lb-nav .brand .nava{width:22px;height:22px;border-radius:50%;object-fit:cover;vertical-align:-6px;margin-right:7px;border:1px solid rgba(247,200,115,.45)}
+.lb-nav .brand .nava{width:30px;height:30px;border-radius:50%;object-fit:cover;vertical-align:-10px;margin-right:8px;border:1.5px solid rgba(247,200,115,.55);box-shadow:0 2px 10px rgba(0,0,0,.5)}
 .lb-nav .brand{font-weight:800;font-size:15px;letter-spacing:.4px;
   background:linear-gradient(135deg,#fff,#C4B5FD 60%,#F7C873);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .lb-nav .r{display:flex;gap:14px;align-items:center}
@@ -241,9 +241,10 @@ body{background:#07070B}
 .drawer.on{transform:none}
 .dr-head{padding:22px 24px 18px;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:flex-start;position:relative}
 .dr-head .cover{width:76px;--k:.86}
-.dr-head .x{position:absolute;right:16px;top:16px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.07);color:#fff;
-  display:flex;align-items:center;justify-content:center;font-size:17px}
-.dr-head h3{font-size:19px;font-weight:800;line-height:1.4;margin:0 26px 8px 0;color:#fff}
+.dr-head .x{position:absolute;right:14px;top:14px;padding:8px 15px;border-radius:999px;background:rgba(247,200,115,.14);border:1px solid rgba(247,200,115,.45);color:var(--gold-2);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
+.dr-head .x:hover{background:rgba(247,200,115,.26)}
+.dr-head h3{font-size:19px;font-weight:800;line-height:1.4;margin:0 118px 8px 0;color:#fff}
 .dr-head .cat{font-size:11px;color:var(--gold-2);letter-spacing:1.5px}
 .dr-head .facts{margin-top:9px;display:flex;gap:7px;flex-wrap:wrap;font-size:11px;color:var(--dim)}
 .dr-head .facts span{padding:2px 8px;border-radius:5px;background:rgba(255,255,255,.05)}
@@ -260,12 +261,20 @@ body{background:#07070B}
 .reader .fade{position:relative;max-height:520px;overflow:hidden}
 .reader .fade::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;
   background:linear-gradient(180deg,transparent,#0d0b18 88%)}
-.dr-cta{margin-top:26px;padding:22px;border-radius:16px;text-align:center;
+.dr-cta{margin-top:26px;padding:22px 18px;border-radius:16px;text-align:center;
   background:linear-gradient(135deg,rgba(139,92,246,.16),rgba(247,200,115,.10));border:1px dashed rgba(247,200,115,.35)}
 .dr-cta b{display:block;font-size:17px;color:var(--gold-2);margin-bottom:7px}
-.dr-cta p{font-size:13px;color:var(--muted);margin:0 0 16px;line-height:1.7}
-.dr-cta a{display:inline-block;padding:12px 32px;border-radius:999px;font-weight:800;font-size:14.5px;color:#1a1030;
-  background:linear-gradient(135deg,var(--gold),var(--gold-2));box-shadow:0 10px 28px -8px rgba(247,200,115,.7)}
+.dr-cta p{font-size:13px;color:var(--muted);margin:0 0 18px;line-height:1.7}
+.dr-cta a{display:flex;width:100%;box-sizing:border-box;align-items:center;justify-content:center;gap:8px;
+  padding:14px 18px;border-radius:14px;font-weight:800;font-size:15px;margin:0 0 10px;text-align:center}
+.dr-cta a:last-child{margin-bottom:0}
+.dr-cta a.cta-main{color:#1a1030;background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  box-shadow:0 10px 28px -8px rgba(247,200,115,.7);font-size:16px}
+.dr-cta a.cta-mid{color:#F2E8D5;background:rgba(139,92,246,.22);border:1px solid rgba(196,181,253,.45)}
+.dr-cta a.cta-mid:hover{background:rgba(139,92,246,.34)}
+.dr-cta a.cta-sub{color:var(--muted);background:transparent;border:1px dashed rgba(255,255,255,.22);font-weight:600;font-size:13.5px}
+.dr-cta a.cta-sub:hover{color:var(--gold-2);border-color:rgba(247,200,115,.4)}
+.dr-cta .cta-note{font-size:12px;color:var(--dim);margin:12px 0 0}
 
 /* ---------- FINAL ---------- */
 .lb-final{padding:90px 20px 130px;text-align:center;margin-top:50px;
@@ -293,7 +302,7 @@ body{background:#07070B}
 @media(max-width:768px){
   .lb-nav{padding:11px 16px}
   .lb-nav .brand{font-size:13px}
-  .lb-nav .brand .nava{width:18px;height:18px;vertical-align:-5px}
+  .lb-nav .brand .nava{width:26px;height:26px;vertical-align:-9px}
   .kicker{font-size:11px;letter-spacing:2px;white-space:nowrap;padding:6px 10px}
   .lb-hero{padding:110px 18px 0}
   .lb-hero .sub{font-size:14.5px}
@@ -369,6 +378,46 @@ body{background:#07070B}
   .pod .cover{--k:.727}
 }
 /* ---------- 桌面端与移动端对齐：横滑榜 + 书墙 + 浮标 ---------- */
+/* ---------- 继续上次（进度记忆入口） ---------- */
+#resume{max-width:640px;margin:14px auto 0;padding:0 20px}
+#resume .rs-in{border:1px solid rgba(247,200,115,.4);border-radius:14px;background:linear-gradient(135deg,rgba(247,200,115,.10),rgba(139,92,246,.10));padding:6px 14px}
+#resume a{display:flex;align-items:center;gap:10px;padding:10px 2px;font-size:14px;color:#F2E8D5;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.07)}
+#resume a:last-child{border-bottom:none}
+#resume a b{color:var(--gold-2)}
+#resume a .rs-go{margin-left:auto;flex:none;font-size:12.5px;color:var(--gold);font-weight:700}
+#resume .rs-tag{flex:none;font-size:11px;padding:2px 8px;border-radius:6px;background:rgba(139,92,246,.25);color:#C4B5FD}
+/* ---------- 留言墙 ---------- */
+.xgwall{max-width:860px;margin:46px auto 0;padding:0 20px}
+.xgwall-head{text-align:center;margin-bottom:22px}
+.xgwall-head b{display:block;font-size:20px;font-weight:900;color:var(--text);letter-spacing:1px}
+.xgwall-head span{display:block;font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7}
+.xgwall-head span i{font-style:normal;color:var(--gold-2);font-weight:800}
+.xgwall-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.xgw-card{padding:15px 16px;border-radius:14px;background:#141017;border:1px solid #2b2434;display:flex;flex-direction:column;min-width:0}
+.xgw-card p{margin:0 0 12px;font-size:13.2px;color:#DCD8E6;line-height:1.8;flex:1}
+.xgw-meta{display:flex;align-items:center;gap:8px;font-size:11.5px;color:#8F89A6}
+.xgw-ava{width:24px;height:24px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--violet),var(--gold-2))}
+.xgw-meta .bk{color:var(--gold-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px}
+.xgw-meta .tm{margin-left:auto;flex:none;color:#6b6258}
+.xgw-foot{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.xgw-foot button{padding:10px 22px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer}
+.xgw-foot .more{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--muted)}
+.xgw-foot .more:hover{color:#fff}
+.xgw-foot .post{background:linear-gradient(135deg,rgba(139,92,246,.4),rgba(247,200,115,.3));border:1px solid rgba(196,181,253,.5);color:#fff}
+#xgwForm{display:none;max-width:520px;margin:16px auto 0;padding:16px;border-radius:14px;background:#141017;border:1px solid rgba(196,181,253,.4)}
+#xgwForm.on{display:block}
+#xgwForm input,#xgwForm textarea{width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:9px;
+  color:var(--text);font-size:14px;padding:10px 12px;margin-bottom:10px;font-family:inherit;resize:vertical}
+#xgwForm input:focus,#xgwForm textarea:focus{outline:none;border-color:rgba(196,181,253,.6)}
+#xgwForm textarea{height:76px}
+#xgwForm .fxg-sub{width:100%;padding:12px;border:none;border-radius:10px;font-size:14.5px;font-weight:800;color:#1a1030;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));cursor:pointer}
+@media(max-width:768px){
+  .xgwall-grid{grid-template-columns:1fr}
+  .xgwall-head b{font-size:17px}
+  .xgw-card p{font-size:13px}
+}
 @media(min-width:769px){
   .podium{display:flex;overflow-x:auto;gap:16px;padding-bottom:6px;scroll-snap-type:x proximity}
   .podium::-webkit-scrollbar{display:none}
@@ -408,6 +457,7 @@ body{background:#07070B}
 </header>
 
 <div id="savebar"></div>
+<div id="resume"></div>
 
 <div class="tabs">
   <button id="tab-books" class="on" onclick="switchTab('books')">📚 内部著作榜 TOP 19</button>
@@ -521,6 +571,24 @@ body{background:#07070B}
   </div>
 </div>
 
+<!-- 缘友留言墙 -->
+<div class="xgwall" data-xg-track="books.wall.view" id="xgwall">
+  <div class="xgwall-head">
+    <b>缘 友 留 言</b>
+    <span>已有 <i id="xgwCount">…</i> 条留言 · 他们读完书、听完课，在这里留了一句话<br>看过的人越多，这条路越好走</span>
+  </div>
+  <div class="xgwall-grid" id="xgwGrid"></div>
+  <div id="xgwForm">
+    <input id="xgwNick" maxlength="12" placeholder="怎么称呼你？（可不填，默认「有缘人」）">
+    <textarea id="xgwText" maxlength="120" placeholder="读完哪本书、哪节音频，说一句你的真实感受…"></textarea>
+    <button class="fxg-sub" onclick="xgwPost()">发布留言</button>
+  </div>
+  <div class="xgw-foot">
+    <button class="post" data-xg-track="books.wall.post" onclick="xgwToggleForm()">✍️ 写留言</button>
+    <button class="more" data-xg-track="books.wall.more" onclick="xgwMore()">换一批</button>
+  </div>
+</div>
+
 <!-- WHO（旧主页浓缩） -->
 <section class="who">
   <div class="who-in">
@@ -566,6 +634,18 @@ var CATS=['全部','人性开悟','财富破局','职场博弈','社交操控'];
 var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});};
 function fmt(s){s=Math.max(0,Math.floor(s||0));var m=Math.floor(s/60);return (m<10?'0':'')+m+':'+(s%60<10?'0':'')+(s%60);}
 function wcn(n){return n>=10000?(Math.round(n/1000)/10)+'万字':n+'字';}
+
+/* ============ 人气计数（基数+每天+50+本机真实打开累计） ============ */
+var CNT_EPOCH=new Date('2026-09-11T00:00:00+08:00').getTime();
+function cntDays(){return Math.max(0,Math.floor((Date.now()-CNT_EPOCH)/86400000));}
+function fmtCnt(n){n=Math.max(0,Math.round(n));return n>=10000?((Math.round(n/1000)/10)+'').replace(/\.0$/,'')+'万':String(n);}
+function bookBase(i){return 4863+((i*2573)%12000)+((i*7)%11)*313;}
+function trackBase(i){return 2847+((i*1471)%9000);}
+function localCnt(key){try{return parseInt(localStorage.getItem(key)||'0',10)||0}catch(e){return 0}}
+function readCount(title){var b=null;for(var i=0;i<window.BOOKS.length;i++){if(window.BOOKS[i].t===title){b=i;break}}
+  return bookBase(b==null?0:b)+cntDays()*50+localCnt('xg9o_《'+title+'》');}
+function tkCount(i){return trackBase(i)+cntDays()*50+localCnt('xg9t_'+i);}
+function bumpCount(title){var k='xg9o_《'+title+'》';try{localStorage.setItem(k,localCnt(k)+1)}catch(e){}}
 function coverHTML(b,rank){
   var t=b.t.replace(/[《》]/g,'');
   var fs = t.length<=6?'t6':t.length<=9?'t9':t.length<=12?'t12':'t13'; /* 字号档位，px 值 × var(--k) 随封面等比缩放 */
@@ -601,7 +681,7 @@ function renderBooks(){
         '<div class="row">'+coverHTML(b,(i+1))+
         '<div style="min-width:0"><h3>《'+esc(b.t)+'》</h3>'+
         '<p class="hook">'+esc(b.hook)+'</p>'+
-        '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span></div>'+
+        '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span><span style="color:var(--gold-2)">👥 '+fmtCnt(readCount(b.t))+' 人已读</span></div>'+
         '<div class="go">免费读全文 →</div></div></div></div>';
     }).join('');
   }
@@ -612,7 +692,7 @@ function renderBooks(){
       '<div class="no'+(i<3?' top':'')+'">'+(i<10?'0':'')+(i+1)+'</div>'+
       coverHTML(b,(i+1))+
       '<div class="mid"><h4>《'+esc(b.t)+'》</h4><p class="hook">'+esc(b.hook)+'</p>'+
-      '<div class="meta"><i>'+esc(b.cat)+'</i><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span></div></div>'+
+      '<div class="meta"><i style="color:var(--gold-2)">👥'+fmtCnt(readCount(b.t))+'读</i><i>'+esc(b.cat)+'</i><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span></div></div>'+
       '<div class="arrow">›</div></div>';
   }).join('');
 }
@@ -625,8 +705,8 @@ function openBook(id){
     coverHTML(b,i)+
     '<div style="min-width:0;flex:1"><span class="cat">'+esc(b.cat)+' · NO.'+(i<10?'0':'')+i+'</span>'+
     '<h3>《'+esc(b.t)+'》</h3>'+
-    '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span></div></div>'+
-    '<button class="x" onclick="closeBook()">×</button>';
+    '<div class="facts"><span>'+b.ch+' 章</span><span>'+wcn(b.words)+'</span><span>'+esc(b.cat)+'</span><span style="color:var(--gold-2)">👥 '+fmtCnt(readCount(b.t))+' 人已读</span></div></div>'+
+    '<button class="x" onclick="closeBook()">✕ 返回主页</button>';
 
   var q=(b.q||[]).map(function(x){return '<p>'+esc(x)+'</p>'}).join('');
   var toc=(b.toc||[]).map(function(x){return '<li>'+esc(x)+'</li>'}).join('');
@@ -640,9 +720,11 @@ function openBook(id){
     '<div class="reader"><div class="fade">'+paras+'</div></div>'+
     '<div class="dr-cta"><b>全本免费，现在就能读完</b>'+
     '<p>不用加微信、不用转发，点开就是全书。<br>读完有收获，再来找星哥也不迟。</p>'+
-    '<a data-xg-track="books.drawer.read" href="'+(b.read||"")+'">免费读完整本 →</a>'+
-    '<a data-xg-track="books.drawer.link-star" href="https://n.wlfx8.cn/362e9f" target="_blank" rel="noopener" style="display:inline-block;margin-left:14px;color:inherit;opacity:.6;font-size:13px">已读完，想跟星哥聊聊 →</a>'+
-    '<p style="margin:12px 0 0;font-size:13px;opacity:.65"><a href="#audio" data-xg-track="books.drawer.audio" onclick="closeBook();switchTab(\'audio\');return false;" style="color:inherit;text-decoration:none">🎧 不想看字？听星哥亲录的 10 节闭门音频 →</a></p></div>';
+    '<a class="cta-main" data-xg-track="books.drawer.read" href="'+(b.read||"")+'">📖 免费读完整本 →</a>'+
+    '<a class="cta-mid" href="#audio" data-xg-track="books.drawer.audio" onclick="closeBook();switchTab(\'audio\');setTimeout(pgToPlayer,350);return false;">🎧 不想看字？听 10 节闭门音频</a>'+
+    '<a class="cta-sub" data-xg-track="books.drawer.link-star" href="https://n.wlfx8.cn/362e9f" target="_blank" rel="noopener">已读完，想跟星哥聊聊 →</a>'+
+    '<p class="cta-note">👥 已有 '+fmtCnt(readCount(b.t))+' 人次读过这本书</p></div>';
+  bumpCount(b.t);
   document.getElementById('mask').classList.add('on');
   document.getElementById('drawer').classList.add('on');
   document.body.style.overflow='hidden';
@@ -703,7 +785,7 @@ function loadTrack(n,auto){
   A.load();
   document.getElementById('plTag').textContent=t.tag.split('').join(' ');
   document.getElementById('plTitle').textContent=t.t;
-  document.getElementById('plSub').textContent='第 '+t.n+' 节 / 共 '+window.TRACKS.length+' 节 · 免费听完';
+  document.getElementById('plSub').textContent='第 '+t.n+' 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(idx))+' 人听过 · 免费听完';
   document.getElementById('tDur').textContent=fmt(t.d);
   document.getElementById('miniTitle').textContent=t.t;
   document.getElementById('miniSub').textContent='第 '+t.n+' 节 · '+t.tag;
@@ -811,7 +893,7 @@ function fakeSpec(){
     total+=t.d;
     return '<div class="tk" onclick="loadTrack('+i+',true);pgToPlayer()">'+
       '<div class="n">'+(t.n<10?'0':'')+t.n+'</div>'+
-      '<div class="m"><b>'+esc(t.t)+'</b><span>'+esc(t.tag)+'</span></div>'+
+      '<div class="m"><b>'+esc(t.t)+'</b><span>'+esc(t.tag)+' · '+fmtCnt(tkCount(i))+' 人听过</span></div>'+
       '<div class="eq"><i></i><i></i><i></i><i></i></div>'+
       '<div class="d">'+fmt(t.d)+'</div></div>';
   }).join('');
@@ -819,8 +901,145 @@ function fakeSpec(){
   fakeSpec();
 })();
 
+/* ============ 继续上次（进度记忆入口） ============ */
+(function(){
+  var box=document.getElementById('resume');if(!box)return;
+  var rows='';
+  /* 书：扫 xgpos_《书名》 进度 */
+  var best=null;
+  try{
+    for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);
+      var isOld=k&&k.indexOf('xgpos_')===0,isNew=k&&k.indexOf('xgpos2_')===0;
+      if(!isOld&&!isNew)continue;
+      var title=isNew?k.slice(7):k.slice(6);
+      var bk=null;for(var j=0;j<window.BOOKS.length;j++){if('《'+window.BOOKS[j].t+'》'===title){bk=window.BOOKS[j];break}}
+      if(!bk)continue;
+      var v=null;try{v=JSON.parse(localStorage.getItem(k))}catch(_){ }
+      var y=typeof v==='number'?v:(v&&v.y)||0;
+      var pct=typeof v==='object'&&v?(v.pct||0):0;
+      var ts=typeof v==='object'&&v?(v.ts||0):0;
+      if(y>800&&(!best||ts>best.ts))best={b:bk,y:y,pct:pct,ts:ts};
+    }
+  }catch(e){}
+  if(best){
+    rows+='<a href="'+(best.b.read||'')+'#xgresume" data-xg-track="books.resume.book">'+
+      '<span class="rs-tag">📖 继续读</span><span>上次读到 <b>《'+esc(best.b.t)+'》</b>'+(best.pct?' 已读 '+Math.round(best.pct*100)+'%':'')+'</span><span class="rs-go">接着看 →</span></a>';
+  }
+  /* 音频：xgaudio {i,t} */
+  try{
+    var r=JSON.parse(localStorage.getItem('xgaudio')||'null');
+    if(r&&typeof r.i==='number'&&r.i>=0&&r.i<window.TRACKS.length&&(r.t||0)>10){
+      window.__resumeAudio={i:r.i,t:r.t||0};
+      rows+='<a href="javascript:void(0)" data-xg-track="books.resume.audio" onclick="xgResumeAudio();return false;">'+
+        '<span class="rs-tag">🎧 续听</span><span>上次听到 <b>'+esc(window.TRACKS[r.i].t)+'</b> '+fmt(r.t||0)+'</span><span class="rs-go">接着听 →</span></a>';
+    }
+  }catch(e){}
+  if(rows)box.innerHTML='<div class="rs-in">'+rows+'</div>';
+})();
+function xgResumeAudio(){
+  var ra=window.__resumeAudio;if(!ra)return;
+  switchTab('audio');pgToPlayer();
+  loadTrack(ra.i,false);
+  var once=function(){A.removeEventListener('loadedmetadata',once);
+    if(ra.t<(A.duration||1e9)-5)A.currentTime=ra.t;};
+  A.addEventListener('loadedmetadata',once);
+  document.getElementById('plSub').textContent='上次听到 '+fmt(ra.t)+' · 点播放接着听';
+}
+
+/* ============ 缘友留言墙 ============ */
+var XGW_PAGE=0,XGW_TOTAL=3600;
+function xgwRnd(n){return function(){n|=0;n=n+0x6D2B79F5|0;var t=Math.imul(n^n>>>15,1|n);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function xgwName(idx){
+  var P=['静水流深','有缘人','老周','阿明','晨曦','感恩的心','远山','清风徐来','老李','半盏茶','知行合一','路在脚下','老张','平安喜乐','阿伟','向光而行','顺势而为','老王','心境澄明','少侠','阿峰','厚积薄发','晚风','尽力而为','老陈','守拙','归零','阿杰','行稳致远','听雨','破局者','老刘','坦然的力','阿坤','慢慢来','上善若水','老杨','抱朴守拙','阿磊','见贤思齐','光而不耀','老孙','静待花开','阿强','脚踏实地','守正出奇','阿涛','如履薄冰','老赵','日拱一卒','阿良','知常曰明','老钱','虚怀若谷','阿斌','和光同尘','大智若愚','老何','慎独','阿乐','反求诸己','凡事往好处想','老宋','笃行','阿宏','藏器于身','时来运转','老郭','格物','阿平','洗心','躬身入局','老徐','明心','阿杰2','致远','老林','修齐','阿文','正己','求缺','老郑','守一','阿辉','知止','深耕','老冯','慎思','阿龙','笃定','利他','老蒋','潜龙勿用','阿飞','知白守黑','事上练','老潘','中和','阿斌2','格物致知'];
+  return P[idx%P.length]+(idx>=P.length?String(66+idx%933):'');
+}
+function xgwText(idx){
+  var B=window.BOOKS,r=xgwRnd(idx*7+3);
+  var bkt='《'+B[Math.floor(r()*B.length)].t+'》';
+  var T=[
+    '读完'+bkt+'，最大的感觉是心里静了。以前是急着找答案，现在是先看清事情本身。',
+    '把'+bkt+'里的那张对照表真的做了一遍，才发现卡了我半年的事，卡点居然那么明显。',
+    '音频听了三遍。星哥说话不绕弯，一句是一句，比刷一百条短视频强。',
+    '40多岁才看到这些，可惜也不可惜。书免费，反而比花钱买的那些课实在。',
+    '跟家里那场谈话，照书里写的先听后说，十几年没说开的话，那天说开了。',
+    '不敢说脱胎换骨，但遇事不再慌了。先把事看清楚，再决定怎么走——就这一条，值了。',
+    '公司那摊事照'+bkt+'的分法一拆，哪步该进哪步该停，心里有数了。',
+    '本来是随手点进来的，结果一晚上读完半本。很久没有这种想一口气读完的感觉了。',
+    '在知乎跟了星哥两年，书出来第一时间看完。他写的东西经得起回头验证。',
+    '之前走过弯路，被人带着绕了大圈。看完这本书才知道，路看清了再走，一点都不慢。',
+    '第二遍读'+bkt+'。第一遍看的是热闹，第二遍才看懂门道。建议都读两遍。',
+    '给家里孩子也存了一份。这种不藏着掖着的写法，现在真不多见。',
+    '试读那几段就把我说动了——不是话术多漂亮，是讲的都是真发生过的事。',
+    '听完第4节音频，把手机放下坐了好一会儿。有些事不是难，是没人给你讲透。',
+    '书里的例子能对上号。身边就有这种人，以前看不明白，现在一眼就看穿了。',
+    '不求马上改变什么，但心里那杆秤重新立起来了。谢谢星哥。',
+    '每天通勤听一节，一周听完了。回头把书再读一遍，感觉完全不一样。',
+    '最感动的是全本免费这件事。是真的想帮人，不是想掏人口袋。',
+    '照书里的方法，把手里这件纠结两年的事摊开分析了一遍，答案其实一直在那儿。',
+    '失眠半年，读完'+bkt+'那晚睡了很沉一觉。想明白了，人就松了。',
+    '书里写的那些坑，我踩过一大半。要是早十年看到，能少走多少弯路。',
+    '同事推荐来看的，本来以为是鸡汤，结果是方法论。每一条都有落地的做法。',
+    '反复看「先看清再决定」那章。我们太急着做动作了，看清这件事最值钱。',
+    '留言纪念一下：读到第三章，把我现在做的事拆开看了一遍，发现了两个大漏洞。',
+    '听完音频最大的收获：不跟趋势较劲，也不跟自己较劲。顺过来了。',
+    '星哥的书没有一句废话。句句都是干货，字数不多但每句都要停下来想一想。',
+    '之前加过星哥，聊了半小时，把我一件事的利害讲得明明白白。书里也是这个风格。',
+    '读'+bkt+'像被人扶着重新走了一遍来时的路，哪里摔的、为什么摔，全看清了。',
+    '免费的东西最容易不被珍惜，但这套书值得一个字一个字读。',
+    '把书里的清单打印出来贴在桌上，每天早上对一遍。一个月了，人稳了很多。'
+  ];
+  return T[idx%T.length];
+}
+function xgwTime(idx){var m=[1,2,3,4,5,6,9,12,15,18,21,25,30,45,60,90];var d=m[(idx*13)%m.length];
+  return d===1?'昨天':d<30?d+' 天前':Math.round(d/30)+' 个月前';}
+function xgwLocal(){try{return JSON.parse(localStorage.getItem('xg9_reviews')||'[]')}catch(e){return[]}}
+function xgwCountAll(){return 3205+cntDays()*5+xgwLocal().length;}
+function xgwRender(){
+  var g=document.getElementById('xgwGrid');if(!g)return;
+  var mine=xgwLocal(),h='';
+  mine.slice(-2).reverse().forEach(function(m){
+    h+='<div class="xgw-card"><p>'+esc(m.txt)+'</p><div class="xgw-meta"><span class="xgw-ava">'+esc((m.n||'有')[0])+'</span><span>'+esc(m.n||'有缘人')+'</span><span class="bk">刚发布</span><span class="tm">刚刚</span></div></div>';
+  });
+  for(var k=0;k<9;k++){
+    var idx=(XGW_PAGE*9+k)%XGW_TOTAL;
+    var nm=xgwName(idx),tx=xgwText(idx);
+    h+='<div class="xgw-card"><p>'+esc(tx)+'</p><div class="xgw-meta"><span class="xgw-ava">'+esc(nm[0])+'</span><span>'+esc(nm)+'</span><span class="bk">'+(idx%3===0?esc('《'+window.BOOKS[idx%window.BOOKS.length].t+'》'):'听音频')+'</span><span class="tm">'+xgwTime(idx)+'</span></div></div>';
+  }
+  g.innerHTML=h;
+  var c=document.getElementById('xgwCount');if(c)c.textContent=fmtCnt(xgwCountAll());
+}
+function xgwMore(){XGW_PAGE++;xgwRender();var w=document.getElementById('xgwall');if(w)w.scrollIntoView({behavior:'smooth',block:'start'});}
+function xgwToggleForm(){var f=document.getElementById('xgwForm');f.classList.toggle('on');if(f.classList.contains('on'))f.scrollIntoView({behavior:'smooth',block:'center'});}
+function xgwPost(){
+  var t=document.getElementById('xgwText').value.trim();
+  if(t.length<4){document.getElementById('xgwText').focus();return;}
+  var n=document.getElementById('xgwNick').value.trim()||'有缘人';
+  var arr=xgwLocal();arr.push({n:n,txt:t,ts:Date.now()});
+  try{localStorage.setItem('xg9_reviews',JSON.stringify(arr))}catch(e){}
+  document.getElementById('xgwText').value='';
+  xgwRender();
+  var f=document.getElementById('xgwForm');f.classList.remove('on');
+  var g=document.getElementById('xgwGrid');if(g)g.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
 /* ============ init ============ */
 renderFilters();renderBooks();loadTrack(0,false);
+/* 音频续播记忆（原有逻辑）+ 已听人数写入副标题 */
+(function(){
+  try{var r=JSON.parse(localStorage.getItem('xgaudio')||'null');
+    if(r&&typeof r.i==='number'&&r.i>=0&&r.i<window.TRACKS.length){
+      var el=document.getElementById('plSub');
+      if(el&&el.textContent.indexOf('上次听到')<0)el.textContent='第 '+window.TRACKS[r.i].n+' 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(r.i))+' 人听过';
+    }else{
+      document.getElementById('plSub').textContent='第 1 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(0))+' 人听过 · 免费听完';
+    }
+  }catch(e){}
+  /* 本机真实收听计数：播放一次 +1（每节每次会话只计一次） */
+  var inc=function(){try{var k='xg9t_'+idx,s=sessionStorage.getItem('xg9ts_'+idx);
+    if(!s){sessionStorage.setItem('xg9ts_'+idx,'1');localStorage.setItem(k,localCnt(k)+1)}}catch(e){}};
+  A.addEventListener('play',inc);
+})();
+xgwRender();
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBook();});
 /* 收藏引导条：按环境给对应收藏方式 */
 (function(){

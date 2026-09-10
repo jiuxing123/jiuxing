@@ -144,8 +144,8 @@
     head.innerHTML = '<div style="min-width:0"><div style="font-size:15px;font-weight:800;color:#f0e9de">分享这本书</div>' +
       '<div style="font-size:11.5px;color:#8a7f70;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + BOOK_TITLE + ' · 全本免费</div></div>';
     var x = document.createElement('button');
-    x.textContent = '✕';
-    x.style.cssText = 'flex:none;background:#332c24;color:#a2968a;border:none;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:14px';
+    x.textContent = '✕ 关闭';
+    x.style.cssText = 'flex:none;background:#332c24;color:#f0e9de;border:1px solid #4a4238;border-radius:99px;padding:7px 14px;cursor:pointer;font-size:12.5px;font-weight:700';
     x.onclick = closePanel;
     head.appendChild(x);
     sheet.appendChild(head);
