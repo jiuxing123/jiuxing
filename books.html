@@ -337,7 +337,10 @@ body{background:#07070B}
   .pod .cover{width:56px;--k:.636}
   .pod h3{font-size:14.5px;margin:0 0 4px}
   .pod .hook{display:none}
-  .pod .facts{display:none}
+  /* TOP3 补齐数据行（与书墙对齐）：只留「章数+阅读次数」，防挤截断 */
+  .pod .facts{display:flex;flex-wrap:nowrap;gap:5px;margin-top:8px;font-size:10px}
+  .pod .facts span{padding:3px 7px;white-space:nowrap}
+  .pod .facts span:nth-child(2),.pod .facts span:nth-child(3){display:none}
   .pod .go{margin-top:6px;font-size:12px}
   .medal{margin-bottom:8px;padding:3px 9px;font-size:10.5px}
   .pod .ranknum{font-size:34px;right:12px;top:10px}
@@ -374,8 +377,9 @@ body{background:#07070B}
   .rk .cover{width:74%;margin:3px auto 0;--k:.84}
   .rk .mid{width:100%;flex:none}
   .rk h4{white-space:normal;font-size:12px;line-height:1.35;min-height:32px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .rk .meta{font-size:9.5px;gap:4px;justify-content:center;flex-wrap:nowrap;overflow:hidden}
-  .rk .meta i{padding:2px 4px;white-space:nowrap}
+  .rk .meta{font-size:9.5px;gap:4px;justify-content:center;flex-wrap:wrap;overflow:visible}
+  .rk .meta i{padding:2px 6px;white-space:nowrap}
+  .rk .meta span+span{display:none}/* 字数隐藏，防三行挤压截断 */
 }
 @media(max-width:400px){
   .rk .cover{--k:.8}
@@ -435,6 +439,9 @@ body{background:#07070B}
   .xgwall-grid{grid-template-columns:1fr}
   .xgwall-head b{font-size:17px}
   .xgw-card p{font-size:13px}
+  /* 留言面板：chips 一排 3 个，压缩链路 */
+  .fxg-chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .fxg-chips button{padding:8px 4px;font-size:11.5px;text-align:center}
   /* 移动端链路控制：只展示 5 条，其余靠「换一批」轮换 */
   .xgw-card:nth-child(n+6){display:none}
 }
@@ -488,6 +495,11 @@ body{background:#07070B}
 <div id="resume"></div>
 <div id="swipehint" onclick="document.getElementById('xgwall').scrollIntoView({behavior:'smooth'})"><i>↓</i> 往下滑 · 好多人在这儿看书聊书</div>
 
+<div class="tabs">
+  <button id="tab-books" class="on" onclick="switchTab('books')">📚 内部著作榜 TOP 19</button>
+  <button id="tab-audio" onclick="switchTab('audio')">🎧 闭门音频课 10 节</button>
+</div>
+
 <!-- 缘友留言墙 -->
 <div class="xgwall" data-xg-track="books.wall.view" id="xgwall">
   <div class="xgwall-head">
@@ -511,11 +523,6 @@ body{background:#07070B}
     <button class="post" data-xg-track="books.wall.post" onclick="xgwToggleForm()">✍️ 写留言</button>
     <button class="more" data-xg-track="books.wall.more" onclick="xgwMore()">换一批</button>
   </div>
-</div>
-
-<div class="tabs">
-  <button id="tab-books" class="on" onclick="switchTab('books')">📚 内部著作榜 TOP 19</button>
-  <button id="tab-audio" onclick="switchTab('audio')">🎧 闭门音频课 10 节</button>
 </div>
 
 <!-- 右侧浮动切换标（移动端，滑过首屏后出现；外层裁剪容器防横向溢出） -->
@@ -927,7 +934,7 @@ function loadMobileEnv(n){
   if(!AC)return;
   try{
     var dc=new AC();
-    fetch(A.src,{headers:{Range:'bytes=0-4194303'}}).then(function(r){return r.arrayBuffer()}).then(function(buf){
+    fetch(A.src,{headers:{Range:'bytes=0-6291455'}}).then(function(r){return r.arrayBuffer()}).then(function(buf){
       return new Promise(function(res,rej){var q=dc.decodeAudioData(buf,res,rej);if(q&&q.then)q.then(res,rej);});
     }).then(function(d){
       var ch=d.getChannelData(0),sr=d.sampleRate,win=Math.floor(sr*ENV_STEP),env=[];
@@ -952,14 +959,18 @@ function fakeSpec(){
     for(var i=0;i<bars.length;i++){
       var target=4;
       if(playing){
+        var v=0,shape=1-i/bars.length*.72;/* 低频高→高频低，对标电脑端频域走势 */
         if(mobileEnv&&mobileEnv.length){
           var vi=Math.floor(A.currentTime/ENV_STEP);
-          if(vi>=mobileEnv.length)vi=mobileEnv.length-1;
-          var v=mobileEnv[vi]||0;
-          target=4+v*40*(0.72+0.28*Math.abs(Math.sin(i*.9+t*.7)));
-        }else{
-          target=6+Math.abs(Math.sin(t*.8+i*.33))*18+Math.abs(Math.sin(t*2.1+i*.71))*10;
+          if(vi<0)vi=0;
+          if(vi<mobileEnv.length)v=mobileEnv[vi]||0;
         }
+        if(!v){/* 包络未覆盖段（加载中/超首屏6MB尾部）：合成语音节奏包络，永不定死 */
+          var g=(Math.abs(Math.sin(t*.53))+Math.abs(Math.sin(t*.31+1.7)))*.5;
+          var burst=.3+.55*Math.abs(Math.sin(t*1.35+i*.17));
+          v=Math.min(1,g*burst*2.1);
+        }
+        target=4+v*40*(0.6+0.4*Math.abs(Math.sin(i*.9+t*.7)))*shape;
       }
       cur[i]+=(target-cur[i])*.45;
       if(cur[i]<4)cur[i]=4;
@@ -1152,7 +1163,8 @@ function xgwLocal(){try{return JSON.parse(localStorage.getItem('xg9_reviews')||'
 function xgwCountAll(){return 1024+cntDays()*25+xgwLocal().length;}
 function xgwRender(){
   var g=document.getElementById('xgwGrid');if(!g)return;
-  var mine=xgwLocal(),h='';
+  /* 真留言只在第一页展示最新的（不永久置顶），换一批后自然汇入流里 */
+  var mine=XGW_PAGE===0?xgwLocal():[],h='';
   mine.slice(-2).reverse().forEach(function(m){
     h+='<div class="xgw-card"><p>'+esc(m.txt)+'</p><div class="xgw-meta"><span class="xgw-ava">'+esc((m.n||'有')[0])+'</span><span>'+esc(m.n||'有缘人')+'</span><span class="bk">'+esc(m.tag||'🎧 听音频')+'</span><span class="tm">刚刚</span></div></div>';
   });
@@ -1166,7 +1178,9 @@ function xgwRender(){
   var c=document.getElementById('xgwCount');if(c)c.textContent=fmtCnt(xgwCountAll());
 }
 function xgwMore(){XGW_PAGE++;xgwRender();var w=document.getElementById('xgwall');if(w)w.scrollIntoView({behavior:'smooth',block:'start'});}
-function xgwToggleForm(){var f=document.getElementById('xgwForm');f.classList.toggle('on');if(f.classList.contains('on'))f.scrollIntoView({behavior:'smooth',block:'center'});}
+function xgwToggleForm(){var f=document.getElementById('xgwForm');f.classList.toggle('on');
+  if(!f.classList.contains('on')){try{sessionStorage.setItem('xgwfClosed','1')}catch(e){}}
+  else{try{sessionStorage.removeItem('xgwfClosed')}catch(e){}f.scrollIntoView({behavior:'smooth',block:'center'})}}
 /* ===== 选项式留言：选谁 + 选收获 → 自动成句 ===== */
 var XGW_SEL={about:'',gain:''};
 var XGW_GAINS=['心里静多了','卡住的事看清了','知道下一步怎么走了','跟家里把话说开了','方法马上能用上','遇事不慌了','值得读第二遍','想对星哥说声谢谢'];
@@ -1224,6 +1238,7 @@ function xgwPost(){
 function xgwFromAudio(){
   XGW_SEL.about='🎧 听音频';
   xgwChipsRender();xgwPreviewUpdate();
+  try{sessionStorage.removeItem('xgwfClosed')}catch(e){}
   var f=document.getElementById('xgwForm');
   if(!f.classList.contains('on'))f.classList.add('on');
   var w=document.getElementById('xgwall');if(w)w.scrollIntoView({behavior:'smooth',block:'start'});
@@ -1254,9 +1269,11 @@ renderFilters();renderBooks();loadTrack(0,false);
   A.addEventListener('play',inc);
 })();
 xgwRender();xgwChipsRender();xgwPreviewUpdate();
-/* 书页跳转预选/锚点：自动打开表单并滚到留言墙（只滚动，不重载） */
+/* 书页跳转预选/锚点：自动打开表单并滚到留言墙（只滚动，不重载）
+ * 表单一旦被用户手动收起（xgwfClosed），本次会话不再自动展开——避免回访被撑长链路 */
 (function(){
-  if(XGW_SEL.about){
+  var dismissed=false;try{dismissed=!!sessionStorage.getItem('xgwfClosed')}catch(e){}
+  if(XGW_SEL.about&&!dismissed){
     var f=document.getElementById('xgwForm');
     if(!f.classList.contains('on'))f.classList.add('on');
   }

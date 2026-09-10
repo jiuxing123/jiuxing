@@ -968,14 +968,15 @@ var WX_STAGES=[0.2,0.4,0.6,0.8,0.95],wxLast=0,wxOpen=false;
 var WX5=["进阶梯的部分了。《封神阶梯》讲的是路径设计：选赛道、攒信用、把一次成功变成系统。前半段打底子，别急。","读到40%了。很多人到路径设计这章就停了，但差距真正拉开在后半段——别停，接着往下。","过半了。阶梯在书里，你自己第一级台阶踩哪儿，书里没有。如果正卡在一件事上，把情况直接发星哥，看到了会认真回。","80%了。选赛道、攒信用、变成系统——这套底层逻辑你已经拿到手。星哥看事有个习惯：先看你手里有什么牌，再谈怎么打。","《封神阶梯》快读完了。读完和读懂之间差一层：把你面对的事摆出来，让星哥对着书帮你过一遍。"];
 window.xgWxCheck=function(pct){
   if(wxOpen)return;
-  try{if(sessionStorage.getItem("xgwxClosed"))return}catch(e){}
   var now=Date.now();if(now-wxLast<120000)return;
-  for(var s=0;s<WX_STAGES.length;s++){var st=WX_STAGES[s];
-    if(pct>=st){
-      var k="xgwx_"+st;
-      var fired=false;try{fired=!!sessionStorage.getItem(k)}catch(e){}
-      if(!fired){try{sessionStorage.setItem(k,"1")}catch(e){}wxLast=now;wxOpen=true;xgWxShow(st,s);break;}
-    }
+  var best=-1;
+  for(var s=0;s<WX_STAGES.length;s++){if(pct>=WX_STAGES[s]){
+    var fired=false;try{fired=!!sessionStorage.getItem("xgwx_"+WX_STAGES[s])}catch(e){}
+    if(!fired)best=s;
+  }}
+  if(best>-1){
+    for(var s2=0;s2<WX_STAGES.length;s2++){if(pct>=WX_STAGES[s2]){try{sessionStorage.setItem("xgwx_"+WX_STAGES[s2],"1")}catch(e){}}}
+    wxLast=now;wxOpen=true;xgWxShow(WX_STAGES[best],best);
   }
 };
 function xgWxShow(st,si){
@@ -988,7 +989,7 @@ function xgWxShow(st,si){
     '<a href="' + WXU + '" target="_blank" rel="noopener" style="display:block;text-align:center;background:#e8b04b;color:#16130f;font-weight:800;font-size:14.5px;padding:12px;border-radius:10px;text-decoration:none">把我的情况发星哥 →</a>';
   document.body.appendChild(d);
   requestAnimationFrame(function(){d.style.transform="translateY(0)"});
-  function close(){d.style.transform="translateY(110%)";setTimeout(function(){d.remove()},380);wxOpen=false;try{sessionStorage.setItem("xgwxClosed","1")}catch(e){}}
+  function close(){d.style.transform="translateY(110%)";setTimeout(function(){d.remove()},380);wxOpen=false;}
   d.querySelector("#xgwxX").onclick=close;
   d.querySelector("a").onclick=function(){close()};
 }
@@ -1099,16 +1100,25 @@ function xgRefreshNoteBtn(){var b=document.getElementById("xgNoteBtn");if(b)b.te
   nb.onclick=xgNotesPanel;
   [w,nb].forEach(function(x){x.style.cssText="\"background:#332c24;color:#f0e9de;border:none;border-radius:6px;padding:6px 12px;font-size:12px;cursor:pointer;min-height:30px\"";bar.insertBefore(x,bar.firstChild);});
 })();
-/* ===== 书末卡「写留言」 ===== */
+/* ===== 书末卡按钮重排：星哥主按钮整行，再看一本+留言并排 ===== */
 (function(){
   var endCard=document.querySelector('div[style*="margin:36px auto 64px"]');
   if(!endCard)return;
   var a=document.createElement("a");
   a.textContent="💬 给星哥留句话";
-  a.style.cssText="display:inline-block;margin-left:14px;background:transparent;border:1px solid #4a4238;color:#e8dcc8;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;vertical-align:middle;cursor:pointer";
+  a.setAttribute("data-xg-track","book.wall.endcard");
   a.onclick=xgGoWall;
   var ref=endCard.querySelector("a[href*='books.html']");
-  if(ref&&ref.parentNode)ref.parentNode.insertBefore(a,ref.nextSibling);else endCard.appendChild(a);
+  var wx=endCard.querySelector("a[href*='wlfx8']");
+  if(wx){wx.style.cssText="display:block;text-align:center;box-sizing:border-box;width:100%;background:#e8b04b;color:#16130f;padding:13px 22px;border-radius:6px;text-decoration:none;font-weight:700;font-size:15px";}
+  if(ref){
+    var row=document.createElement("div");
+    row.style.cssText="display:flex;gap:12px;margin-top:12px";
+    ref.style.cssText="flex:1;text-align:center;box-sizing:border-box;background:transparent;border:1px solid #4a4238;color:#e8dcc8;padding:11px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:13.5px";
+    a.style.cssText="flex:1;text-align:center;box-sizing:border-box;background:transparent;border:1px solid #4a4238;color:#e8dcc8;padding:11px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:13.5px;cursor:pointer";
+    ref.parentNode.insertBefore(row,ref);
+    row.appendChild(ref);row.appendChild(a);
+  }else{a.style.cssText="display:block;text-align:center;margin-top:12px;background:transparent;border:1px solid #4a4238;color:#e8dcc8;padding:11px 20px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;cursor:pointer";endCard.appendChild(a);}
 })();
 })();</script><script>window.GOATCOUNTER_CODE='YOUR_GOATCOUNTER_CODE';/*注册 GoatCounter 后把占位符换成你的 site code，全站即生效*/</script>
 <script src="../assets/js/analytics.js"></script>
