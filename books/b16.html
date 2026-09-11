@@ -72,7 +72,74 @@ strong{ font-weight:700; }
   h2.chapter{ font-size:22px; }
   table{ display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
 }
-</style><style id="xgtopbar-css">@media(max-width:640px){body>div[style*="position:sticky"]{padding:8px 10px!important;gap:5px!important}body>div[style*="position:sticky"]>a{font-size:12px!important;white-space:nowrap}body>div[style*="position:sticky"] span[style*="flex:1"]{font-size:10.5px!important}body>div[style*="position:sticky"] span[style*="flex:none"]{gap:4px!important}body>div[style*="position:sticky"] span[style*="flex:none"] button{padding:5px 7px!important;font-size:11px!important;min-height:26px!important;border-radius:5px!important}}</style></head>
+</style><style id="xgtopbar-css">@media(max-width:640px){body>div[style*="position:sticky"]{padding:8px 10px!important;gap:5px!important}body>div[style*="position:sticky"]>a{font-size:12px!important;white-space:nowrap}body>div[style*="position:sticky"] span[style*="flex:1"]{font-size:10.5px!important}body>div[style*="position:sticky"] span[style*="flex:none"]{gap:4px!important}body>div[style*="position:sticky"] span[style*="flex:none"] button{padding:5px 7px!important;font-size:11px!important;min-height:26px!important;border-radius:5px!important}}</style><script id="xg9_poly">/* 星哥书城 · 老安卓内核兼容垫片（ES5，防御式 polyfill）
+ * 目标：微信 X5 老内核 / Android 5-6 未升级 WebView / Chrome 30-60
+ * 缺失 API 会导致脚本顶层抛错→书页所有交互（段评点/设置/分享/笔记）全灭
+ * 本文件被 inject_progress.js 内联进书页 <head>，也内联进 books.html */
+(function () {
+  var AP = Array.prototype, SP = String.prototype;
+
+  /* NodeList.forEach（Chrome<51 缺失，最常见杀手） */
+  if (window.NodeList && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = function (cb, ctx) {
+      ctx = ctx || window;
+      for (var i = 0; i < this.length; i++) cb.call(ctx, this[i], i, this);
+    };
+  }
+  /* HTMLCollection forEach 同理 */
+  if (window.HTMLCollection && !HTMLCollection.prototype.forEach) {
+    HTMLCollection.prototype.forEach = NodeList.prototype.forEach;
+  }
+
+  if (!AP.includes) AP.includes = function (x) { var t = Object(this); if (t.length === 0) return false; return Array.prototype.indexOf.call(t, x) > -1; };
+  if (!AP.find) AP.find = function (cb, ctx) { for (var i = 0; i < this.length; i++) { if (cb.call(ctx || this, this[i], i, this)) return this[i]; } };
+  if (!AP.findIndex) AP.findIndex = function (cb, ctx) { for (var i = 0; i < this.length; i++) { if (cb.call(ctx || this, this[i], i, this)) return i; } return -1; };
+
+  if (!SP.includes) SP.includes = function (s) { return this.indexOf(String(s)) > -1; };
+  if (!SP.startsWith) SP.startsWith = function (s) { return this.indexOf(String(s)) === 0; };
+  if (!SP.endsWith) SP.endsWith = function (s) { var t = String(s); return this.indexOf(t, this.length - t.length) !== -1; };
+  if (!SP.repeat) SP.repeat = function (n) { var out = ''; n = n | 0; while (n--) out += this; return out; };
+  if (!SP.padStart) SP.padStart = function (n, s) { var t = String(this); s = s == null ? ' ' : String(s); while (t.length < n) t = s.slice(0, n - t.length) + t; return t; };
+  if (!SP.padEnd) SP.padEnd = function (n, s) { var t = String(this); s = s == null ? ' ' : String(s); while (t.length < n) t += s.slice(0, n - t.length); return t; };
+
+  if (!Object.assign) Object.assign = function (t) { if (t == null) throw TypeError; for (var i = 1; i < arguments.length; i++) { var s = arguments[i]; if (s) for (var k in s) if (Object.prototype.hasOwnProperty.call(s, k)) t[k] = s[k]; } return t; };
+  if (!Object.entries) Object.entries = function (o) { var out = []; for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) out.push([k, o[k]]); return out; };
+  if (!Object.values) Object.values = function (o) { var out = []; for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) out.push(o[k]); return out; };
+  if (!Number.isInteger) Number.isInteger = function (x) { return typeof x === 'number' && isFinite(x) && Math.floor(x) === x; };
+
+  /* Array.from：覆盖 array-like 与 iterator 两种用法 */
+  if (!Array.from) Array.from = function (a) {
+    if (a == null) return [];
+    var out = [];
+    if (a.length != null && typeof a !== 'string') { for (var i = 0; i < a.length; i++) out.push(a[i]); return out; }
+    if (typeof a === 'string') { for (var j = 0; j < a.length; j++) out.push(a[j]); return out; }
+    try { var it = a[typeof Symbol !== 'undefined' ? Symbol.iterator : '@@iterator']; if (it) { var r = it.call(a), step; while ((step = r.next()) && !step.done) out.push(step.value); } } catch (e) {}
+    return out;
+  };
+
+  function ownMatches(el, sel) {
+    var p = el.parentNode || el.document || el.ownerDocument;
+    if (!p) return false;
+    var all = p.querySelectorAll(sel);
+    for (var i = 0; i < all.length; i++) if (all[i] === el) return true;
+    return false;
+  }
+  if (window.Element) {
+    if (!Element.prototype.matches) Element.prototype.matches = Element.prototype.matchesSelector || Element.prototype.webkitMatchesSelector || Element.prototype.msMatchesSelector || Element.prototype.mozMatchesSelector || function (sel) { return ownMatches(this, sel); };
+    if (!Element.prototype.closest) Element.prototype.closest = function (sel) { var el = this; while (el && el.nodeType === 1) { if (el.matches(sel)) return el; el = el.parentNode; } return null; };
+    if (!Element.prototype.remove) Element.prototype.remove = function () { if (this.parentNode) this.parentNode.removeChild(this); };
+    if (!Element.prototype.append) Element.prototype.append = function () { for (var i = 0; i < arguments.length; i++) { var a = arguments[i]; this.appendChild(a instanceof Node ? a : document.createTextNode(String(a))); } };
+    if (!Element.prototype.prepend) Element.prototype.prepend = function () { for (var i = arguments.length - 1; i >= 0; i--) { var a = arguments[i]; this.insertBefore(a instanceof Node ? a : document.createTextNode(String(a)), this.firstChild); } };
+    if (!Element.prototype.scrollIntoViewIfNeeded) Element.prototype.scrollIntoViewIfNeeded = Element.prototype.scrollIntoViewIfNeeded || function (c) { try { this.scrollIntoView(c !== false); } catch (e) {} };
+  }
+  /* scrollTo 平滑对象参数在老内核降级为直接跳转，不报错 */
+  if (window.scrollTo && navigator && /Trident|MSIE/.test(navigator.userAgent || '')) {
+    var _st = window.scrollTo;
+    window.scrollTo = function (a, b) { if (a && typeof a === 'object') { _st(a.left != null ? a.left : a.top, a.top != null ? a.top : a.left); } else _st(a, b); };
+  }
+})();
+</script>
+</head>
 <body><div id="xgprog" style="position:fixed;top:0;left:0;height:3px;width:0;background:#e8b04b;z-index:99"></div><div style="position:sticky;top:0;z-index:50;background:#16130fee;border-bottom:1px solid #332c24;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;backdrop-filter:blur(6px)"><a href="../books.html" style="color:#e8b04b;text-decoration:none;font-size:14px;font-weight:700;flex:none">← 返回书库</a><span style="color:#a2968a;font-size:12px;flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">《世界的真相》 · 全本免费</span></div><div class="page cover">
 <span class="series">星哥实战成长与创业系列</span>
 <h1>世界的真相</h1>
