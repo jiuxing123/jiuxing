@@ -884,7 +884,7 @@ function pgToPlayer(){var v=document.getElementById('vinyl');if(v)setTimeout(fun
 if(location.hash==='#audio'){setTimeout(function(){switchTab('audio');},60);}
 
 /* ============ AUDIO ============ */
-var A=new Audio();A.preload='none';
+var A=new Audio();A.preload='metadata';/* 起播热身：先拉头部元数据，点击后起播更快 */
 var idx=0,rates=[1,1.25,1.5,0.75],ri=0,loopAll=true,started=false;
 var ctx=null,analyser=null,freq=null,bars=[];
 
@@ -915,11 +915,11 @@ function loadTrack(n,auto){
   idx=(n+window.TRACKS.length)%window.TRACKS.length;
   var t=window.TRACKS[idx];
   if(IS_MOBILE)loadMobileEnv(idx);
-  A.src='assets/audio/track'+t.n+'.mp3';
-  A.load();
+  A.src='assets/audio/track'+t.n+'.mp3';/* 不调 A.load()：play() 隐式加载，避免重复请求打断已缓冲数据 */
+  var subEl=document.getElementById('plSub');subEl.removeAttribute('data-orig');
   document.getElementById('plTag').textContent=t.tag.split('').join(' ');
   document.getElementById('plTitle').textContent=t.t;
-  document.getElementById('plSub').textContent='第 '+t.n+' 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(idx))+'次收听 · 免费听完';
+  subEl.textContent='第 '+t.n+' 节 / 共 '+window.TRACKS.length+' 节 · '+fmtCnt(tkCount(idx))+'次收听 · 免费听完';
   document.getElementById('tDur').textContent=fmt(t.d);
   document.getElementById('miniTitle').textContent=t.t;
   document.getElementById('miniSub').textContent='第 '+t.n+' 节 · '+t.tag;
@@ -965,6 +965,15 @@ A.addEventListener('timeupdate',function(){
 A.addEventListener('ended',function(){if(loopAll)nextTrack();});
 A.addEventListener('error',function(){
   if(A.src){document.getElementById('plSub').textContent='⚠ 音频加载失败，请刷新后重试';}
+});
+/* 缓冲感知：waiting 时明示「正在加载」，消除「点了没反应像卡死」的感觉 */
+A.addEventListener('waiting',function(){
+  var el=document.getElementById('plSub');
+  if(el&&!el.getAttribute('data-orig')){el.setAttribute('data-orig',el.textContent);el.textContent='正在加载，马上就好…';}
+});
+A.addEventListener('playing',function(){
+  var el=document.getElementById('plSub');
+  if(el&&el.getAttribute('data-orig')){el.textContent=el.getAttribute('data-orig');el.removeAttribute('data-orig');}
 });
 
 function setFill(p){
@@ -1356,6 +1365,14 @@ renderFilters();renderBooks();loadTrack(0,false);
   A.addEventListener('play',inc);
 })();
 xgwRender();xgwChipsRender();xgwPreviewUpdate();
+/* 秒播预热：空闲时后台预取当前曲（续播曲或第1节）头部 1MB 进 HTTP 缓存，
+ * 用户点击起播的 Range 请求直接命中缓存，省掉 1-3 秒首包+缓冲沉默 */
+setTimeout(function(){
+  try{
+    var t0=window.TRACKS[idx];
+    fetch('assets/audio/track'+t0.n+'.mp3',{headers:{Range:'bytes=0-1048575'}}).catch(function(){});
+  }catch(e){}
+},2500);
 /* 书页跳转预选/锚点：自动打开表单并滚到留言墙（只滚动，不重载）
  * 表单一旦被用户手动收起（xgwfClosed），本次会话不再自动展开——避免回访被撑长链路 */
 (function(){
