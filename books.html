@@ -443,9 +443,12 @@ body{background:#07070B}
   .xgw-card{padding:10px 11px;border-radius:12px}
   .xgw-card p{font-size:12px;line-height:1.6;margin:0 0 7px;
     display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
-  .xgw-meta{font-size:10.5px;gap:5px}
+  /* meta 两行整齐排：行1 头像+昵称+时间（都不换行），行2 书名标签缩进对齐 */
+  .xgw-meta{font-size:10.5px;gap:4px 5px;flex-wrap:wrap}
   .xgw-ava{width:18px;height:18px;font-size:9px}
-  .xgw-meta .bk{max-width:60px}
+  .xgw-meta>span:nth-child(2){flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .xgw-meta .bk{flex:0 0 100%;max-width:100%;order:3;padding-left:23px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .xgw-meta .tm{margin-left:auto}
   /* 留言面板：chips 一排 3 个，压缩链路 */
   .fxg-chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
   .fxg-chips button{padding:8px 4px;font-size:11.5px;text-align:center}
