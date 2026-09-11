@@ -72,7 +72,8 @@ strong{ font-weight:700; }
   h2.chapter{ font-size:22px; }
   table{ display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
 }
-</style><style id="xgtopbar-css">@media(max-width:640px){body>div[style*="position:sticky"]{padding:8px 10px!important;gap:5px!important}body>div[style*="position:sticky"]>a{font-size:12px!important;white-space:nowrap}body>div[style*="position:sticky"] span[style*="flex:1"]{font-size:10.5px!important}body>div[style*="position:sticky"] span[style*="flex:none"]{gap:4px!important}body>div[style*="position:sticky"] span[style*="flex:none"] button{padding:5px 7px!important;font-size:11px!important;min-height:26px!important;border-radius:5px!important}}</style><script id="xg9_poly">/* 星哥书城 · 老安卓内核兼容垫片（ES5，防御式 polyfill）
+</style><style id="xgtopbar-css">@media(max-width:640px){body>div[style*="position:sticky"]{padding:8px 10px!important;gap:5px!important}body>div[style*="position:sticky"]>a{font-size:12px!important;white-space:nowrap}body>div[style*="position:sticky"] span[style*="flex:1"]{font-size:10.5px!important}body>div[style*="position:sticky"] span[style*="flex:none"]{gap:4px!important}body>div[style*="position:sticky"] span[style*="flex:none"] button{padding:5px 7px!important;font-size:11px!important;min-height:26px!important;border-radius:5px!important}}</style>
+<script id="xg9_poly">/* 星哥书城 · 老安卓内核兼容垫片（ES5，防御式 polyfill）
  * 目标：微信 X5 老内核 / Android 5-6 未升级 WebView / Chrome 30-60
  * 缺失 API 会导致脚本顶层抛错→书页所有交互（段评点/设置/分享/笔记）全灭
  * 本文件被 inject_progress.js 内联进书页 <head>，也内联进 books.html */
@@ -1245,7 +1246,7 @@ var sv=getSaved();
 if(sv){setTimeout(function(){
   try{var p=document.querySelector(".xgpill");if(p)p.remove()}catch(e){}
   window.scrollTo(0,sv.y);
-  if(sv.pct){try{for(var s=0;s<WX_STAGES.length;s++){if(sv.pct>=WX_STAGES[s])sessionStorage.setItem("xgwx_"+WX_STAGES[s],"1")}}catch(e){}}
+  if(sv.pct){try{for(var s=0;s<WX_STAGES.length;s++){if(sv.pct>=WX_STAGES[s])sessionStorage.setItem("xgwxd_"+s,"1")}}catch(e){}}
   var t=document.createElement("div");
   t.textContent="已回到上次读到的地方"+(sv.pct?" · 已读 "+Math.round(sv.pct*100)+"%":"");
   t.style.cssText="position:fixed;top:54px;left:50%;transform:translateX(-50%);z-index:98;background:#e8b04b;color:#16130f;font-weight:700;font-size:12.5px;padding:7px 16px;border-radius:99px;box-shadow:0 4px 16px rgba(0,0,0,.4);opacity:0;transition:opacity .3s;white-space:nowrap";
@@ -1260,23 +1261,24 @@ window.addEventListener("scroll",function(){clearTimeout(tk2);tk2=setTimeout(fun
   if(st>500){try{localStorage.setItem(KEY2,JSON.stringify({y:Math.round(window.scrollY),pct:curPct,ts:Date.now()}))}catch(e){}}
   try{xgWxCheck(curPct)}catch(e){}
 },250);},{passive:true});
-/* ===== 微信引导卡×5（20/40/60/80/95%，话术按书定制） ===== */
+setTimeout(function(){try{xgWxCheck((function(){var h=document.documentElement;var mx=h.scrollHeight-h.clientHeight;return mx>0?(h.scrollTop||document.body.scrollTop)/mx:0})())}catch(e){}},1200);
+/* ===== 微信引导卡×5（20/40/60/80/95%，话术按书定制；漏档排队逐张补弹，保证每本5次） ===== */
 var WXU="https://n.wlfx8.cn/362e9f";
-var WX_STAGES=[0.2,0.4,0.6,0.8,0.95],wxLast=0,wxOpen=false;
+var WX_STAGES=[0.2,0.4,0.6,0.8,0.95],wxOpen=false,wxQueue=[];
 var WX5=["带人不是管人——能读进这句话，你已经领先多数带团队的人了。慢慢看，后面是核心。","读到40%了。「让一群人把事做成」那几章，建议对着手下的团队读——每句都是你想说没说出来的。","过半了。逻辑在书里，你手下那几个具体的人，书里没有。如果正为带人头疼，把情况发给星哥。","80%了。让一群人把事做成、而不是把一群人管住——这个骨架你已经拿到了。","《带人做事的底层逻辑》快读完了。读完和带得好之间差一层：把你团队的具体情况跟星哥聊一遍。"];
+function wxMark(s){try{sessionStorage.setItem("xgwxd_"+s,"1")}catch(e){}}
+function wxHit(s){try{return !!sessionStorage.getItem("xgwxd_"+s)}catch(e){return false}}
 window.xgWxCheck=function(pct){
   if(wxOpen)return;
-  var now=Date.now();if(now-wxLast<120000)return;
-  var best=-1;
-  for(var s=0;s<WX_STAGES.length;s++){if(pct>=WX_STAGES[s]){
-    var fired=false;try{fired=!!sessionStorage.getItem("xgwx_"+WX_STAGES[s])}catch(e){}
-    if(!fired)best=s;
-  }}
-  if(best>-1){
-    for(var s2=0;s2<WX_STAGES.length;s2++){if(pct>=WX_STAGES[s2]){try{sessionStorage.setItem("xgwx_"+WX_STAGES[s2],"1")}catch(e){}}}
-    wxLast=now;wxOpen=true;xgWxShow(WX_STAGES[best],best);
-  }
+  var miss=[];
+  for(var s=0;s<WX_STAGES.length;s++){if(pct>=WX_STAGES[s]&&!wxHit(s))miss.push(s);}
+  if(!miss.length)return;
+  wxQueue=miss;wxNext();
 };
+function wxNext(){
+  if(wxOpen)return;
+  while(wxQueue.length){var s=wxQueue.shift();if(wxHit(s))continue;wxMark(s);wxOpen=true;xgWxShow(WX_STAGES[s],s);return;}
+}
 function xgWxShow(st,si){
   var d=document.createElement("div");
   d.setAttribute("data-xg-track","book.wx.pop");
@@ -1287,7 +1289,7 @@ function xgWxShow(st,si){
     '<a href="' + WXU + '" target="_blank" rel="noopener" style="display:block;text-align:center;background:#e8b04b;color:#16130f;font-weight:800;font-size:14.5px;padding:12px;border-radius:10px;text-decoration:none">把我的情况发星哥 →</a>';
   document.body.appendChild(d);
   requestAnimationFrame(function(){d.style.transform="translateY(0)"});
-  function close(){d.style.transform="translateY(110%)";setTimeout(function(){d.remove()},380);wxOpen=false;}
+  function close(){d.style.transform="translateY(110%)";setTimeout(function(){d.remove()},380);wxOpen=false;setTimeout(wxNext,450);}
   d.querySelector("#xgwxX").onclick=close;
   d.querySelector("a").onclick=function(){close()};
 }
