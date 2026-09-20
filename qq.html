@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<title>添加星哥QQ · 一对一陪跑</title>
+<meta name="robots" content="noindex">
+<meta property="og:title" content="添加星哥QQ · 一对一陪跑">
+<link rel="icon" href="assets/img/avatar.jpg">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    background:#07070B;color:#F5F3F8;
+    font-family:'PingFang SC','HarmonyOS Sans SC','Microsoft YaHei',-apple-system,system-ui,sans-serif;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom));overflow-x:hidden;
+  }
+  .box{width:100%;max-width:380px;position:relative;z-index:1;padding:26px 20px 22px;border-radius:24px;
+    background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 30px 80px rgba(0,0,0,.55);}
+  .qr{display:block;width:100%;max-width:300px;margin:0 auto 14px;border-radius:14px;
+    border:1px solid rgba(255,255,255,.14);box-shadow:0 16px 48px rgba(0,0,0,.5);}
+  h1{font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-.01em}
+  .sub{font-size:13.5px;color:#9E9AAD;line-height:1.7;margin-bottom:12px}
+  .no{display:inline-block;padding:8px 20px;border-radius:99px;
+    background:rgba(232,176,75,.12);border:1px solid rgba(232,176,75,.4);color:#e8b04b;
+    font-size:17px;font-weight:800;letter-spacing:.05em}
+  .btn{display:block;width:100%;margin-top:12px;padding:13px;border:none;border-radius:12px;
+    background:#e8b04b;color:#16130f;font-size:15.5px;font-weight:800;cursor:pointer;
+    font-family:inherit;text-decoration:none;}
+  .btn2{display:block;width:100%;margin-top:10px;padding:12px;border-radius:12px;
+    background:transparent;border:1px solid rgba(255,255,255,.22);color:#f0e9de;
+    font-size:14.5px;font-weight:700;cursor:pointer;text-decoration:none;}
+  .tip{margin-top:14px;font-size:12.5px;color:#6F6B82;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>添加星哥 QQ</h1>
+  <p class="sub">扫一扫下面的二维码，直接加我好友</p>
+  <img class="qr" src="assets/img/qq_qr.jpg" alt="星哥QQ二维码 天狼星 3072392021">
+  <br>
+  <span class="no">QQ：3072392021</span>
+  <button class="btn" id="copyBtn" type="button">一键复制QQ号</button>
+  <a class="btn2" id="openQQ" href="https://wpa.qq.com/msgrd?v=3&amp;uin=3072392021&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener">已装QQ？点这里直接打开 →</a>
+  <p class="tip">微信里打开：长按二维码 → 保存图片 → 打开QQ「扫一扫」选相册<br>或在QQ搜索框直接粘贴上面的号，备注来意通过更快</p>
+</div>
+<script>window.GOATCOUNTER_CODE='YOUR_GOATCOUNTER_CODE';/*注册 GoatCounter 后把占位符换成你的 site code，全站即生效*/</script>
+<script>
+/* 统计：QQ页打开 + 跳转尝试 */
+try{(function(){var C=window.GOATCOUNTER_CODE;
+if(C&&C!=='YOUR_GOATCOUNTER_CODE'){new Image().src='https://'+C+'.goatcounter.com/count?p=/qq-open&event=true&t='+encodeURIComponent(document.title);}})();}catch(e){}
+</script>
+<script>
+(function () {
+  var QQ_NO = '3072392021';
+  var UA = navigator.userAgent || '';
+  function inWeChat() { return /MicroMessenger/i.test(UA); }
+
+  /* 微信内置浏览器里 wpa 链接打不开：藏掉按钮，主推扫码+复制 */
+  if (inWeChat()) {
+    var o = document.getElementById('openQQ');
+    if (o) o.style.display = 'none';
+  }
+
+  /* 点击「打开QQ」时记一次统计 */
+  var open = document.getElementById('openQQ');
+  if (open) open.onclick = function () {
+    try{
+      if(window.GOATCOUNTER_CODE&&window.GOATCOUNTER_CODE!=='YOUR_GOATCOUNTER_CODE'){
+        new Image().src='https://'+window.GOATCOUNTER_CODE+'.goatcounter.com/count?p=/qq-jump&event=true';
+      }
+    }catch(e){}
+  };
+
+  /* 一键复制QQ号（老内核 execCommand 兜底） */
+  var btn = document.getElementById('copyBtn');
+  if (btn) btn.onclick = function () {
+    var ok = false;
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = QQ_NO;
+      ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta);
+      ta.select();
+      ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch (e) {}
+    if (!ok && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(QQ_NO);
+      ok = true;
+    }
+    btn.textContent = ok ? '已复制，去QQ粘贴搜索' : '复制失败，请手动输入';
+    setTimeout(function () { btn.textContent = '一键复制QQ号'; }, 2000);
+  };
+})();
+</script>
+</body>
+</html>

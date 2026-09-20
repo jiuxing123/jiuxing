@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
 <meta name="format-detection" content="telephone=no">
-<title>正在打开微信 · 星哥</title>
+<title>添加星哥QQ · 一对一陪跑</title>
 <meta name="robots" content="noindex">
-<meta property="og:title" content="添加星哥微信 · 一对一陪跑">
+<meta property="og:title" content="添加星哥QQ · 一对一陪跑">
 <link rel="icon" href="assets/img/avatar.jpg">
 <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -20,8 +20,8 @@
   .box{width:100%;max-width:360px;position:relative;z-index:1;padding:32px 24px;border-radius:24px;
     background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);
     backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 30px 80px rgba(0,0,0,.55);}
-  .spin{margin:0 auto 22px;width:40px;height:40px;border:3px solid rgba(94,234,212,.18);
-    border-top-color:#5EEAD4;border-radius:50%;animation:s .9s linear infinite;}
+  .spin{margin:0 auto 22px;width:40px;height:40px;border:3px solid rgba(232,176,75,.18);
+    border-top-color:#e8b04b;border-radius:50%;animation:s .9s linear infinite;}
   @keyframes s{to{transform:rotate(360deg)}}
   h1{font-size:20px;font-weight:800;margin-bottom:8px;letter-spacing:-.01em}
   p{font-size:14px;color:#9E9AAD;line-height:1.7}
@@ -30,21 +30,19 @@
 <body>
 <div class="box">
   <div class="spin"></div>
-  <h1>正在打开微信…</h1>
-  <p>若未自动跳转，请手动打开微信</p>
+  <h1>正在打开QQ…</h1>
+  <p>若未自动跳转，请手动打开QQ</p>
 </div>
 <script>window.GOATCOUNTER_CODE='YOUR_GOATCOUNTER_CODE';/*注册 GoatCounter 后把占位符换成你的 site code，全站即生效*/</script>
 <script>
-/* 统计：微信跳转尝试（尽力而为，重定向前发出像素请求） */
+/* 统计：旧链接转发（尽力而为，重定向前发出像素请求） */
 try{var C=window.GOATCOUNTER_CODE;
-if(C&&C!=='YOUR_GOATCOUNTER_CODE'){new Image().src='https://'+C+'.goatcounter.com/count?p=/wx-jump&event=true&t='+encodeURIComponent(document.title);}}catch(e){}
+if(C&&C!=='YOUR_GOATCOUNTER_CODE'){new Image().src='https://'+C+'.goatcounter.com/count?p=/wx-to-qq&event=true&t='+encodeURIComponent(document.title);}}catch(e){}
 </script>
 <script>
 (function () {
-  // 直接唤起/跳转微信：该链接会 302 到对应公众号文章。
-  // 后续想落到自己的文章，把这里换成你自己的 mp.weixin.qq.com/s/... 即可。
-  var WX_OPEN_URL = 'https://n.wlfx8.cn/362e9f';
-  window.location.replace(WX_OPEN_URL);
+  // 旧的加微信链路已全部下线：转发到 QQ 落地页（二维码 + 一键唤起QQ）。
+  window.location.replace('qq.html');
 })();
 </script>
 </body>
