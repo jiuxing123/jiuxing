@@ -44,8 +44,8 @@
   <br data-page-node-id="TTi3F4Kp16wnMYyfUt0lXJ">
   <span class="no" data-page-node-id="AtjdSwFHDowFYbRvqStDJe">QQ：3072392021</span>
   <button class="btn" id="copyBtn" type="button" data-page-node-id="15ia4zXSnD1cgy7jJSP0DL">一键复制QQ号</button>
-  <a class="btn2" id="openQQ" href="https://qm.qq.com/q/iRID90b2LK" target="_blank" rel="noopener" data-page-node-id="Jlmlnbnwmmxy66ntUrwpjX">不想扫码？点这里直接加我QQ好友 →</a>
-  <p class="tip" data-page-node-id="JjvBgxtXUOHmejeCn8O8Yb">微信里打开：长按二维码 → 保存图片 → 打开QQ「扫一扫」选相册<br data-page-node-id="sicWqfHhL3s2Lrt4sFuEpz">或在QQ搜索框直接粘贴上面的号，备注来意通过更快</p>
+  <a class="btn2" id="openQQ" href="https://qm.qq.com/q/tVC1365gyI" target="_blank" rel="noopener" data-page-node-id="Jlmlnbnwmmxy66ntUrwpjX">没有跳转？点这里手动加好友 →</a>
+  <p class="tip" data-page-node-id="JjvBgxtXUOHmejeCn8O8Yb">知乎等App内打开会自动尝试跳转QQ，稍等1-2秒<br data-page-node-id="sicWqfHhL3s2Lrt4sFuEpz">微信里打开：长按二维码 → 保存图片 → 打开QQ「扫一扫」选相册</p>
 </div>
 <script>window.GOATCOUNTER_CODE='YOUR_GOATCOUNTER_CODE';/*注册 GoatCounter 后把占位符换成你的 site code，全站即生效*/</script>
 <script>
@@ -56,24 +56,50 @@ if(C&&C!=='YOUR_GOATCOUNTER_CODE'){new Image().src='https://'+C+'.goatcounter.co
 <script>
 (function () {
   var QQ_NO = '3072392021';
+  var QM_URL = 'https://qm.qq.com/q/tVC1365gyI';
+  /* QQ原生协议：直接弹好友名片（穿透知乎/浏览器内置WebView的主力） */
+  var QQ_SCHEME = 'mqqapi://card/show_pslcard?src_type=internal&version=1&uin=' + QQ_NO + '&card_type=person&source=qrcode';
   var UA = navigator.userAgent || '';
   function inWeChat() { return /MicroMessenger/i.test(UA); }
-
-  /* 微信内置浏览器里 qq 直加链接打不开：藏掉按钮，主推扫码+复制 */
-  if (inWeChat()) {
-    var o = document.getElementById('openQQ');
-    if (o) o.style.display = 'none';
-  }
-
-  /* 点击「打开QQ」时记一次统计 */
-  var open = document.getElementById('openQQ');
-  if (open) open.onclick = function () {
+  function isMobile() { return /Mobile|Android|iPhone/i.test(UA); }
+  function track(p) {
     try{
       if(window.GOATCOUNTER_CODE&&window.GOATCOUNTER_CODE!=='YOUR_GOATCOUNTER_CODE'){
-        new Image().src='https://'+window.GOATCOUNTER_CODE+'.goatcounter.com/count?p=/qq-jump&event=true';
+        new Image().src='https://'+window.GOATCOUNTER_CODE+'.goatcounter.com/count?p='+p+'&event=true';
       }
     }catch(e){}
-  };
+  }
+
+  /* 页面是否已离开（跳QQ成功时 webview 会 pagehide/隐藏） */
+  var left = false;
+  try{
+    window.addEventListener('pagehide', function(){ left = true; }, false);
+    document.addEventListener('visibilitychange', function(){ if (document.hidden) left = true; }, false);
+  }catch(e){}
+
+  /* 分层唤起：先原生协议直弹名片 → 1.8秒没离开再落官方加好友页 */
+  function tryQQ() {
+    if (inWeChat()) return;
+    track('/qq-jump');
+    try { window.location.href = QQ_SCHEME; } catch (e) {}
+    setTimeout(function () {
+      if (!left) { try { window.location.href = QM_URL; } catch (e) {} }
+    }, 1800);
+  }
+
+  var open = document.getElementById('openQQ');
+  if (inWeChat()) {
+    /* 微信内置浏览器拦一切QQ跳转：藏按钮，主推扫码+复制 */
+    if (open) open.style.display = 'none';
+  } else {
+    /* 手机上打开页面自动尝试跳一次；按钮改为防呆重试（阻止默认跳转，走完整分层） */
+    if (isMobile()) { setTimeout(tryQQ, 700); }
+    if (open) open.onclick = function (e) {
+      if (e && e.preventDefault) e.preventDefault(); else return true;
+      tryQQ();
+      return false;
+    };
+  }
 
   /* 一键复制QQ号（老内核 execCommand 兜底） */
   var btn = document.getElementById('copyBtn');
