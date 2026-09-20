@@ -60,7 +60,7 @@
         if (el && !el.getAttribute('data-xg-track')) el.setAttribute('data-xg-track', name);
       } catch (e) {}
     }
-    mark('a[href*="n.wlfx8.cn/362e9f"]', 'reader.cta.link-star');
+    mark('a[href*="qq.html"]', 'reader.cta.link-star');
     mark('a[href="../books.html"]', 'reader.cta.next-book');
     mark('button[onclick^="xgShare"]', 'reader.action.share');
     mark('button[onclick^="xgFont(-1)"]', 'reader.action.font-minus');
@@ -105,7 +105,7 @@
       return;
     }
     /* 兜底：动态生成的触点条（dockbar）链接没有标记也能记到 */
-    if (anchor && /n\.wlfx8\.cn/.test(anchor.getAttribute('href'))) {
+    if (anchor && /qq\.html/.test(anchor.getAttribute('href'))) {
       if (isReader) send('reader.dock.link-star');
       else if (/books\.html$/.test(location.pathname)) send('cta.books.other-linkstar');
       else send('cta.index.other-linkstar');
